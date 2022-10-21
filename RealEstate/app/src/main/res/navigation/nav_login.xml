@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_login" app:startDestination="@id/loginFragment">
+
+    <fragment android:id="@+id/loginFragment" android:name="com.gs.realestate.ui.login.LoginFragment"
+              android:label="LoginFragment"
+              tools:layout="@layout/fragment_login">
+        <action
+                android:id="@+id/action_LoginFragment_to_ForgotFragment"
+                app:destination="@id/forgotFragment"/>
+        <action
+                android:id="@+id/action_LoginFragment_to_SignUpFragment"
+                app:destination="@id/SignUpFragment"/>
+    </fragment>
+    <fragment android:id="@+id/SignUpFragment" android:name="com.gs.realestate.ui.login.SignUpUserFragment"
+              android:label="@string/signup"
+              tools:layout="@layout/fragment_signupuser">
+        <action
+                android:id="@+id/action_SignUpFragment_to_LoginFragment"
+                app:destination="@id/loginFragment"/>
+    </fragment>
+    <fragment android:id="@+id/forgotFragment" android:name="com.gs.realestate.ui.login.ForgotFragment"
+              android:label="LoginFragment"
+              tools:layout="@layout/fragment_forgot">
+        <action
+                android:id="@+id/action_forgotfragment_to_LoginFragment"
+                app:destination="@id/loginFragment"/>
+    </fragment>
+
+</navigation>

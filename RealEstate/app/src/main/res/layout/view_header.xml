@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:text="Terms"
+              android:layout_weight="2"
+              android:textStyle="bold"
+              android:textSize="20dp"
+              android:padding="5dp"
+    >
+
+    </TextView>
+<androidx.appcompat.widget.AppCompatButton
+        android:text="Accept"
+        android:textColor="@color/white"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_entermobile"
+        android:layout_centerHorizontal="true"
+        android:background="@color/royal_blue"
+        android:layout_marginTop="25dp"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="25dp"
+        android:id="@+id/bt_accept"/>
+<androidx.appcompat.widget.AppCompatButton
+        android:text="Cancel"
+        android:textColor="@color/black"
+        android:layout_width="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_entermobile"
+        android:layout_centerHorizontal="true"
+        android:background="@color/grey"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+        android:id="@+id/bt_cancel"/>
+
+</LinearLayout>

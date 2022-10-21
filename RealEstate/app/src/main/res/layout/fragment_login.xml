@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<io.github.florent37.shapeofview.shapes.RoundRectView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/royal_blue"
+        android:layout_marginTop="10dp"
+        android:elevation="4dp"
+        app:shape_roundRect_topLeftRadius="20dp"
+        app:shape_roundRect_topRightRadius="20dp"
+        android:layout_alignParentBottom="true"
+        app:shape_roundRect_borderColor="@color/grey"
+        app:shape_roundRect_borderWidth="2dp"
+>
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/grey"
+                    android:padding="20dp"
+    >
+
+        <TextView
+                android:text="@string/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_title"
+                android:gravity="center"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:layout_weight="1"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/et_entermobile"
+                android:layout_below="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/entermobile"
+                android:paddingBottom="15dp"
+                app:startIconDrawable="@android:drawable/ic_menu_call"
+                app:errorEnabled="true"
+                app:counterEnabled="true"
+                app:counterMaxLength="10"
+                app:endIconMode="clear_text"
+                app:boxBackgroundColor="@color/lightblue"
+        >
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+
+            />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+                android:text="@string/getotp"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/et_entermobile"
+                android:layout_centerHorizontal="true"
+                android:background="@color/royal_blue"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="25dp"
+                android:id="@+id/bt_login"/>
+
+
+    </RelativeLayout>
+
+</io.github.florent37.shapeofview.shapes.RoundRectView>

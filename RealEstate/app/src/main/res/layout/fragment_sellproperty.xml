@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<io.github.florent37.shapeofview.shapes.RoundRectView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/royal_blue"
+        android:layout_marginTop="10dp"
+        android:elevation="4dp"
+
+        app:shape_roundRect_topLeftRadius="20dp"
+        app:shape_roundRect_topRightRadius="20dp"
+        android:layout_alignParentBottom="true"
+        app:shape_roundRect_borderColor="@color/grey"
+        app:shape_roundRect_borderWidth="2dp"
+>
+
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                    android:background="@color/grey"
+    >
+
+        <TextView
+                android:text="@string/getstarted"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textSize="18dp"
+                android:textColor="@color/royal_blue"
+                android:textStyle="bold"
+                android:id="@+id/tv_next"/>
+        <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/sellproperty"
+                android:layout_marginTop="22dp"
+                android:id="@+id/im_signup"/>
+        <TextView
+                android:text="@string/sellproperty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/im_signup"
+                android:layout_centerHorizontal="true"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                android:id="@+id/tv_title"/>
+        <TextView
+                android:text="@string/getnotified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_title"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:id="@+id/textView3"/>
+    </RelativeLayout>
+
+</io.github.florent37.shapeofview.shapes.RoundRectView>

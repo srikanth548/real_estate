@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+
+    <TextView android:layout_width="wrap_content"
+              android:id="@+id/actvities"
+              android:text="Active Properties"
+              android:gravity="center"
+              android:textStyle="bold"
+              android:textSize="19dp"
+              android:layout_margin="10dp"
+              android:layout_alignParentTop="true"
+              android:layout_height="wrap_content"
+    />
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_post"
+            android:layout_below="@+id/actvities"
+            tools:listitem="@layout/view_propertyitem"
+    />
+    <io.github.florent37.shapeofview.shapes.RoundRectView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/royal_blue"
+            android:layout_margin="8dp"
+            android:elevation="4dp"
+            android:id="@+id/btn_post"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:shape_roundRect_topLeftRadius="20dp"
+            app:shape_roundRect_topRightRadius="20dp"
+            app:shape_roundRect_bottomLeftRadius="20dp"
+            app:shape_roundRect_bottomRightRadius="20dp"
+            android:layout_alignParentBottom="true"
+            app:shape_roundRect_borderColor="@color/grey"
+            app:shape_roundRect_borderWidth="2dp"
+    >
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/royal_blue"
+                        android:padding="10dp"
+        >
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="@string/postnewproperty"
+                      android:textColor="@color/white"
+                      android:gravity="center_horizontal"
+                      android:textStyle="bold"
+            />
+
+        </RelativeLayout>
+    </io.github.florent37.shapeofview.shapes.RoundRectView>
+</RelativeLayout>

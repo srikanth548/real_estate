@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/SignUpFragment">
+
+    <fragment
+            android:id="@+id/SignUpFragment"
+            android:name="com.gs.realestate.ui.intro.SignUpFragment"
+            android:label="@string/signup"
+            tools:layout="@layout/fragment_signup">
+
+        <action
+                android:id="@+id/action_SignUpFragment_to_ListFragment"
+                app:destination="@id/ListPropertyFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/ListPropertyFragment"
+            android:name="com.gs.realestate.ui.intro.ListPropertyFragment"
+            android:label="@string/listproperty"
+            tools:layout="@layout/fragment_listproperty">
+
+        <action
+                android:id="@+id/action_ListFragment_to_SellPropertyFragment"
+                app:destination="@id/SellPropertyFragment"/>
+    </fragment>
+    <fragment
+            android:id="@+id/SellPropertyFragment"
+            android:name="com.gs.realestate.ui.intro.SellPropertyFragment"
+            android:label="@string/sellproperty"
+            tools:layout="@layout/fragment_sellproperty">
+
+
+    </fragment>
+</navigation>
