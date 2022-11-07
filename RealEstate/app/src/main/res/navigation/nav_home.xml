@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_home">
+            android:id="@+id/nav_home" app:startDestination="@id/allPropertiesFrag">
 
+    <fragment android:id="@+id/accountFragment" android:name="com.gs.realestate.ui.home.account.AccountFragment"
+              android:label="AccountFragment"/>
+    <fragment android:id="@+id/allPropertiesFrag"
+              android:name="com.gs.realestate.ui.home.allproperties.AllPropertiesFrag"
+              android:label="AllPropertiesFrag"/>
+    <fragment android:id="@+id/helpFragment" android:name="com.gs.realestate.ui.home.help.HelpFragment"
+              android:label="HelpFragment"/>
+    <fragment android:id="@+id/settingsFragement" android:name="com.gs.realestate.ui.home.settings.SettingsFragement"
+              android:label="SettingsFragement"/>
 </navigation>

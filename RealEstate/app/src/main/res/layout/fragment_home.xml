@@ -20,6 +20,7 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_post"
             android:layout_below="@+id/actvities"
+            android:id="@+id/rv_listofitems"
             tools:listitem="@layout/view_propertyitem"
     />
     <io.github.florent37.shapeofview.shapes.RoundRectView

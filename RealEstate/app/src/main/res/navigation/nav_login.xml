@@ -14,9 +14,9 @@
                 android:id="@+id/action_LoginFragment_to_SignUpFragment"
                 app:destination="@id/SignUpFragment"/>
     </fragment>
-    <fragment android:id="@+id/SignUpFragment" android:name="com.gs.realestate.ui.login.SignUpUserFragment"
+    <fragment android:id="@+id/SignUpFragment" android:name="com.gs.realestate.ui.login.ConfirmOtpFragment"
               android:label="@string/signup"
-              tools:layout="@layout/fragment_signupuser">
+              tools:layout="@layout/fragment_confirmotp">
         <action
                 android:id="@+id/action_SignUpFragment_to_LoginFragment"
                 app:destination="@id/loginFragment"/>

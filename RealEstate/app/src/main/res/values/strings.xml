@@ -51,7 +51,12 @@
     <string name="logout">Logout</string>
     <string name="postnewproperty">POST NEW PROPERTY</string>
 
-   <string-array name="terms">
+    <string name="logintype">mobile_number</string>
+    <string name="errorLogin">There is some problem in network, Can u please try again </string>
+    <string name="signin">SignIn</string>
+    <string name="invalidOtp">Invalid Otp</string>
+
+    <string-array name="terms">
        <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>
        <item>ii.By registering you represent that you are a major and that if you are registering on behalf of a person or entity, you are authorized to register for the Service.</item>
        <item>iii.You agree that you may be charged a nominal fee for registering on the website and to access the services provided by it.</item>
