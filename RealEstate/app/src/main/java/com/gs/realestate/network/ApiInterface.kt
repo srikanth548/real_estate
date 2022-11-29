@@ -1,5 +1,6 @@
 package com.gs.realestate.network
 
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -23,4 +24,15 @@ interface ApiInterface {
 
     @GET("/api/property/myproperties")
     suspend fun getMyProperties(@Header("Cookie") cookie: String):Response<AllPropertiesResponse>
+
+    @GET("place/nearbysearch/json?")
+    fun doPlaces(
+        @Query(value = "type", encoded = true) type: String?,
+        @Query(value = "location", encoded = true) location: String?,
+        @Query(value = "name", encoded = true) name: String?,
+        @Query(value = "opennow", encoded = true) opennow: Boolean,
+        @Query(value = "rankby", encoded = true) rankby: String?,
+        @Query(value = "key", encoded = true) key: String?
+    ): Call<PlacesPOJO.Root?>
+
 }

@@ -4,10 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/resend_effect.xml" value="0.20208333333333334" />
+        <entry key="app/src/main/res/drawable/switch_thumb_selector.xml" value="0.20208333333333334" />
+        <entry key="app/src/main/res/drawable/switch_track_selector.xml" value="0.18802083333333333" />
         <entry key="app/src/main/res/layout/activity_congrats.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.10492315837281262" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/activity_postproperty.xml" value="0.2076749435665914" />
+        <entry key="app/src/main/res/layout/activity_postcategory.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_postflat.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_posthighlights.xml" value="0.3838150289017341" />
+        <entry key="app/src/main/res/layout/activity_postopen.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_postplot.xml" value="0.13496376811594202" />
+        <entry key="app/src/main/res/layout/activity_postproperty.xml" value="0.33535353535353535" />
+        <entry key="app/src/main/res/layout/activity_postpublished.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/activity_propertydetail.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.18" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.13496376811594202" />
@@ -30,11 +38,14 @@
         <entry key="app/src/main/res/layout/fragment_signupuser.xml" value="0.3115277580432182" />
         <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.2" />
         <entry key="app/src/main/res/layout/view_header.xml" value="0.13496376811594202" />
+        <entry key="app/src/main/res/layout/view_highlight.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/view_imageupload.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/view_intro.xml" value="0.2" />
         <entry key="app/src/main/res/layout/view_listproperty.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/view_logainmain.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/view_propertyitem.xml" value="0.34745122583273685" />
         <entry key="app/src/main/res/layout/view_sellproperty.xml" value="0.15" />
+        <entry key="app/src/main/res/layout/view_site.xml" value="0.1" />
         <entry key="app/src/main/res/layout/view_terms_footer.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.18697916666666667" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.1875" />

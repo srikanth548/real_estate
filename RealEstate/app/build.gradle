@@ -59,6 +59,12 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.github.mohan-dev1248:PosterSlider:1.0.2'
     implementation 'com.github.taimoorsultani:android-sweetalert2:2.0.2'
+    implementation 'com.google.android.libraries.places:places:2.7.0'
+    implementation 'info.androidhive:fontawesome:0.0.5'
+    implementation('com.razorpay:checkout:1.6.20')
+
+    implementation 'com.google.maps.android:places-ktx:2.0.0'
+    implementation 'us.belka:androidtoggleswitch:1.2.2'
 
     // Dependency to include Maps SDK for Android
     implementation 'com.google.android.gms:play-services-maps:18.1.0'

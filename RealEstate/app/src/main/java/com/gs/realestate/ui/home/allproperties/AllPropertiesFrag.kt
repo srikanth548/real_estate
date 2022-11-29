@@ -1,5 +1,6 @@
 package com.gs.realestate.ui.home.allproperties
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,12 +17,16 @@ import com.gs.realestate.databinding.FragmentHomeBinding
 import com.gs.realestate.databinding.FragmentListpropertyBinding
 import com.gs.realestate.databinding.FragmentSignupBinding
 import com.gs.realestate.network.*
+import com.gs.realestate.network.Properties
+import com.gs.realestate.ui.post.PostPropertyActivity
 import com.gs.realestate.util.PreferenceHelper
 import com.gs.realestate.util.PreferenceHelper.csrftoken
 import com.gs.realestate.util.PreferenceHelper.messages
 import com.gs.realestate.util.PreferenceHelper.mobilenumber
 import com.gs.realestate.util.PreferenceHelper.sessionid
 import com.gs.realestate.util.SnackBarToast
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AllPropertiesFrag : Fragment() {
 
@@ -54,7 +59,7 @@ class AllPropertiesFrag : Fragment() {
         recyclerView.adapter = propertyListAdap
         getProperties()
         binding.btnPost.setOnClickListener{
-
+            startActivity(Intent(activity, PostPropertyActivity::class.java))
         }
 //        binding.tvNext.setOnClickListener {
 //            findNavController().navigate(R.id.action_SignUpFragment_to_ListFragment)
@@ -64,6 +69,22 @@ class AllPropertiesFrag : Fragment() {
 
     fun getProperties() {
 
+//        val properties = Properties()
+//        properties.imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Sunflower_sky_backdrop.jpg/220px-Sunflower_sky_backdrop.jpg"
+//        properties.expiryDate = "25/11/2022"
+//        properties.location = "hyd"
+//        properties.propertyType = "Agriculture"
+//        properties.viewCount = 1
+//        properties.favCount = 1
+//        val del = Details()
+//        del.unit = "Acres"
+//        del.value = "10"
+//        val del1 = Details()
+//        del1.unit = "Lacs"
+//        del1.value = "8"
+//        properties.details = Arrays.asList(del,del1)
+//        propertiesList.addAll(listOf(properties))
+//        propertyListAdap.notifyDataSetChanged()
 
             activity?.let { context ->
                 val prefs = PreferenceHelper.customPreference(context)

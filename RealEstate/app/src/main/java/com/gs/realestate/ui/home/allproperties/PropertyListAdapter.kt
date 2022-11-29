@@ -53,7 +53,7 @@ class PropertyListAdapter (val items : ArrayList<Properties>, val context: Conte
                 propertiesObj.imageUrl = "https://rightmycdn.azureedge.net/" + propertiesObj.imageUrl
                 println("image url" + propertiesObj.imageUrl)
             }
-            Glide.with(cont).asBitmap().load(propertiesObj.imageUrl).into(holder.backgroundImage);
+            Glide.with(cont).asBitmap().load(propertiesObj.imageUrl).placeholder(R.drawable.house).into(holder.backgroundImage);
 
 //            Picasso.get().load("https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=740").resize(50, 50).
 //            centerCrop().placeholder(R.drawable.house)

@@ -1,10 +1,12 @@
 package com.gs.realestate.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -13,6 +15,7 @@ import com.google.android.material.navigation.NavigationView
 import com.gs.realestate.R
 import com.gs.realestate.databinding.ActivityCongratsBinding
 import com.gs.realestate.databinding.ActivityHomeBinding
+import com.gs.realestate.ui.post.PostPropertyActivity
 
 class HomeActivity : AppCompatActivity() {
 
@@ -38,6 +41,25 @@ class HomeActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        navView.setNavigationItemSelectedListener{
+            val id = it.itemId
+            if (id == R.id.nav_home||id== R.id.nav_allproperties) {
+                navController.navigate(R.id.allPropertiesFrag)
+            }
+            else if(id== R.id.nav_myaccount){
+                navController.navigate(R.id.accountFragment)
+            }else if(id == R.id.nav_postproperty){
+                startActivity(Intent(this@HomeActivity, PostPropertyActivity::class.java))
+            }else if(id== R.id.nav_settings){
+                navController.navigate(R.id.settingsFragement)
+            }else if(id == R.id.nav_help){
+                navController.navigate(R.id.helpFragment)
+            }
+            else if(id == R.id.nav_logout){
+                this.finish()
+            }
+            return@setNavigationItemSelectedListener true
+        }
 
     }
 

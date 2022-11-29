@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+>
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/app_bar_main"
+            android:layout_alignParentTop="true"
+            android:theme="@style/Theme.RealEstate.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/Theme.RealEstate"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <ScrollView android:layout_width="match_parent"
+                android:layout_below="@+id/app_bar_main"
+                android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_below="@+id/app_bar_main"
+                      android:layout_margin="8dp"
+                      android:layout_marginTop="5dp"
+                      android:paddingBottom="40dp"
+                      android:layout_height="wrap_content" >
+            <io.github.florent37.shapeofview.shapes.RoundRectView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/royal_blue"
+                    android:elevation="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_alignParentBottom="true"
+                    app:shape_roundRect_borderColor="@color/grey"
+                    app:shape_roundRect_borderWidth="2dp"
+            >
+                <TextView android:layout_width="match_parent"
+                          android:text="@string/strflat"
+                          android:textColor="@color/royal_blue"
+                          android:gravity="center_horizontal"
+                          android:padding="10dp"
+                          android:textSize="15dp"
+                          android:textStyle="bold"
+                          android:layout_height="wrap_content"/>
+            </io.github.florent37.shapeofview.shapes.RoundRectView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_entervillage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/entervillage"
+                    app:errorEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:boxBackgroundColor="@color/grey"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:id="@+id/et_village"
+
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_entercity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/entercity"
+                    app:errorEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:boxBackgroundColor="@color/grey"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:id="@+id/et_city"
+
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_entermandal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/entermandal"
+                    app:errorEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:boxBackgroundColor="@color/grey"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:id="@+id/et_mandal"
+
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_enterdistrict"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enterdistrict"
+                    app:errorEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:boxBackgroundColor="@color/grey"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:id="@+id/et_district"
+
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_enterstate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enterstate"
+                    android:enabled="false"
+                    app:errorEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:boxBackgroundColor="@color/grey"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:text="Telangana"
+                        android:id="@+id/et_state"
+
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_enternameofproject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/strnameofproject"
+                    app:errorEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:boxBackgroundColor="@color/grey"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:id="@+id/et_projectname"
+
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"
+                    android:padding="5dp"
+                    android:prompt="@string/facing"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/grey"
+                    android:id="@+id/sp_facing"/>
+            <androidx.appcompat.widget.AppCompatSpinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dialog"
+                    android:padding="5dp"
+                    android:prompt="@string/typeofapproach"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/grey"
+                    android:id="@+id/sp_typesofroad"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/et_approach_road"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/approacroad"
+                        android:layout_weight="3"
+                        app:endIconMode="clear_text"
+                        app:boxBackgroundColor="@color/grey"
+                >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:id="@+id/et_aproad"
+
+                    />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <io.github.florent37.shapeofview.shapes.RoundRectView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:shape_roundRect_borderColor="@color/grey"
+                        app:shape_roundRect_borderWidth="2dp"
+                >
+                    <androidx.appcompat.widget.AppCompatTextView android:layout_width="80dp"
+                                                                 android:gravity="center"
+                                                                 android:padding="5dp"
+
+                                                                 android:layout_height="match_parent"
+                                                                 android:text="@string/feets"/>
+                </io.github.florent37.shapeofview.shapes.RoundRectView>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:layout_marginTop="15dp"
+                          android:layout_height="wrap_content">
+               <TextView android:layout_width="0dp"
+                         android:layout_weight="1"
+                         android:textColor="@color/black"
+                         android:gravity="center_horizontal"
+                         android:text="@string/gatedcommunity"
+                         android:layout_height="wrap_content"/>
+                <belka.us.androidtoggleswitch.widgets.ToggleSwitch
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:textToggleLeft="@string/yes"
+                        app:activeBgColor="@color/royal_blue"
+                        app:textToggleRight="@string/no"/>
+
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:layout_marginTop="15dp"
+                          android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/et_enterguntas"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/plintharea"
+                        android:layout_weight="3"
+                        app:endIconMode="clear_text"
+                        app:boxBackgroundColor="@color/grey"
+                >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="text"
+                            android:id="@+id/et_guntas"
+
+                    />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <io.github.florent37.shapeofview.shapes.RoundRectView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:shape_roundRect_borderColor="@color/grey"
+                        app:shape_roundRect_borderWidth="2dp"
+                >
+                    <androidx.appcompat.widget.AppCompatTextView android:layout_width="80dp"
+                                                                 android:gravity="center"
+                                                                 android:padding="5dp"
+
+                                                                 android:layout_height="match_parent"
+                                                                 android:text="@string/sqfeets"/>
+                </io.github.florent37.shapeofview.shapes.RoundRectView>
+            </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_numoffloors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/numoffloors"
+                    app:errorEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:boxBackgroundColor="@color/grey"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:id="@+id/et_numfloors"
+
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_floornum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/floornumber"
+                    app:errorEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:boxBackgroundColor="@color/grey"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:id="@+id/et_floornm"
+
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_bedrooms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/numofbedrooms"
+                    app:errorEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:boxBackgroundColor="@color/grey"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:id="@+id/et_bdrooms"
+
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_bathrooms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/numofbathrooms"
+                    app:errorEnabled="true"
+                    app:endIconMode="clear_text"
+                    app:boxBackgroundColor="@color/grey"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:id="@+id/et_bathroom"
+
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <io.github.florent37.shapeofview.shapes.RoundRectView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/royal_blue"
+            android:layout_margin="8dp"
+            android:elevation="4dp"
+            android:id="@+id/btn_post"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:shape_roundRect_topLeftRadius="20dp"
+            app:shape_roundRect_topRightRadius="20dp"
+            app:shape_roundRect_bottomLeftRadius="20dp"
+            app:shape_roundRect_bottomRightRadius="20dp"
+            android:layout_alignParentBottom="true"
+            app:shape_roundRect_borderColor="@color/grey"
+            app:shape_roundRect_borderWidth="2dp"
+    >
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/royal_blue"
+                        android:padding="10dp"
+        >
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:text="@string/nextstep"
+                      android:textColor="@color/white"
+                      android:gravity="center_horizontal"
+                      android:textStyle="bold"
+            />
+
+        </RelativeLayout>
+    </io.github.florent37.shapeofview.shapes.RoundRectView>
+</RelativeLayout>
