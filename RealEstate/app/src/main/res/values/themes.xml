@@ -20,4 +20,10 @@
     </style>
     <style name="Theme.RealEstate.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="Theme.RealEstate.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+
+    <!-- ProgressDialog-->
+    <style name="CustomDialogTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>

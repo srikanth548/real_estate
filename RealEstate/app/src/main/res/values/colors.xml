@@ -11,5 +11,8 @@
     <color name="grey">#F2F2F2</color>
     <color name="lightblue">#F6FDFF</color>
     <color name="royal_light_blue">#994169E1</color>
+    <color name="transparent">#00000000</color>
+    <color name="dialogBackground">#60000000</color>
+    <color name="transparent7">#70000000</color>
 
 </resources>
