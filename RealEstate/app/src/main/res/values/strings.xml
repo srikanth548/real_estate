@@ -121,6 +121,8 @@
     <string name="numofbathrooms">Number of Bathrooms</string>
     <string name="stropenspace">Open Space</string>
     <string name="pleasecheckterms">Please accept the terms and conditions</string>
+    <string name="str_terms_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="str_please_check_terms_to_continue"><![CDATA[Please check Terms & Conditions to continue.]]></string>
 
     <string-array name="terms">
        <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>
