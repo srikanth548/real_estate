@@ -121,6 +121,18 @@
     <string name="numofbathrooms">Number of Bathrooms</string>
     <string name="stropenspace">Open Space</string>
     <string name="pleasecheckterms">Please accept the terms and conditions</string>
+    <string name="str_agriculture">Agriculture</string>
+    <string name="str_residential">Residential</string>
+    <string name="str_commercial">Commercial/ Industrial</string>
+    <string name="str_agricultural_land">Agricultural Land</string>
+    <string name="str_farm_house">Farm House</string>
+    <string name="str_plots">Plots</string>
+    <string name="str_flats">Flats</string>
+    <string name="str_villas_houses">Villas / Houses</string>
+    <string name="str_open_spaces">Open Spaces</string>
+    <string name="str_buildings">Buildings</string>
+    <string name="str_property_type">Property type</string>
+    <string name="str_select_property_type">Please select property type to proceed futher.</string>
 
     <string-array name="terms">
        <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>
