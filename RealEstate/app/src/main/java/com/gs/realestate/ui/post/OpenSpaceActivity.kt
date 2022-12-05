@@ -29,20 +29,22 @@ class OpenSpaceActivity : AppCompatActivity() {
         footballPlayers.add("Gareth Bale")
         footballPlayers.add("Luis Suarez")
 
+//        binding.etSuggestion.autoCompleteSuggestions = arrayOf("Cristiano Ronaldo", "Messi", "Sunil Chetri", "Neymar")
+
         val arrayAdapter: ArrayAdapter<String?> = ArrayAdapter<String?>(this, R.layout.simple_list_item_1, footballPlayers)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinner.adapter = arrayAdapter
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                if (parent.getItemAtPosition(position) == "Choose Football players from lis") {
-                }
-                else {
-                    val item = parent.getItemAtPosition(position).toString()
-                    Toast.makeText(parent.context, "Selected: $item", Toast.LENGTH_SHORT).show()
-                }
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
+//        binding.spinner.adapter = arrayAdapter
+//        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+//                if (parent.getItemAtPosition(position) == "Choose Football players from lis") {
+//                }
+//                else {
+//                    val item = parent.getItemAtPosition(position).toString()
+//                    Toast.makeText(parent.context, "Selected: $item", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//            override fun onNothingSelected(parent: AdapterView<*>?) {}
+//        }
         binding.btnPost.setOnClickListener{
             startActivity(Intent(this@OpenSpaceActivity, PostHighlightActivity::class.java))
 

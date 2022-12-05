@@ -9,10 +9,14 @@
     <color name="white">#FFFFFFFF</color>
     <color name="royal_blue">#4169E1</color>
     <color name="grey">#F2F2F2</color>
+    <color name="colorGray">#f3f3f3</color>
     <color name="lightblue">#F6FDFF</color>
     <color name="royal_light_blue">#994169E1</color>
     <color name="transparent">#00000000</color>
     <color name="dialogBackground">#60000000</color>
     <color name="transparent7">#70000000</color>
+    <color name="focusBlue">#00BDFE</color>
+    <color name="borderGray">#cccccc</color>
+    <color name="disabledGray">#eeeeee</color>
 
 </resources>

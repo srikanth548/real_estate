@@ -26,6 +26,7 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.gs.realestate.R
 import com.gs.realestate.databinding.ActivityPostpropertyBinding
+import com.gs.realestate.ui.post.properties.PostAgricultureActivity
 import java.util.*
 
 
@@ -127,7 +128,8 @@ class PostPropertyActivity : AppCompatActivity(), OnMapReadyCallback {
             if(binding.imResidencetick.isVisible) {
                 startActivity(Intent(this@PostPropertyActivity, PostFlatActivity::class.java))
             }else  if(binding.imAgriculturetick.isVisible) {
-                startActivity(Intent(this@PostPropertyActivity, PostCategoryActivity::class.java))
+                startActivity(Intent(this@PostPropertyActivity, PostAgricultureActivity::class.java))
+//                startActivity(Intent(this@PostPropertyActivity, PostCategoryActivity::class.java))
             }else  if(binding.imOpentick.isVisible) {
                 startActivity(Intent(this@PostPropertyActivity, OpenSpaceActivity::class.java))
             }else{
