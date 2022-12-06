@@ -1,237 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:orientation="vertical"
-              android:layout_height="match_parent"
->
-    <LinearLayout android:layout_width="match_parent"
-                  android:orientation="vertical"
-                  android:layout_height="wrap_content" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
     <com.google.android.material.appbar.AppBarLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:theme="@style/Theme.RealEstate.AppBarOverlay">
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.RealEstate.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/Theme.RealEstate"/>
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/Theme.RealEstate" />
 
     </com.google.android.material.appbar.AppBarLayout>
-   <TextView android:layout_width="match_parent"
-             android:text="@string/selectloc"
-             android:padding="10dp"
-             android:textStyle="bold"
-             android:layout_height="wrap_content"/>
-    <fragment android:id="@+id/autocomplete_fragment"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="5dp"
-              android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-    />
-    <fragment
-            android:id="@+id/map"
-            class="com.google.android.gms.maps.SupportMapFragment"
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appBarLayout"
+        android:layout_above="@id/btn_post">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="350dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView android:layout_width="match_parent"
-                  android:text="@string/propertytype"
-                  android:padding="10dp"
-                  android:textStyle="bold"
-                  android:layout_height="wrap_content"/>
 
-        <LinearLayout android:layout_width="match_parent"
-                      android:orientation="horizontal"
-                      android:layout_height="wrap_content">
-            <io.github.florent37.shapeofview.shapes.RoundRectView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="1dp"
-                    android:elevation="4dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:shape_roundRect_topLeftRadius="5dp"
-                    app:shape_roundRect_topRightRadius="5dp"
-                    app:shape_roundRect_bottomLeftRadius="5dp"
-                    app:shape_roundRect_bottomRightRadius="5dp"
-                    android:layout_alignParentBottom="true"
-                    app:shape_roundRect_borderColor="@color/grey"
-                    app:shape_roundRect_borderWidth="2dp"
-            >
-                <RelativeLayout android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@color/lightblue"
-                                android:id="@+id/rl_agri"
-                                android:padding="10dp"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/selectloc"
+                android:textStyle="bold" />
 
-                >
-                    <ImageView android:layout_width="wrap_content"
-                               android:background="@drawable/ic_tick"
-                               android:id="@+id/im_agriculturetick"
-                               android:visibility="gone"
-                               android:layout_height="wrap_content"/>
-                    <ImageView android:layout_width="match_parent"
-                               android:id="@+id/imagriculture"
-                               android:layout_height="100dp"
-                              android:background="@drawable/ic_agriculture"
-                              android:gravity="center_horizontal"
-                               android:layout_margin="5dp"
-                              android:textStyle="bold"
-                    />
-                    <TextView android:layout_width="match_parent"
-                              android:text="@string/agriculture"
-                              android:textSize="8dp"
-                              android:gravity="center_horizontal"
-                              android:layout_below="@+id/imagriculture"
-                              android:layout_height="wrap_content"/>
+                    <fragment
+                        android:id="@+id/autocomplete_fragment"
+                        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp" />
 
-                </RelativeLayout>
-            </io.github.florent37.shapeofview.shapes.RoundRectView>
-            <io.github.florent37.shapeofview.shapes.RoundRectView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="1dp"
-                    android:elevation="4dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:shape_roundRect_topLeftRadius="5dp"
-                    app:shape_roundRect_topRightRadius="5dp"
-                    app:shape_roundRect_bottomLeftRadius="5dp"
-                    app:shape_roundRect_bottomRightRadius="5dp"
-                    android:layout_alignParentBottom="true"
-                    app:shape_roundRect_borderColor="@color/grey"
-                    app:shape_roundRect_borderWidth="2dp"
-            >
-                <RelativeLayout android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@color/lightblue"
-                                android:id="@+id/rl_residence"
-                                android:padding="10dp"
+                    <fragment
+                        android:id="@+id/map"
+                        class="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="350dp" />
 
-                >
-                    <ImageView android:layout_width="wrap_content"
-                               android:background="@drawable/ic_tick"
-                               android:id="@+id/im_residencetick"
-                               android:visibility="gone"
-                               android:layout_height="wrap_content"/>
-                    <ImageView android:layout_width="match_parent"
-                               android:id="@+id/imresidence"
-                               android:layout_height="100dp"
-                               android:background="@drawable/ic_house"
-                               android:gravity="center_horizontal"
+            <!--        <LinearLayout-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:orientation="horizontal">-->
 
-                               android:textStyle="bold"
-                               android:layout_marginTop="5dp" android:layout_marginStart="5dp"
-                               android:layout_marginEnd="5dp" android:layout_marginBottom="5dp"/>
-                    <TextView android:layout_width="match_parent"
-                              android:text="@string/residence"
-                              android:textSize="8dp"
-                              android:gravity="center_horizontal"
-                              android:layout_below="@+id/imresidence"
-                              android:layout_height="wrap_content"/>
+            <!--            <io.github.florent37.shapeofview.shapes.RoundRectView-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_alignParentBottom="true"-->
+            <!--                android:layout_margin="1dp"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:elevation="4dp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:shape_roundRect_borderColor="@color/grey"-->
+            <!--                app:shape_roundRect_borderWidth="2dp"-->
+            <!--                app:shape_roundRect_bottomLeftRadius="5dp"-->
+            <!--                app:shape_roundRect_bottomRightRadius="5dp"-->
+            <!--                app:shape_roundRect_topLeftRadius="5dp"-->
+            <!--                app:shape_roundRect_topRightRadius="5dp">-->
 
-                </RelativeLayout>
+            <!--                <RelativeLayout-->
+            <!--                    android:id="@+id/rl_agri"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:background="@color/lightblue"-->
+            <!--                    android:padding="10dp"-->
 
-            </io.github.florent37.shapeofview.shapes.RoundRectView>
-            <io.github.florent37.shapeofview.shapes.RoundRectView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="1dp"
-                    android:elevation="4dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:shape_roundRect_topLeftRadius="5dp"
-                    app:shape_roundRect_topRightRadius="5dp"
-                    app:shape_roundRect_bottomLeftRadius="5dp"
-                    app:shape_roundRect_bottomRightRadius="5dp"
-                    android:layout_alignParentBottom="true"
-                    app:shape_roundRect_borderColor="@color/grey"
-                    app:shape_roundRect_borderWidth="2dp"
-            >
-                <RelativeLayout android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:id="@+id/rl_commericial"
-                                android:background="@color/lightblue"
-                                android:padding="10dp"
+            <!--                    >-->
 
-                >
-                    <ImageView android:layout_width="wrap_content"
-                               android:background="@drawable/ic_tick"
-                               android:id="@+id/im_commericialck"
-                               android:visibility="gone"
-                               android:layout_height="wrap_content"/>
-                    <ImageView android:layout_width="match_parent"
-                               android:id="@+id/imcommercial"
-                               android:layout_height="100dp"
-                               android:background="@drawable/ic_commercial"
-                               android:gravity="center_horizontal"
-                               android:layout_margin="5dp"
-                               android:paddingTop="10dp"
-                               android:textStyle="bold"
-                    />
-                    <TextView android:layout_width="match_parent"
-                              android:text="@string/commericial"
-                              android:textSize="8dp"
-                              android:gravity="center_horizontal"
-                              android:layout_below="@+id/imcommercial"
-                              android:layout_height="wrap_content"/>
+            <!--                    <ImageView-->
+            <!--                        android:id="@+id/im_agriculturetick"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:background="@drawable/ic_tick"-->
+            <!--                        android:visibility="gone" />-->
 
-                </RelativeLayout>
+            <!--                    <ImageView-->
+            <!--                        android:id="@+id/imagriculture"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="100dp"-->
+            <!--                        android:layout_margin="5dp"-->
+            <!--                        android:background="@drawable/ic_agriculture"-->
+            <!--                        android:gravity="center_horizontal"-->
+            <!--                        android:textStyle="bold" />-->
 
-            </io.github.florent37.shapeofview.shapes.RoundRectView>
-            <io.github.florent37.shapeofview.shapes.RoundRectView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="1dp"
-                    android:elevation="4dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:shape_roundRect_topLeftRadius="5dp"
-                    app:shape_roundRect_topRightRadius="5dp"
-                    app:shape_roundRect_bottomLeftRadius="5dp"
-                    app:shape_roundRect_bottomRightRadius="5dp"
-                    android:layout_alignParentBottom="true"
-                    app:shape_roundRect_borderColor="@color/grey"
-                    app:shape_roundRect_borderWidth="2dp"
-            >
-                <RelativeLayout android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:id="@+id/rl_open"
-                                android:background="@color/lightblue"
-                                android:padding="10dp"
+            <!--                    <TextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_below="@+id/imagriculture"-->
+            <!--                        android:gravity="center_horizontal"-->
+            <!--                        android:text="@string/agriculture"-->
+            <!--                        android:textSize="8dp" />-->
 
-                >
-                    <ImageView android:layout_width="wrap_content"
-                               android:background="@drawable/ic_tick"
-                               android:id="@+id/im_opentick"
-                               android:visibility="gone"
-                               android:layout_height="wrap_content"/>
-                    <ImageView android:layout_width="match_parent"
-                               android:id="@+id/imopenplots"
-                               android:layout_height="100dp"
-                               android:background="@drawable/ic_openplots"
-                               android:gravity="center_horizontal"
-                               android:layout_margin="5dp"
+            <!--                </RelativeLayout>-->
+            <!--            </io.github.florent37.shapeofview.shapes.RoundRectView>-->
 
-                               android:textStyle="bold"
-                    />
-                    <TextView android:layout_width="match_parent"
-                              android:text="@string/openplots"
-                              android:textSize="8dp"
-                              android:gravity="center_horizontal"
-                              android:layout_below="@+id/imopenplots"
-                              android:layout_height="wrap_content"/>
+            <!--            <io.github.florent37.shapeofview.shapes.RoundRectView-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_alignParentBottom="true"-->
+            <!--                android:layout_margin="1dp"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:elevation="4dp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:shape_roundRect_borderColor="@color/grey"-->
+            <!--                app:shape_roundRect_borderWidth="2dp"-->
+            <!--                app:shape_roundRect_bottomLeftRadius="5dp"-->
+            <!--                app:shape_roundRect_bottomRightRadius="5dp"-->
+            <!--                app:shape_roundRect_topLeftRadius="5dp"-->
+            <!--                app:shape_roundRect_topRightRadius="5dp">-->
 
-                </RelativeLayout>
+            <!--                <RelativeLayout-->
+            <!--                    android:id="@+id/rl_residence"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:background="@color/lightblue"-->
+            <!--                    android:padding="10dp"-->
 
-            </io.github.florent37.shapeofview.shapes.RoundRectView>
+            <!--                    >-->
+
+            <!--                    <ImageView-->
+            <!--                        android:id="@+id/im_residencetick"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:background="@drawable/ic_tick"-->
+            <!--                        android:visibility="gone" />-->
+
+            <!--                    <ImageView-->
+            <!--                        android:id="@+id/imresidence"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="100dp"-->
+            <!--                        android:layout_marginStart="5dp"-->
+            <!--                        android:layout_marginTop="5dp"-->
+
+            <!--                        android:layout_marginEnd="5dp"-->
+            <!--                        android:layout_marginBottom="5dp"-->
+            <!--                        android:background="@drawable/ic_house"-->
+            <!--                        android:gravity="center_horizontal"-->
+            <!--                        android:textStyle="bold" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_below="@+id/imresidence"-->
+            <!--                        android:gravity="center_horizontal"-->
+            <!--                        android:text="@string/residence"-->
+            <!--                        android:textSize="8dp" />-->
+
+            <!--                </RelativeLayout>-->
+
+            <!--            </io.github.florent37.shapeofview.shapes.RoundRectView>-->
+
+            <!--            <io.github.florent37.shapeofview.shapes.RoundRectView-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_alignParentBottom="true"-->
+            <!--                android:layout_margin="1dp"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:elevation="4dp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:shape_roundRect_borderColor="@color/grey"-->
+            <!--                app:shape_roundRect_borderWidth="2dp"-->
+            <!--                app:shape_roundRect_bottomLeftRadius="5dp"-->
+            <!--                app:shape_roundRect_bottomRightRadius="5dp"-->
+            <!--                app:shape_roundRect_topLeftRadius="5dp"-->
+            <!--                app:shape_roundRect_topRightRadius="5dp">-->
+
+            <!--                <RelativeLayout-->
+            <!--                    android:id="@+id/rl_commericial"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:background="@color/lightblue"-->
+            <!--                    android:padding="10dp"-->
+
+            <!--                    >-->
+
+            <!--                    <ImageView-->
+            <!--                        android:id="@+id/im_commericialck"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:background="@drawable/ic_tick"-->
+            <!--                        android:visibility="gone" />-->
+
+            <!--                    <ImageView-->
+            <!--                        android:id="@+id/imcommercial"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="100dp"-->
+            <!--                        android:layout_margin="5dp"-->
+            <!--                        android:background="@drawable/ic_commercial"-->
+            <!--                        android:gravity="center_horizontal"-->
+            <!--                        android:paddingTop="10dp"-->
+            <!--                        android:textStyle="bold" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_below="@+id/imcommercial"-->
+            <!--                        android:gravity="center_horizontal"-->
+            <!--                        android:text="@string/commericial"-->
+            <!--                        android:textSize="8dp" />-->
+
+            <!--                </RelativeLayout>-->
+
+            <!--            </io.github.florent37.shapeofview.shapes.RoundRectView>-->
+
+            <!--            <io.github.florent37.shapeofview.shapes.RoundRectView-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_alignParentBottom="true"-->
+            <!--                android:layout_margin="1dp"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:elevation="4dp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:shape_roundRect_borderColor="@color/grey"-->
+            <!--                app:shape_roundRect_borderWidth="2dp"-->
+            <!--                app:shape_roundRect_bottomLeftRadius="5dp"-->
+            <!--                app:shape_roundRect_bottomRightRadius="5dp"-->
+            <!--                app:shape_roundRect_topLeftRadius="5dp"-->
+            <!--                app:shape_roundRect_topRightRadius="5dp">-->
+
+            <!--                <RelativeLayout-->
+            <!--                    android:id="@+id/rl_open"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:background="@color/lightblue"-->
+            <!--                    android:padding="10dp"-->
+
+            <!--                    >-->
+
+            <!--                    <ImageView-->
+            <!--                        android:id="@+id/im_opentick"-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:background="@drawable/ic_tick"-->
+            <!--                        android:visibility="gone" />-->
+
+            <!--                    <ImageView-->
+            <!--                        android:id="@+id/imopenplots"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="100dp"-->
+            <!--                        android:layout_margin="5dp"-->
+            <!--                        android:background="@drawable/ic_openplots"-->
+            <!--                        android:gravity="center_horizontal"-->
+
+            <!--                        android:textStyle="bold" />-->
+
+            <!--                    <TextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_below="@+id/imopenplots"-->
+            <!--                        android:gravity="center_horizontal"-->
+            <!--                        android:text="@string/openplots"-->
+            <!--                        android:textSize="8dp" />-->
+
+            <!--                </RelativeLayout>-->
+
+            <!--            </io.github.florent37.shapeofview.shapes.RoundRectView>-->
+            <!--        </LinearLayout>-->
+
+            <com.gs.realestate.util.propertyCategoryView.CustomPropertyCategoryView
+                android:id="@+id/cvPropertyCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
-    </LinearLayout>
+
+    </ScrollView>
 
     <io.github.florent37.shapeofview.shapes.RoundRectView
             android:layout_width="match_parent"
