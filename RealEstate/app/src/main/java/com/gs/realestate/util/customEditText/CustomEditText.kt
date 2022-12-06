@@ -128,6 +128,7 @@ class CustomEditText(context: Context, attributeSet: AttributeSet) :
     private var isMultilineView: Boolean = false
         set(value) {
             field = value
+            binding.etContent.isSingleLine = false
             binding.etContent.setLines(if (value) 4 else 1)
         }
 
@@ -177,7 +178,7 @@ class CustomEditText(context: Context, attributeSet: AttributeSet) :
         dataModifiers()
     }
 
-    
+
     private fun dataModifiers() {
         binding.tbSwitch.setOnCheckedChangeListener { _, b ->
             binding.tvSwitchLabel.text = if (b) switchOnText else switchOffText

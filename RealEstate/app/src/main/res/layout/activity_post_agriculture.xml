@@ -284,10 +284,11 @@
 
 
             <com.gs.realestate.util.customEditText.CustomEditText
+                android:id="@+id/etDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:edit_text_hint="@string/str_max_1024_characters"
                 app:edit_text_multi_line_view="true"
+                app:edit_text_hint="@string/str_max_1024_characters"
                 app:edit_text_title="@string/str_description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
