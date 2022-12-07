@@ -113,16 +113,41 @@
         app:layout_constraintWidth_percent="0.5" />
 
 
+
     <com.gs.realestate.util.customEditText.CustomEditText
         android:id="@+id/etConstructedArea"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:edit_text_input_type="inputNumberDecimal"
         app:edit_text_suffix="@string/str_sfts"
-        app:edit_text_title="@string/str_approach_road_width"
+        app:edit_text_title="@string/str_constructed_area"
         app:layout_constraintBottom_toTopOf="@id/etPlotArea"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etPlotArea"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etNoOfFloors"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumberDecimal"
+        app:edit_text_title="@string/str_no_of_floors"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPlotArea"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etFloorNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumberDecimal"
+        app:edit_text_title="@string/str_floor_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etNoOfFloors"
+        app:layout_constraintBottom_toBottomOf="@id/etNoOfFloors"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.5" />
 
@@ -134,7 +159,7 @@
         app:edit_text_input_type="inputNumberDecimal"
         app:edit_text_title="@string/str_age_of_the_building"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etPlotArea"
+        app:layout_constraintTop_toBottomOf="@id/etNoOfFloors"
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="0.5" />
 

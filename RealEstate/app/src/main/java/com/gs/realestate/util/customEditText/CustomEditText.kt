@@ -199,4 +199,12 @@ class CustomEditText(context: Context, attributeSet: AttributeSet) :
     }
 
 
+    fun getText(): String {
+        return binding.etContent.text.toString()
+    }
+
+    fun isValidText(): Boolean {
+        return binding.etContent.text.toString().isNotBlank()
+    }
+
 }
