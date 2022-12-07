@@ -24,6 +24,8 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.gs.realestate.R
 import com.gs.realestate.databinding.ActivityPostpropertyBinding
 import com.gs.realestate.ui.post.properties.PostAgricultureActivity
+import com.gs.realestate.ui.post.properties.PostCommercialActivity
+import com.gs.realestate.ui.post.properties.PostResidentialActivity
 import com.gs.realestate.util.Constants
 import com.gs.realestate.util.SnackBarToast
 import com.gs.realestate.util.propertyCategoryView.CustomPropertyCategoryView
@@ -95,20 +97,20 @@ class PostPropertyActivity : AppCompatActivity(), OnMapReadyCallback {
                         startActivity(intent)
                     }
                     CustomPropertyCategoryView.TYPE_RESIDENTIAL -> {
-                        startActivity(
-                            Intent(
-                                this@PostPropertyActivity,
-                                PostFlatActivity::class.java
-                            )
-                        )
+                        val intent = Intent(this@PostPropertyActivity, PostResidentialActivity::class.java)
+                        intent.putExtra(Constants.EXTRA_PROPERTY_TYPE, selectedOption.second)
+                        startActivity(intent)
                     }
                     CustomPropertyCategoryView.TYPE_COMMERCIAL -> {
-                        startActivity(
-                            Intent(
-                                this@PostPropertyActivity,
-                                OpenSpaceActivity::class.java
-                            )
-                        )
+                        val intent = Intent(this@PostPropertyActivity, PostCommercialActivity::class.java)
+                        intent.putExtra(Constants.EXTRA_PROPERTY_TYPE, selectedOption.second)
+                        startActivity(intent)
+//                        startActivity(
+//                            Intent(
+//                                this@PostPropertyActivity,
+//                                OpenSpaceActivity::class.java
+//                            )
+//                        )
                     }
                 }
             }

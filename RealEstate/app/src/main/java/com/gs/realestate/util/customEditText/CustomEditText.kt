@@ -167,9 +167,9 @@ class CustomEditText(context: Context, attributeSet: AttributeSet) :
                 it.getString(R.styleable.CustomEditText_edit_text_switch_on_text).orEmpty()
             switchOffText =
                 it.getString(R.styleable.CustomEditText_edit_text_switch_off_text).orEmpty()
+            inputType = it.getString(R.styleable.CustomEditText_edit_text_input_type).orEmpty()
             isMultilineView =
                 it.getBoolean(R.styleable.CustomEditText_edit_text_multi_line_view, false)
-            inputType = it.getString(R.styleable.CustomEditText_edit_text_input_type).orEmpty()
 
             it.recycle()
         }

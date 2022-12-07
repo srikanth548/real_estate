@@ -15,6 +15,22 @@
         android:theme="@style/Theme.RealEstate"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.post.properties.PostCommercialActivity"
+            android:theme="@style/Theme.RealEstate.NoActionBar"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.post.properties.PostResidentialActivity"
+            android:exported="false"
+            android:theme="@style/Theme.RealEstate.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.post.properties.PostAgricultureActivity"
             android:exported="false"
             android:theme="@style/Theme.RealEstate.NoActionBar">
@@ -55,32 +71,32 @@
             android:name=".ui.intro.SplashActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.RealEstate.NoActionBar"></activity>
+            android:theme="@style/Theme.RealEstate.NoActionBar" />
         <activity
             android:name=".ui.post.PostHighlightActivity"
             android:exported="true"
             android:label="@string/postaproperty"
-            android:theme="@style/Theme.RealEstate.NoActionBar"></activity>
+            android:theme="@style/Theme.RealEstate.NoActionBar" />
         <activity
             android:name=".ui.post.PostCategoryActivity"
             android:exported="true"
             android:label="@string/postaproperty"
-            android:theme="@style/Theme.RealEstate.NoActionBar"></activity>
+            android:theme="@style/Theme.RealEstate.NoActionBar" />
         <activity
             android:name=".ui.post.PostPropertyActivity"
             android:exported="true"
             android:label="@string/postaproperty"
-            android:theme="@style/Theme.RealEstate.NoActionBar"></activity>
+            android:theme="@style/Theme.RealEstate.NoActionBar" />
         <activity
             android:name=".ui.post.PostFlatActivity"
             android:exported="true"
             android:label="@string/postaproperty"
-            android:theme="@style/Theme.RealEstate.NoActionBar"></activity>
+            android:theme="@style/Theme.RealEstate.NoActionBar" />
         <activity
             android:name=".ui.post.OpenSpaceActivity"
             android:exported="true"
             android:label="@string/postaproperty"
-            android:theme="@style/Theme.RealEstate.NoActionBar"></activity>
+            android:theme="@style/Theme.RealEstate.NoActionBar" />
 
         <meta-data
             android:name="com.razorpay.ApiKey"

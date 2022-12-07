@@ -159,6 +159,23 @@
     <string name="str_buildings">Buildings</string>
     <string name="str_property_type">Property type</string>
     <string name="str_select_property_type">Please select property type to proceed further.</string>
+    <string name="str_name_of_venture">Name of the Project / Venture (Optional)</string>
+    <string name="str_is_gated_community">Is it a gated community?</string>
+    <string name="str_suitable_for">Suitable for</string>
+    <string name="str_sfts">SFTS</string>
+    <string name="str_plinth_area">Plinth Area</string>
+    <string name="str_floor_numbers">Number of Floors</string>
+    <string name="str_floor_number">Floor Number</string>
+    <string name="str_number_of_bedrooms">Number of Bedrooms</string>
+    <string name="str_no_of_bathrooms">Number of Bathrooms</string>
+    <string name="str_no_of_car_park">Number of Car Parkings</string>
+    <string name="str_age_of_building">Age of the Apartment/Building</string>
+    <string name="str_years">Years</string>
+    <string name="str_cars">Cars</string>
+    <string name="str_inr">₹</string>
+    <string name="str_approax_rental_value">Approax Rental Value</string>
+    <string name="str_plot_area">PlotArea</string>
+    <string name="str_age_of_the_building">Age of the Building</string>
 
     <string-array name="terms">
         <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>
