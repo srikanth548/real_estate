@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/size_10dp">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/separator"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <TextView
+        android:id="@+id/tvCamera"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_10dp"
+        android:background="@drawable/gray_button_background"
+        android:padding="20dp"
+        android:text="@string/str_camera"
+        android:textAlignment="center"
+        app:drawableBottomCompat="@drawable/ic_camera"
+        app:layout_constraintEnd_toStartOf="@id/separator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvGallery"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="@dimen/size_10dp"
+        android:background="@drawable/gray_button_background"
+        android:padding="20dp"
+        android:text="@string/str_gallery"
+        android:textAlignment="center"
+        app:drawableBottomCompat="@drawable/ic_gallery"
+        app:layout_constraintEnd_toStartOf="@id/separator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCamera" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gvUploadedPictures"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_10dp"
+        android:background="@drawable/gray_button_background"
+        android:padding="@dimen/size_3dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/separator"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

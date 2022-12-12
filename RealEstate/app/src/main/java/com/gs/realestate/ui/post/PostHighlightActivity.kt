@@ -8,13 +8,15 @@ import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.widget.GridView
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.chip.Chip
 import com.gs.realestate.R
 import com.gs.realestate.base.BaseActivity
 import com.gs.realestate.databinding.ActivityPosthighlightsBinding
@@ -24,6 +26,7 @@ import com.gs.realestate.network.RetrofitClient
 import com.gs.realestate.ui.login.TermsAdapter
 import com.gs.realestate.ui.post.adapter.HighLightsAdapter
 import com.gs.realestate.ui.post.adapter.ImageAdapter
+import com.gs.realestate.ui.post.adapter.PicturesAdapter
 import com.gs.realestate.util.SnackBarToast
 import com.razorpay.Checkout
 import com.razorpay.ExternalWalletListener
@@ -38,7 +41,6 @@ import retrofit2.Response
 
 class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, ExternalWalletListener,
     DialogInterface.OnClickListener {
-    private lateinit var imagesGrid: GridView
     private lateinit var binding: ActivityPosthighlightsBinding
     private lateinit var imagesUpload: ImageAdapter
     private lateinit var highLightsAdapter: HighLightsAdapter
@@ -49,6 +51,8 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val permissionCode = 101
     private lateinit var alertDialogBuilder: AlertDialog.Builder
+
+    private lateinit var picturesAdapter: PicturesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,18 +66,19 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(this@PostHighlightActivity)
 
-        imagesGrid = binding.imagesgrid
-        imagesUpload = ImageAdapter(imagesList, this)
-        imagesGrid.adapter = imagesUpload
+        setPicturesView()
+        setLocationProximityData()
 
-        binding.rlCamera.setOnClickListener {
+        imagesUpload = ImageAdapter(imagesList, this)
+
+        binding.clCustomPictureUpload.tvCamera.setOnClickListener {
             imagePicker.takeFromCamera { imageResult ->
                 imageCallBack(
                     imageResult
                 )
             }
         }
-        binding.rlGallery.setOnClickListener {
+        binding.clCustomPictureUpload.tvGallery.setOnClickListener {
             imagePicker.pickFromStorage { imageResult ->
                 imageCallBack(
                     imageResult
@@ -98,11 +103,53 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         }
 
         binding.btnPost.setOnClickListener {
+//            println("Selected chips : "+binding.cgProximity.checkedChipIds.forEach { binding.root.findViewById<Chip>(it).text.toString() })
             if (binding.terms.isChecked) {
                 startPayment()
             } else {
                 SnackBarToast.showErrorSnackBar(it, getString(R.string.pleasecheckterms))
             }
+        }
+    }
+
+    private fun setLocationProximityData() {
+        val itemsArray = listOf(
+            "Near to Reserve Forest",
+            "24 Hours Security",
+            "Solar Fencing",
+            "Near to Hospitals",
+            "Near to Police Station",
+            "Near to Town (can reach 10min 15min 30min)",
+            "Near to Local Village",
+            "Near to Market ( Fruit & Vegetable)",
+            "Near to water Projects",
+            "Any other Water body famous nearby",
+            "Near to resorts",
+            "Near to NH",
+            "Near to River or pond"
+        )
+        createChips(itemsArray)
+    }
+
+    private fun createChips(itemsArray: List<String>) {
+        itemsArray.forEach {
+            val chip = Chip(this@PostHighlightActivity).apply {
+                text = it
+                isCheckable = true
+//                setChipBackgroundColorResource(R.color.purple_500)
+//                isCloseIconVisible = true
+//                setTextColor(ContextCompat.getColor(context, R.color.white))
+//                setTextAppearance(R.style.ChipTextAppearance)
+            }
+            binding.cgProximity.addView(chip)
+        }
+    }
+
+    private fun setPicturesView() {
+        binding.clCustomPictureUpload.gvUploadedPictures.apply {
+            picturesAdapter = PicturesAdapter(imagesList, this@PostHighlightActivity)
+            layoutManager = GridLayoutManager(this@PostHighlightActivity, 2)
+            adapter = picturesAdapter
         }
     }
 
@@ -276,7 +323,10 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
             is ImageResult.Success -> {
                 val uri = imageResult.value
                 imagesList.add(uri)
-                imagesUpload.notifyDataSetChanged()
+                if (imagesList.isNotEmpty()) {
+                    binding.clCustomPictureUpload.gvUploadedPictures.visibility = View.VISIBLE
+                }
+                picturesAdapter.notifyDataSetChanged()
             }
             is ImageResult.Failure -> {
                 val errorString = imageResult.errorString

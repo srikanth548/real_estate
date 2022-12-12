@@ -209,6 +209,9 @@
     <string name="str_error_enter_constructed_area">Please enter Constructed Area</string>
     <string name="str_constructed_area">Constructed Area</string>
     <string name="str_no_of_floors">Number of Floors</string>
+    <string name="str_camera">Camera</string>
+    <string name="str_gallery">Gallery</string>
+    <string name="str_highlights">Highlights</string>
 
     <string-array name="terms">
         <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>

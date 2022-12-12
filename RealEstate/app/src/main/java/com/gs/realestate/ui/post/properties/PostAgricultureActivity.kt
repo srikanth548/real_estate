@@ -1,11 +1,13 @@
 package com.gs.realestate.ui.post.properties
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.gs.realestate.R
 import com.gs.realestate.base.BaseActivity
 import com.gs.realestate.databinding.ActivityPostAgricultureBinding
+import com.gs.realestate.ui.post.PostHighlightActivity
 import com.gs.realestate.util.Constants
 import com.gs.realestate.util.SnackBarToast
 
@@ -37,15 +39,16 @@ class PostAgricultureActivity : BaseActivity() {
         }
 
         binding.btnPost.setOnClickListener {
-            if (isLandType) {
-                if (validateAgricultureLandType()) {
-                    Toast.makeText(this, "Valid data", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                if (validateFarmHouseType()) {
-                    Toast.makeText(this, "Valid data", Toast.LENGTH_SHORT).show()
-                }
-            }
+            startActivity(Intent(this@PostAgricultureActivity, PostHighlightActivity::class.java))
+//            if (isLandType) {
+//                if (validateAgricultureLandType()) {
+//                    Toast.makeText(this, "Valid data", Toast.LENGTH_SHORT).show()
+//                }
+//            } else {
+//                if (validateFarmHouseType()) {
+//                    Toast.makeText(this, "Valid data", Toast.LENGTH_SHORT).show()
+//                }
+//            }
         }
     }
 

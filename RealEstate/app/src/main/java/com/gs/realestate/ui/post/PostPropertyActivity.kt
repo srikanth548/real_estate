@@ -105,12 +105,6 @@ class PostPropertyActivity : AppCompatActivity(), OnMapReadyCallback {
                         val intent = Intent(this@PostPropertyActivity, PostCommercialActivity::class.java)
                         intent.putExtra(Constants.EXTRA_PROPERTY_TYPE, selectedOption.second)
                         startActivity(intent)
-//                        startActivity(
-//                            Intent(
-//                                this@PostPropertyActivity,
-//                                OpenSpaceActivity::class.java
-//                            )
-//                        )
                     }
                 }
             }
