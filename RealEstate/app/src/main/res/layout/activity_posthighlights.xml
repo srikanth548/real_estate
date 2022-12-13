@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/app_bar_main"
+        android:layout_above="@id/llPost"
         android:layout_margin="8dp"
         android:orientation="vertical">
 
@@ -450,6 +451,7 @@
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/llPost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
