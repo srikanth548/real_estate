@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/size_5dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        tools:text="Title" />
+
+
+    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+        android:id="@+id/etContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
+        android:layout_marginTop="@dimen/size_3dp"
+        android:layout_toStartOf="@id/tvSuffix"
+        android:background="@drawable/box_bg"
+        android:padding="6dp" />
+
+
+    <TextView
+        android:id="@+id/tvSuffix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="2dp"
+        android:layout_toStartOf="@id/tbSwitch"
+        android:background="@drawable/suffix_bg"
+        android:padding="9dp"
+        android:visibility="gone"
+        tools:text="@string/action_settings"
+        tools:visibility="gone" />
+
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/tbSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_below="@id/tvTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-2dp"
+        android:layout_marginTop="2dp"
+        android:background="@drawable/suffix_bg"
+        android:paddingStart="@dimen/size_5dp"
+        android:paddingEnd="@dimen/size_5dp"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+
+    <TextView
+        android:id="@+id/tvSwitchLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/etContent"
+        android:layout_marginEnd="@dimen/size_5dp"
+        android:layout_toStartOf="@id/tbSwitch"
+        android:visibility="gone"
+        tools:text="@string/action_settings" />
+
+
+</RelativeLayout>

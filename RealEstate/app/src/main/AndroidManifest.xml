@@ -14,19 +14,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RealEstate"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".ui.home.property.PropertyDetailsActivity"
             android:exported="false"
-            android:label="@string/str_property_details"
+            android:theme="@style/Theme.RealEstate.NoActionBar"
+            android:label="@string/str_property_details" />
+
+        <activity
+            android:name=".ui.post.properties.PostCommercialActivity"
+            android:exported="false"
             android:theme="@style/Theme.RealEstate.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD3Dh9p2T3Oghmdmdbbj7sQL50isgbefag" />
+        <activity
+            android:name=".ui.post.properties.PostResidentialActivity"
+            android:exported="false"
+            android:theme="@style/Theme.RealEstate.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".ui.post.properties.PostAgricultureActivity"
+            android:exported="false"
+            android:theme="@style/Theme.RealEstate.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
 
         <activity
             android:name=".ui.login.LoginActivity"
@@ -34,13 +55,8 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.RealEstate.NoActionBar">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
         </activity>
+
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="true"
@@ -52,36 +68,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.intro.SplashActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.RealEstate.NoActionBar"></activity>
+            android:theme="@style/Theme.RealEstate.NoActionBar" />
+
         <activity
             android:name=".ui.post.PostHighlightActivity"
             android:exported="true"
             android:label="@string/postaproperty"
-            android:theme="@style/Theme.RealEstate.NoActionBar"></activity>
+            android:theme="@style/Theme.RealEstate.NoActionBar" />
+
         <activity
             android:name=".ui.post.PostCategoryActivity"
             android:exported="true"
             android:label="@string/postaproperty"
-            android:theme="@style/Theme.RealEstate.NoActionBar"></activity>
+            android:theme="@style/Theme.RealEstate.NoActionBar" />
+
         <activity
             android:name=".ui.post.PostPropertyActivity"
             android:exported="true"
             android:label="@string/postaproperty"
-            android:theme="@style/Theme.RealEstate.NoActionBar"></activity>
+            android:theme="@style/Theme.RealEstate.NoActionBar" />
+
         <activity
             android:name=".ui.post.PostFlatActivity"
             android:exported="true"
             android:label="@string/postaproperty"
-            android:theme="@style/Theme.RealEstate.NoActionBar"></activity>
+            android:theme="@style/Theme.RealEstate.NoActionBar" />
+
         <activity
             android:name=".ui.post.OpenSpaceActivity"
             android:exported="true"
             android:label="@string/postaproperty"
-            android:theme="@style/Theme.RealEstate.NoActionBar"></activity>
+            android:theme="@style/Theme.RealEstate.NoActionBar" />
 
         <meta-data
             android:name="com.razorpay.ApiKey"
@@ -89,6 +111,11 @@
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD3Dh9p2T3Oghmdmdbbj7sQL50isgbefag" />
+
     </application>
 
 </manifest>
