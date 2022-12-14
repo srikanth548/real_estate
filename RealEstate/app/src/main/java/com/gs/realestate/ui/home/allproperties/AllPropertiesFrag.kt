@@ -16,6 +16,7 @@ import com.gs.realestate.databinding.FragmentHomeBinding
 import com.gs.realestate.network.ApiInterface
 import com.gs.realestate.network.Properties
 import com.gs.realestate.network.RetrofitClient
+import com.gs.realestate.ui.home.property.PropertyDetailsActivity
 import com.gs.realestate.ui.post.PostPropertyActivity
 import com.gs.realestate.util.PreferenceHelper
 import com.gs.realestate.util.PreferenceHelper.csrftoken
@@ -52,7 +53,9 @@ class AllPropertiesFrag : BaseFragment() {
         recyclerView.adapter = propertyListAdap
         getProperties()
         binding.btnPost.setOnClickListener {
-            startActivity(Intent(activity, PostPropertyActivity::class.java))
+            startActivity(Intent(activity, PropertyDetailsActivity::class.java))
+
+//            startActivity(Intent(activity, PostPropertyActivity::class.java))
         }
 //        binding.tvNext.setOnClickListener {
 //            findNavController().navigate(R.id.action_SignUpFragment_to_ListFragment)

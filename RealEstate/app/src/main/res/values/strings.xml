@@ -133,20 +133,21 @@
     <string name="str_buildings">Buildings</string>
     <string name="str_property_type">Property type</string>
     <string name="str_select_property_type">Please select property type to proceed futher.</string>
+    <string name="str_property_details">Property Details</string>
 
     <string-array name="terms">
-       <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>
-       <item>ii.By registering you represent that you are a major and that if you are registering on behalf of a person or entity, you are authorized to register for the Service.</item>
-       <item>iii.You agree that you may be charged a nominal fee for registering on the website and to access the services provided by it.</item>
-       <item>iv.The information which is provided by you is true and that you have not misrepresented any information.</item>
-       <item>v.You agree that pictures, location and orientation of the house, floor plans, water availability as provided by the Seller shall be shared to the Buyers.</item>
-       <item>vi.You acknowledge that certain information like phone number and name shall be shared with third parties for performing physical visits or acquiring Revenue records and the same shall be done so within reasonable limits of the scope of this Agreement.</item>
-       <item>vii.You agree that you shall notify Right My Property at the earliest instance possible of any possible breach of the account data or unauthorized access. To protect such information, you are advised to change the password from time to time and Right My Property shall not be held responsible for any mischief arising due to the carelessness of the seller or any data breach from your side.</item>
-       <item>viii.You undertake to use the website only for the purposes intended for and shall not commit any act that jeopardizes the information provided by any other user.</item>
-       <item>ix.You undertake not to put up any listing that can be construed as harassment, religious, racial hatred, obscenity, or of any other inconvenience of any nature.</item>
-       <item>x.You agree that in the event of violation of any of the terms mentioned hereunder, Right My Property reserves the right to suspend or deactivate your account and you forfeit the payment made towards any subscription plans.</item>
-       <item>xi.You shall not post any deep linking or provide access to any content that is not expressly provided by Right My Property and Right My Property reserves the right to take down such violations.</item>
-       <item>xii.You shall not to copy, modify, reverse engineer, decompile, disassemble, create derivative works of the website nor attempt to locate or obtain its source code.</item>
-       <item>xiii.You undertake to correspond and use the username, password and phone number provided by you at the time of registration to communicate with the representatives to facilitate easy access to your account and details.</item>
-   </string-array>
+        <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>
+        <item>ii.By registering you represent that you are a major and that if you are registering on behalf of a person or entity, you are authorized to register for the Service.</item>
+        <item>iii.You agree that you may be charged a nominal fee for registering on the website and to access the services provided by it.</item>
+        <item>iv.The information which is provided by you is true and that you have not misrepresented any information.</item>
+        <item>v.You agree that pictures, location and orientation of the house, floor plans, water availability as provided by the Seller shall be shared to the Buyers.</item>
+        <item>vi.You acknowledge that certain information like phone number and name shall be shared with third parties for performing physical visits or acquiring Revenue records and the same shall be done so within reasonable limits of the scope of this Agreement.</item>
+        <item>vii.You agree that you shall notify Right My Property at the earliest instance possible of any possible breach of the account data or unauthorized access. To protect such information, you are advised to change the password from time to time and Right My Property shall not be held responsible for any mischief arising due to the carelessness of the seller or any data breach from your side.</item>
+        <item>viii.You undertake to use the website only for the purposes intended for and shall not commit any act that jeopardizes the information provided by any other user.</item>
+        <item>ix.You undertake not to put up any listing that can be construed as harassment, religious, racial hatred, obscenity, or of any other inconvenience of any nature.</item>
+        <item>x.You agree that in the event of violation of any of the terms mentioned hereunder, Right My Property reserves the right to suspend or deactivate your account and you forfeit the payment made towards any subscription plans.</item>
+        <item>xi.You shall not post any deep linking or provide access to any content that is not expressly provided by Right My Property and Right My Property reserves the right to take down such violations.</item>
+        <item>xii.You shall not to copy, modify, reverse engineer, decompile, disassemble, create derivative works of the website nor attempt to locate or obtain its source code.</item>
+        <item>xiii.You undertake to correspond and use the username, password and phone number provided by you at the time of registration to communicate with the representatives to facilitate easy access to your account and details.</item>
+    </string-array>
 </resources>

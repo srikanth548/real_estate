@@ -15,5 +15,6 @@
     <color name="dialogBackground">#60000000</color>
     <color name="transparent7">#70000000</color>
     <color name="gray">#808080</color>
+    <color name="red">#F44336</color>
 
 </resources>
