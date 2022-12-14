@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <ImageView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/house" android:id="@+id/im_upload"
-            tools:layout_editor_absoluteY="0dp" tools:layout_editor_absoluteX="0dp"/>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/im_upload"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:scaleType="fitXY"
+    android:layout_margin="2dp"
+    app:srcCompat="@drawable/house"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp" />

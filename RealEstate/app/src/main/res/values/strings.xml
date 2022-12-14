@@ -121,6 +121,32 @@
     <string name="numofbathrooms">Number of Bathrooms</string>
     <string name="stropenspace">Open Space</string>
     <string name="pleasecheckterms">Please accept the terms and conditions</string>
+    <string name="str_village_locality">Village/Locality</string>
+    <string name="str_city_town">City/Town</string>
+    <string name="str_mandal">Mandal</string>
+    <string name="str_district">District</string>
+    <string name="str_state">State</string>
+    <string name="str_extent_in">Extent in</string>
+    <string name="str_acres">Acres</string>
+    <string name="str_guntas">Guntas</string>
+    <string name="str_type_of_approach_road">Type of Approach Road</string>
+    <string name="str_approach_road_width">Approach Road Width</string>
+    <string name="str_offer_price">Offer Price</string>
+    <string name="str_crores">Crores</string>
+    <string name="str_lakhs">Lakhs</string>
+    <string name="str_nearby_market_price">Nearby Prevailing Market Place</string>
+    <string name="str_field_partner_code">Field Partner Code</string>
+    <string name="str_name_of_owner">Name of the owner</string>
+    <string name="str_contact_number_primary">Contact Phone Number(Primary)</string>
+    <string name="str_contact_number_alternative">Contact Phone Number(Alternative)</string>
+    <string name="str_description">Description</string>
+    <string name="str_feets">Feets</string>
+    <string name="str_max_1024_characters">(Max 1024 Characters)</string>
+    <string name="str_construction_type_farm_house">Construction type of Farm House</string>
+    <string name="str_construction_plot_area">Farm House Constructed Plot Area</string>
+    <string name="str_sqyrds">SQRYDS</string>
+    <string name="str_facing">Facing</string>
+    <string name="atr_age_of_farm_house">Age of Farm House</string>
     <string name="str_agriculture">Agriculture</string>
     <string name="str_residential">Residential</string>
     <string name="str_commercial">Commercial/ Industrial</string>
@@ -132,21 +158,74 @@
     <string name="str_open_spaces">Open Spaces</string>
     <string name="str_buildings">Buildings</string>
     <string name="str_property_type">Property type</string>
-    <string name="str_select_property_type">Please select property type to proceed futher.</string>
+    <string name="str_select_property_type">Please select property type to proceed further.</string>
+    <string name="str_name_of_venture">Name of the Project / Venture (Optional)</string>
+    <string name="str_is_gated_community">Is it a gated community?</string>
+    <string name="str_suitable_for">Suitable for</string>
+    <string name="str_sfts">SFTS</string>
+    <string name="str_plinth_area">Plinth Area</string>
+    <string name="str_floor_numbers">Number of Floors</string>
+    <string name="str_floor_number">Floor Number</string>
+    <string name="str_number_of_bedrooms">Number of Bedrooms</string>
+    <string name="str_no_of_bathrooms">Number of Bathrooms</string>
+    <string name="str_no_of_car_park">Number of Car Parkings</string>
+    <string name="str_age_of_building">Age of the Apartment/Building</string>
+    <string name="str_years">Years</string>
+    <string name="str_cars">Cars</string>
+    <string name="str_inr">₹</string>
+    <string name="str_approax_rental_value">Approax Rental Value</string>
+    <string name="str_plot_area">PlotArea</string>
+    <string name="str_age_of_the_building">Age of the Building</string>
+    <string name="str_err_please_select_village">Please enter Village Name</string>
+    <string name="str_err_please_select_city">Please enter City Name</string>
+    <string name="str_err_please_select_mandal">Please enter Mandal Name</string>
+    <string name="str_err_please_select_state">Please enter State Name</string>
+    <string name="str_err_please_enter_extent">"Please enter Extent "</string>
+    <string name="str_enter_type_of_approach_road">Please select Type of Approach Road</string>
+    <string name="str_err_enter_guntas">Please enter Guntas</string>
+    <string name="str_error_road_width">Please enter Road Width</string>
+    <string name="str_err_enter_offer_price">Please enter Offer price</string>
+    <string name="str_err_market_price">Please enter nearby Prevailing Market Price</string>
+    <string name="str_err_owner_name">Please enter Owner Name</string>
+    <string name="str_err_contact_number">Please enter Contact Number</string>
+    <string name="str_err_enter_construction_type">Please enter Construction type of farm house</string>
+    <string name="str_err_enter_construction_area">Please enter Farm House Constructed Plot Area</string>
+    <string name="str_farm_house_plinth_area">Farm House constructed Plinth Area</string>
+    <string name="str_err_enter_farm_house_plinth_area">Please enter Farm House Plinth Area</string>
+    <string name="str_error_enter_facing">Please enter Facing</string>
+    <string name="str_enter_age_of_farm_house">Please enter age of farm house</string>
+    <string name="str_please_enter_plinth_area">Please enter Plinth Area</string>
+    <string name="str_err_no_of_floors">Please enter no of Floors</string>
+    <string name="str_err_enter_floor_number">Please enter Floor number</string>
+    <string name="str_err_enter_no_of_bedrooms">Please enter Number of bed rooms</string>
+    <string name="str_err_enter_no_of_bathrooms">Please enter no of bathrooms</string>
+    <string name="str_err_car_parking">Please enter no of car parking spaces.</string>
+    <string name="str_err_enter_building_age">Please enter Age of Apartment/ building.</string>
+    <string name="str_err_approax_rent">Please enter Approax rent</string>
+    <string name="str_err_suitable_for">Please enter Suitable for.</string>
+    <string name="str_err_plot_area">Plese enter Plot Area</string>
+    <string name="str_err_age_of_building">Please enter age of building</string>
+    <string name="str_error_enter_plot_area">Please enter plot area</string>
+    <string name="str_error_enter_constructed_area">Please enter Constructed Area</string>
+    <string name="str_constructed_area">Constructed Area</string>
+    <string name="str_no_of_floors">Number of Floors</string>
+    <string name="str_camera">Camera</string>
+    <string name="str_gallery">Gallery</string>
+    <string name="str_highlights">Highlights</string>
 
     <string-array name="terms">
-       <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>
-       <item>ii.By registering you represent that you are a major and that if you are registering on behalf of a person or entity, you are authorized to register for the Service.</item>
-       <item>iii.You agree that you may be charged a nominal fee for registering on the website and to access the services provided by it.</item>
-       <item>iv.The information which is provided by you is true and that you have not misrepresented any information.</item>
-       <item>v.You agree that pictures, location and orientation of the house, floor plans, water availability as provided by the Seller shall be shared to the Buyers.</item>
-       <item>vi.You acknowledge that certain information like phone number and name shall be shared with third parties for performing physical visits or acquiring Revenue records and the same shall be done so within reasonable limits of the scope of this Agreement.</item>
-       <item>vii.You agree that you shall notify Right My Property at the earliest instance possible of any possible breach of the account data or unauthorized access. To protect such information, you are advised to change the password from time to time and Right My Property shall not be held responsible for any mischief arising due to the carelessness of the seller or any data breach from your side.</item>
-       <item>viii.You undertake to use the website only for the purposes intended for and shall not commit any act that jeopardizes the information provided by any other user.</item>
-       <item>ix.You undertake not to put up any listing that can be construed as harassment, religious, racial hatred, obscenity, or of any other inconvenience of any nature.</item>
-       <item>x.You agree that in the event of violation of any of the terms mentioned hereunder, Right My Property reserves the right to suspend or deactivate your account and you forfeit the payment made towards any subscription plans.</item>
-       <item>xi.You shall not post any deep linking or provide access to any content that is not expressly provided by Right My Property and Right My Property reserves the right to take down such violations.</item>
-       <item>xii.You shall not to copy, modify, reverse engineer, decompile, disassemble, create derivative works of the website nor attempt to locate or obtain its source code.</item>
-       <item>xiii.You undertake to correspond and use the username, password and phone number provided by you at the time of registration to communicate with the representatives to facilitate easy access to your account and details.</item>
-   </string-array>
+        <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>
+        <item>ii.By registering you represent that you are a major and that if you are registering on behalf of a person or entity, you are authorized to register for the Service.</item>
+        <item>iii.You agree that you may be charged a nominal fee for registering on the website and to access the services provided by it.</item>
+        <item>iv.The information which is provided by you is true and that you have not misrepresented any information.</item>
+        <item>v.You agree that pictures, location and orientation of the house, floor plans, water availability as provided by the Seller shall be shared to the Buyers.</item>
+        <item>vi.You acknowledge that certain information like phone number and name shall be shared with third parties for performing physical visits or acquiring Revenue records and the same shall be done so within reasonable limits of the scope of this Agreement.</item>
+        <item>vii.You agree that you shall notify Right My Property at the earliest instance possible of any possible breach of the account data or unauthorized access. To protect such information, you are advised to change the password from time to time and Right My Property shall not be held responsible for any mischief arising due to the carelessness of the seller or any data breach from your side.</item>
+        <item>viii.You undertake to use the website only for the purposes intended for and shall not commit any act that jeopardizes the information provided by any other user.</item>
+        <item>ix.You undertake not to put up any listing that can be construed as harassment, religious, racial hatred, obscenity, or of any other inconvenience of any nature.</item>
+        <item>x.You agree that in the event of violation of any of the terms mentioned hereunder, Right My Property reserves the right to suspend or deactivate your account and you forfeit the payment made towards any subscription plans.</item>
+        <item>xi.You shall not post any deep linking or provide access to any content that is not expressly provided by Right My Property and Right My Property reserves the right to take down such violations.</item>
+        <item>xii.You shall not to copy, modify, reverse engineer, decompile, disassemble, create derivative works of the website nor attempt to locate or obtain its source code.</item>
+        <item>xiii.You undertake to correspond and use the username, password and phone number provided by you at the time of registration to communicate with the representatives to facilitate easy access to your account and details.</item>
+    </string-array>
 </resources>

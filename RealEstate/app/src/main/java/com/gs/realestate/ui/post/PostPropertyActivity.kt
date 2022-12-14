@@ -23,6 +23,10 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.gs.realestate.R
 import com.gs.realestate.databinding.ActivityPostpropertyBinding
+import com.gs.realestate.ui.post.properties.PostAgricultureActivity
+import com.gs.realestate.ui.post.properties.PostCommercialActivity
+import com.gs.realestate.ui.post.properties.PostResidentialActivity
+import com.gs.realestate.util.Constants
 import com.gs.realestate.util.SnackBarToast
 import com.gs.realestate.util.propertyCategoryView.CustomPropertyCategoryView
 
@@ -54,8 +58,6 @@ class PostPropertyActivity : AppCompatActivity(), OnMapReadyCallback {
         if (!Places.isInitialized()) {
             Places.initialize(applicationContext, apiKey)
         }
-
-        // Initialize the AutocompleteSupportFragment.
 
         // Initialize the AutocompleteSupportFragment.
         val autocompleteFragment =
@@ -90,28 +92,19 @@ class PostPropertyActivity : AppCompatActivity(), OnMapReadyCallback {
             } else {
                 when (selectedOption?.first) {
                     CustomPropertyCategoryView.TYPE_AGRICULTURE -> {
-                        startActivity(
-                            Intent(
-                                this@PostPropertyActivity,
-                                PostCategoryActivity::class.java
-                            )
-                        )
+                        val intent = Intent(this@PostPropertyActivity, PostAgricultureActivity::class.java)
+                        intent.putExtra(Constants.EXTRA_PROPERTY_TYPE, selectedOption.second)
+                        startActivity(intent)
                     }
                     CustomPropertyCategoryView.TYPE_RESIDENTIAL -> {
-                        startActivity(
-                            Intent(
-                                this@PostPropertyActivity,
-                                PostFlatActivity::class.java
-                            )
-                        )
+                        val intent = Intent(this@PostPropertyActivity, PostResidentialActivity::class.java)
+                        intent.putExtra(Constants.EXTRA_PROPERTY_TYPE, selectedOption.second)
+                        startActivity(intent)
                     }
                     CustomPropertyCategoryView.TYPE_COMMERCIAL -> {
-                        startActivity(
-                            Intent(
-                                this@PostPropertyActivity,
-                                OpenSpaceActivity::class.java
-                            )
-                        )
+                        val intent = Intent(this@PostPropertyActivity, PostCommercialActivity::class.java)
+                        intent.putExtra(Constants.EXTRA_PROPERTY_TYPE, selectedOption.second)
+                        startActivity(intent)
                     }
                 }
             }
