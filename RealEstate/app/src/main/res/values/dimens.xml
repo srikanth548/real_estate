@@ -10,7 +10,6 @@
     <dimen name="size_8dp">8dp</dimen>
     <dimen name="progress_dialog_size">150dp</dimen>
     <dimen name="size_3dp">3dp</dimen>
-    <dimen name="size_5dp">5dp</dimen>
     <dimen name="size_1dp">1dp</dimen>
     <dimen name="size_9dp">9dp</dimen>
     <dimen name="size_16sp">16sp</dimen>
