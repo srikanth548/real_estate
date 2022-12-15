@@ -213,6 +213,9 @@
     <string name="str_camera">Camera</string>
     <string name="str_gallery">Gallery</string>
     <string name="str_highlights">Highlights</string>
+    <string name="str_email_optional">Email (Optional)</string>
+    <string name="str_name">Name</string>
+    <string name="str_update">Update</string>
 
     <string-array name="terms">
         <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>

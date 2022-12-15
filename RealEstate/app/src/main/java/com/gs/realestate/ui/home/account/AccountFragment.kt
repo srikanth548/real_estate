@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.gs.realestate.R
 import com.gs.realestate.databinding.FragmentAccountBinding
-import com.gs.realestate.databinding.FragmentSignupBinding
 
 class AccountFragment : Fragment() {
 
