@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CustomEditText">
+        <attr name="edit_text_title" format="string" />
+        <attr name="edit_text_hint" format="string" />
+        <attr name="edit_text_enabled" format="boolean" />
+        <attr name="edit_text_suffix" format="string" />
+        <attr name="edit_text_switch_enabled" format="boolean" />
+        <attr name="edit_text_switch_on_text" format="string" />
+        <attr name="edit_text_switch_off_text" format="string" />
+        <attr name="edit_text_multi_line_view" format="boolean" />
+        <attr name="edit_text_input_type" format="enum">
+            <enum name="inputText" value="0"/>
+            <enum name="inputNumber" value="1"/>
+            <enum name="inputNumberDecimal" value="2"/>
+        </attr>
+    </declare-styleable>
+</resources>

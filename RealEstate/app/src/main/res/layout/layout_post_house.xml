@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/clRoot">
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etVillage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_title="@string/str_village_locality"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etCity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_title="@string/str_city_town"
+        app:layout_constraintBaseline_toBaselineOf="@id/etVillage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etMandal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_title="@string/str_mandal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etVillage"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etDistrict"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_title="@string/str_district"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/etMandal"
+        app:layout_constraintTop_toBottomOf="@id/etCity"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etState"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_title="@string/str_state"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etMandal"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etNameOfVenture"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_title="@string/str_name_of_venture"
+        app:layout_constraintBottom_toBottomOf="@id/etState"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/etState"
+        app:layout_constraintTop_toTopOf="@id/etState"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etFacing"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_title="@string/str_facing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNameOfVenture"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etApproachRoad"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_title="@string/str_type_of_approach_road"
+        app:layout_constraintBottom_toBottomOf="@id/etFacing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etFacing"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etApproachRoadWidth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumberDecimal"
+        app:edit_text_suffix="@string/str_feets"
+        app:edit_text_title="@string/str_approach_road_width"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etFacing"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/gatedCommunitySwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_10dp"
+        android:text="@string/str_is_gated_community"
+        app:layout_constraintBottom_toBottomOf="@id/etApproachRoadWidth"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etApproachRoadWidth"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etPlotArea"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumberDecimal"
+        app:edit_text_suffix="@string/str_sqyrds"
+        app:edit_text_title="@string/str_plot_area"
+        app:layout_constraintBottom_toBottomOf="@id/etPlinthArea"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etPlinthArea"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etPlinthArea"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumberDecimal"
+        app:edit_text_suffix="@string/str_sfts"
+        app:edit_text_title="@string/str_plinth_area"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etApproachRoadWidth"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etNoOfFloors"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumber"
+        app:edit_text_title="@string/str_floor_numbers"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPlinthArea"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etFloorNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumber"
+        app:edit_text_title="@string/str_floor_number"
+        app:layout_constraintTop_toTopOf="@id/etNoOfFloors"
+        app:layout_constraintBottom_toBottomOf="@id/etNoOfFloors"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etNoOfBedRooms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumber"
+        app:edit_text_title="@string/str_number_of_bedrooms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNoOfFloors"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etNoOfBathrooms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumber"
+        app:edit_text_title="@string/str_no_of_bathrooms"
+        app:layout_constraintTop_toTopOf="@id/etNoOfBedRooms"
+        app:layout_constraintBottom_toBottomOf="@id/etNoOfBedRooms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etBuildingAge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumber"
+        app:edit_text_suffix="@string/str_years"
+        app:edit_text_title="@string/str_age_of_the_building"
+        app:layout_constraintTop_toBottomOf="@id/etNoOfBedRooms"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etOfferPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumberDecimal"
+        app:edit_text_switch_enabled="true"
+        app:edit_text_switch_off_text="@string/str_lakhs"
+        app:edit_text_switch_on_text="@string/str_crores"
+        app:edit_text_title="@string/str_offer_price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etBuildingAge"
+        app:layout_constraintBottom_toBottomOf="@id/etBuildingAge"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etMarketPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumberDecimal"
+        app:edit_text_switch_off_text="@string/str_lakhs"
+        app:edit_text_switch_on_text="@string/str_crores"
+        app:edit_text_switch_enabled="true"
+        app:edit_text_title="@string/str_nearby_market_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etBuildingAge"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etApproaxRent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumber"
+        app:edit_text_suffix="@string/str_inr"
+        app:edit_text_title="@string/str_approax_rental_value"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/etMarketPrice"
+        app:layout_constraintBottom_toBottomOf="@+id/etMarketPrice"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etSuitableFor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_title="@string/str_suitable_for"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etMarketPrice"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etFieldPartner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_title="@string/str_field_partner_code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/etSuitableFor"
+        app:layout_constraintTop_toTopOf="@id/etSuitableFor"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etOwnerName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_title="@string/str_name_of_owner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSuitableFor"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etPrimaryContact"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumber"
+        app:edit_text_title="@string/str_contact_number_primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/etOwnerName"
+        app:layout_constraintTop_toTopOf="@id/etOwnerName"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etAlternativeContact"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:edit_text_input_type="inputNumber"
+        app:edit_text_title="@string/str_contact_number_alternative"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etOwnerName"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:edit_text_multi_line_view="true"
+        app:edit_text_hint="@string/str_max_1024_characters"
+        app:edit_text_title="@string/str_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etAlternativeContact" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
