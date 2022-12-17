@@ -10,6 +10,7 @@ import com.gs.realestate.databinding.FragmentSignupBinding
 
 class HelpFragment : Fragment() {
 
+
     private var _binding: FragmentHelpBinding? = null
 
     // This property is only valid between onCreateView and

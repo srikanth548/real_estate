@@ -5,6 +5,18 @@
     android:layout_height="match_parent"
     android:padding="@dimen/size_10dp">
 
+
+    <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:edit_text_enabled="false"
+        app:edit_text_title="@string/str_registered_mobile_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <com.gs.realestate.util.customEditText.CustomEditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
@@ -12,16 +24,28 @@
         app:edit_text_title="@string/str_email_optional"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/etMobile" />
 
 
     <com.gs.realestate.util.customEditText.CustomEditText
+        android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:edit_text_title="@string/str_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etEmail" />
+
+
+    <CheckBox
+        android:id="@+id/cbTerms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_post"
+        android:text="@string/str_terms_conditions" />
+
 
 
     <io.github.florent37.shapeofview.shapes.RoundRectView

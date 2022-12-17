@@ -216,6 +216,10 @@
     <string name="str_email_optional">Email (Optional)</string>
     <string name="str_name">Name</string>
     <string name="str_update">Update</string>
+    <string name="str_registered_mobile_number">Registered Mobile Number</string>
+    <string name="str_terms_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="str_please_check_terms_to_continue"><![CDATA[Please check Terms & Conditions to continue.]]></string>
+    <string name="str_help_text">For any queries, please email to\n <u>info@rightmyproperty.in</u></string>
 
     <string-array name="terms">
         <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>
