@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_home" app:startDestination="@id/allPropertiesFrag">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_home"
+    app:startDestination="@id/allPropertiesFrag">
 
-    <fragment android:id="@+id/accountFragment" android:name="com.gs.realestate.ui.home.account.AccountFragment"
-              android:label="My Account"/>
-    <fragment android:id="@+id/allPropertiesFrag"
-              android:name="com.gs.realestate.ui.home.allproperties.AllPropertiesFrag"
-              android:label="My Properties"/>
-    <fragment android:id="@+id/helpFragment" android:name="com.gs.realestate.ui.home.help.HelpFragment"
-              android:label="Help"/>
-    <fragment android:id="@+id/settingsFragement" android:name="com.gs.realestate.ui.home.settings.SettingsFragement"
-              android:label="Settings"/>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.gs.realestate.ui.home.account.AccountFragment"
+        android:label="My Account" />
+
+    <fragment
+        android:id="@+id/allPropertiesFrag"
+        android:name="com.gs.realestate.ui.home.allproperties.AllPropertiesFrag"
+        android:label="My Properties" />
+
+    <fragment
+        android:id="@+id/helpFragment"
+        android:name="com.gs.realestate.ui.home.help.HelpFragment"
+        android:label="Help" />
+
+    <fragment
+        android:id="@+id/settingsFragement"
+        android:name="com.gs.realestate.ui.home.settings.SettingsFragement"
+        android:label="Settings" />
+
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.gs.realestate.ui.home.notification.NotificationFragment"
+        android:label="Notifications" />
 </navigation>

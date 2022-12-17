@@ -220,6 +220,7 @@
     <string name="str_terms_conditions"><![CDATA[Terms & Conditions]]></string>
     <string name="str_please_check_terms_to_continue"><![CDATA[Please check Terms & Conditions to continue.]]></string>
     <string name="str_help_text">For any queries, please email to\n <u>info@rightmyproperty.in</u></string>
+    <string name="str_notifications">Notifications</string>
 
     <string-array name="terms">
         <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>

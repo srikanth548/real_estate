@@ -22,6 +22,11 @@
                 android:title="@string/allproperties"/>
 
         <item
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/ic_notfication"
+            android:title="@string/str_notifications"/>
+
+        <item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/ic_settings"
                 android:title="@string/settings"/>
