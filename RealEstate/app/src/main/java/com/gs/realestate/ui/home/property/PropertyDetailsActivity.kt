@@ -3,6 +3,9 @@ package com.gs.realestate.ui.home.property
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gs.realestate.databinding.ActivityPropertyDetailsBinding
+import com.gs.realestate.network.Details
+import com.gs.realestate.network.Properties
+import com.gs.realestate.network.Series
 
 class PropertyDetailsActivity : AppCompatActivity() {
 
@@ -15,39 +18,87 @@ class PropertyDetailsActivity : AppCompatActivity() {
         binding = ActivityPropertyDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        buildStaticData()
 
+        intent.extras?.let {
+            if(it.containsKey("EXTRA_PROPERTY_DETAILS")){
+                it.getParcelable<Properties>("EXTRA_PROPERTY_DETAILS")?.let {propertyDetails ->
+//                    loadData(propertyDetails)
+                }
+            }
+        }
 
+        loadData(getDummyData())
     }
 
-    private fun buildStaticData() {
+    private fun loadData(propertyDetails: Properties) {
         binding.imageSlider.setImagesList(
             listOf(
-                "https://picsum.photos/200",
-                "https://picsum.photos/id/237/200/300",
-                "https://picsum.photos/seed/picsum/200/300"
+                propertyDetails.imageUrl ?: ""
             )
         )
 
-        binding.tvPropertyName.text = "(TG2211000021) Farm House"
-        binding.tvLocationDetails.text = "Nizampet,Hyderabad...."
-        binding.tvExpiresIn.text = "Post expires in 19-Nov-2022"
-        binding.tvPropertyPrice.text = "$ 100,00"
-        binding.tvLikesCount.text = "15"
-        binding.tvViewsCount.text = "26"
+        binding.tvPropertyName.text = propertyDetails.propertyType
+        binding.tvLocationDetails.text = propertyDetails.location
+        binding.tvExpiresIn.text = "Post expires in ${propertyDetails.expiryDate}"
+        binding.tvPropertyPrice.text =
+            "${propertyDetails.details?.get(1)?.value}  ${propertyDetails.details?.get(1)?.unit}"
+        binding.tvLikesCount.text = propertyDetails.favCount.toString()
+        binding.tvViewsCount.text = propertyDetails.viewCount.toString()
 
 
         binding.cGraph.loadGraphData(
-            xAxisList = getDatesList(),
-            viewsList = getValuesList(),
-            favList = getFavList(),
-            viewsName = "Views",
-            favoritesName = "Fav"
+            xAxisList = propertyDetails.categories ?: listOf(),
+            viewsList = propertyDetails.series?.get(0)?.data ?: listOf(),
+            favList = propertyDetails.series?.get(1)?.data ?: listOf(),
+            viewsName = propertyDetails.series?.get(0)?.name ?: "",
+            favoritesName = propertyDetails.series?.get(1)?.name ?: ""
+        )
+    }
+
+
+    private fun getDummyData(): Properties {
+        return Properties(
+            propertyid = 0,
+            imageUrl = "https://picsum.photos/200",
+            propertyType = "(TG2211000021) Farm House",
+            details = listOf(
+                Details(
+                    value = "12.00",
+                    unit = "Acres"
+                ),
+                Details(
+                    value = "₹20.00",
+                    unit = "Lakhs"
+                ),
+                Details(
+                    value = null,
+                    unit = "km  from ORR"
+                ),
+                Details(
+                    value = null,
+                    unit = "km  from Hyd"
+                )
+            ),
+            location = "Nizampet,Hyderabad....",
+            viewCount = 10,
+            favCount = 3,
+            commentCount = 6,
+            expiryDate = "19-Nov-2022",
+            categories = getDatesList(),
+            series = listOf(
+                Series(
+                    name = "Views",
+                    data = getValuesList()
+                ),
+                Series(
+                    name = "Fav",
+                    data = getFavList()
+                )
+            )
         )
     }
 
@@ -78,7 +129,6 @@ class PropertyDetailsActivity : AppCompatActivity() {
             "13-03-2022"
         )
     }
-
 
     private fun getValuesList(): List<Int> {
         return listOf(

@@ -53,9 +53,7 @@ class AllPropertiesFrag : BaseFragment() {
         recyclerView.adapter = propertyListAdap
         getProperties()
         binding.btnPost.setOnClickListener {
-            startActivity(Intent(activity, PropertyDetailsActivity::class.java))
-
-//            startActivity(Intent(activity, PostPropertyActivity::class.java))
+            startActivity(Intent(activity, PostPropertyActivity::class.java))
         }
 //        binding.tvNext.setOnClickListener {
 //            findNavController().navigate(R.id.action_SignUpFragment_to_ListFragment)

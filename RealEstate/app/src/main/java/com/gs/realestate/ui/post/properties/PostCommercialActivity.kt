@@ -1,11 +1,14 @@
 package com.gs.realestate.ui.post.properties
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.gs.realestate.R
 import com.gs.realestate.databinding.ActivityPostCommercialBinding
+import com.gs.realestate.network.models.property.CommercialPropertyRequest
+import com.gs.realestate.network.models.property.UnitDetails
+import com.gs.realestate.ui.post.PostHighlightActivity
 import com.gs.realestate.util.Constants
 import com.gs.realestate.util.SnackBarToast
 
@@ -45,16 +48,87 @@ class PostCommercialActivity : AppCompatActivity() {
             when (selectedType) {
                 getString(R.string.str_open_spaces) -> {
                     if (validateOpenSpaceType()) {
-                        Toast.makeText(this, "Valid data", Toast.LENGTH_SHORT).show()
+                        val openSpaceObj = prepareCommercialOpenSpaceObject()
+                        startActivity(
+                            Intent(
+                                this@PostCommercialActivity,
+                                PostHighlightActivity::class.java
+                            )
+                        )
                     }
                 }
                 getString(R.string.str_buildings) -> {
                     if (validateBuildingType()) {
-                        Toast.makeText(this, "Valid data", Toast.LENGTH_SHORT).show()
+                        val buildingObj = prepareCommercialBuildingObject()
+                        startActivity(
+                            Intent(
+                                this@PostCommercialActivity,
+                                PostHighlightActivity::class.java
+                            )
+                        )
                     }
                 }
             }
         }
+    }
+
+    private fun prepareCommercialBuildingObject(): CommercialPropertyRequest {
+        // need to ask key for constructed area
+        return CommercialPropertyRequest(
+            villageName = binding.llCOmmercialBuilding.etVillage.getText(),
+            cityName = binding.llCOmmercialBuilding.etCity.getText(),
+            mandalName = binding.llCOmmercialBuilding.etMandal.getText(),
+            districtName = binding.llCOmmercialBuilding.etDistrict.getText(),
+            stateName = binding.llCOmmercialBuilding.etState.getText(),
+            projectName = binding.llCOmmercialBuilding.etNameOfVenture.getText(),
+            approachRoad = binding.llCOmmercialBuilding.etApproachRoad.getText(),
+            roadWidth = binding.llCOmmercialBuilding.etApproachRoadWidth.getText(),
+            plotArea = binding.llCOmmercialBuilding.etPlotArea.getText(),
+            numberOfFloors = binding.llCOmmercialBuilding.etNoOfFloors.getText(),
+            floorNumber = binding.llCOmmercialBuilding.etFloorNumber.getText(),
+            ageOfProperty = binding.llCOmmercialBuilding.etAgeOfBuilding.getText(),
+            offerPriceDetails = UnitDetails(
+                value = binding.llCOmmercialBuilding.etOfferPrice.getText(),
+                unitType = binding.llCOmmercialBuilding.etOfferPrice.getSwitchText()
+            ),
+            marketPriceDetails = UnitDetails(
+                value = binding.llCOmmercialBuilding.etMarketPrice.getText(),
+                unitType = "Lakhs"
+            ),
+            suitableFor = binding.llCOmmercialBuilding.etSuitableFor.getText(),
+            fieldPartnerCode = binding.llCOmmercialBuilding.etFieldPartner.getText(),
+            ownerName = binding.llCOmmercialBuilding.etOwnerName.getText(),
+            contactNumber1 = binding.llCOmmercialBuilding.etPrimaryContact.getText(),
+            contactNumber2 = binding.llCOmmercialBuilding.etAlternativeContact.getText(),
+            description = binding.llCOmmercialBuilding.etDescription.getText()
+        )
+    }
+
+    private fun prepareCommercialOpenSpaceObject(): CommercialPropertyRequest {
+        return CommercialPropertyRequest(
+            villageName = binding.llCommercialOpen.etVillage.getText(),
+            cityName = binding.llCommercialOpen.etCity.getText(),
+            mandalName = binding.llCommercialOpen.etMandal.getText(),
+            districtName = binding.llCommercialOpen.etDistrict.getText(),
+            stateName = binding.llCommercialOpen.etState.getText(),
+            extentInSqrYrds = binding.llCommercialOpen.etExtent.getText(),
+            approachRoad = binding.llCommercialOpen.etApproachRoad.getText(),
+            roadWidth = binding.llCommercialOpen.etApproachRoadWidth.getText(),
+            offerPriceDetails = UnitDetails(
+                value = binding.llCommercialOpen.etOfferPrice.getText(),
+                unitType = binding.llCommercialOpen.etOfferPrice.getSwitchText()
+            ),
+            marketPriceDetails = UnitDetails(
+                value = binding.llCommercialOpen.etMarketPrice.getText(),
+                unitType = "Lakhs"
+            ),
+            suitableFor = binding.llCommercialOpen.etMarketPrice.getText(),
+            fieldPartnerCode = binding.llCommercialOpen.etFieldPartner.getText(),
+            ownerName = binding.llCommercialOpen.etOwnerName.getText(),
+            contactNumber1 = binding.llCommercialOpen.etPrimaryContact.getText(),
+            contactNumber2 = binding.llCommercialOpen.etAlternativeContact.getText(),
+            description = binding.llCommercialOpen.etDescription.getText()
+        )
     }
 
 

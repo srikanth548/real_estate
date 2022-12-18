@@ -28,9 +28,9 @@ data class PostResidentialPropertyRequest(
     @SerializedName("empty")
     var empty: String? = null,
     @SerializedName("offerprice")
-    var offerPriceDetails: UnitDetails,
+    var offerPriceDetails: UnitDetails? = null,
     @SerializedName("marketprice")
-    var marketPriceDetails: UnitDetails,
+    var marketPriceDetails: UnitDetails? = null,
     @SerializedName("suitablefor")
     var suitableFor: String? = null,
     @SerializedName("fieldpartnercode")
@@ -44,7 +44,7 @@ data class PostResidentialPropertyRequest(
     @SerializedName("description")
     var description: String? = null,
     @SerializedName("pref")
-    var prefDetails: Pref,
+    var prefDetails: Pref? = null,
     @SerializedName("latitute")
     var latitute: Double? = null,
     @SerializedName("longtitue")

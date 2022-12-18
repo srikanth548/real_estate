@@ -42,7 +42,7 @@ data class PostAgricultureRequest(
     @SerializedName("description")
     var description: String? = null,
     @SerializedName("pref")
-    var prefDetails: Pref,
+    var prefDetails: Pref? = null,
     @SerializedName("latitute")
     var latitute: Double? = null,
     @SerializedName("longtitue")

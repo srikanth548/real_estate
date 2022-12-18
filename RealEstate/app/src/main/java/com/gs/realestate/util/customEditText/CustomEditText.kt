@@ -17,6 +17,17 @@ class CustomEditText(context: Context, attributeSet: AttributeSet) :
 
     private var binding: LayoutCustomEditTextBinding
 
+
+    /*
+    * Variable to set the text to edit text
+    * */
+    private var text: String = ""
+    set(value){
+        field = value
+        binding.etContent.setText(value)
+    }
+
+
     /*
     * Variable to set the title above edit text
     * */
@@ -199,12 +210,21 @@ class CustomEditText(context: Context, attributeSet: AttributeSet) :
     }
 
 
+    fun setInputText(value: String){
+        text = value
+    }
+
+
     fun getText(): String {
         return binding.etContent.text.toString()
     }
 
     fun isValidText(): Boolean {
         return binding.etContent.text.toString().isNotBlank()
+    }
+
+    fun getSwitchText(): String {
+        return binding.tvSwitchLabel.text.toString()
     }
 
 }

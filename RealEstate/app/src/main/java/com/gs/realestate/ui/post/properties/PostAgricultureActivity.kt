@@ -3,10 +3,11 @@ package com.gs.realestate.ui.post.properties
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.gs.realestate.R
 import com.gs.realestate.base.BaseActivity
 import com.gs.realestate.databinding.ActivityPostAgricultureBinding
+import com.gs.realestate.network.models.property.PostAgricultureRequest
+import com.gs.realestate.network.models.property.UnitDetails
 import com.gs.realestate.ui.post.PostHighlightActivity
 import com.gs.realestate.util.Constants
 import com.gs.realestate.util.SnackBarToast
@@ -39,17 +40,92 @@ class PostAgricultureActivity : BaseActivity() {
         }
 
         binding.btnPost.setOnClickListener {
-            startActivity(Intent(this@PostAgricultureActivity, PostHighlightActivity::class.java))
-//            if (isLandType) {
-//                if (validateAgricultureLandType()) {
-//                    Toast.makeText(this, "Valid data", Toast.LENGTH_SHORT).show()
-//                }
-//            } else {
-//                if (validateFarmHouseType()) {
-//                    Toast.makeText(this, "Valid data", Toast.LENGTH_SHORT).show()
-//                }
-//            }
+//            startActivity(Intent(this@PostAgricultureActivity, PostHighlightActivity::class.java))
+            if (isLandType) {
+                if (validateAgricultureLandType()) {
+                    val landObj = prepareAgricultureLandObject()
+                    startActivity(
+                        Intent(
+                            this@PostAgricultureActivity,
+                            PostHighlightActivity::class.java
+                        )
+                    )
+                }
+            } else {
+                if (validateFarmHouseType()) {
+                    val farmHouseObj = prepareFarmHouseObject()
+                    startActivity(
+                        Intent(
+                            this@PostAgricultureActivity,
+                            PostHighlightActivity::class.java
+                        )
+                    )
+                }
+            }
         }
+    }
+
+    private fun prepareFarmHouseObject(): PostAgricultureRequest {
+        return PostAgricultureRequest(
+            villageName = binding.etVillage.getText(),
+            cityName = binding.etCity.getText(),
+            mandalName = binding.etMandal.getText(),
+            districtName = binding.etDistrict.getText(),
+            stateName = binding.etState.getText(),
+            extentInAcre = binding.etExtent.getText(),
+            extentInGunta = binding.etGuntas.getText(),
+            constructionType = binding.etConstructionType.getText(),
+            plotArea = binding.etConstructedPlotArea.getText(),
+            propertyFacing = binding.etFacing.getText(),
+            ageOfProperty = binding.etAgeOfFarmHouse.getText(),
+            plinthArea = binding.etFarmHousePlinthArea.getText(),
+            approachRoad = binding.etApproachRoad.getText(),
+            roadSizeFeet = binding.etApproachRoadWidth.getText(),
+            offerPricePerUnit = binding.etOfferPrice.getText(),
+            marketPricePerUnit = binding.etMarketPrice.getText(),
+            fieldPartnerCode = binding.etFieldPartner.getText(),
+            ownerName = binding.etOwnerName.getText(),
+            contactNumber1 = binding.etPrimaryContact.getText(),
+            contactNumber2 = binding.etAlternativeContact.getText(),
+            description = binding.etDescription.getText(),
+            offerPriceDetails = UnitDetails(
+                value = binding.etOfferPrice.getText(),
+                unitType = binding.etOfferPrice.getSwitchText()
+            ),
+            marketPriceDetails = UnitDetails(
+                value = binding.etMarketPrice.getText(),
+                unitType = binding.etMarketPrice.getSwitchText()
+            )
+        )
+    }
+
+    private fun prepareAgricultureLandObject(): PostAgricultureRequest {
+        return PostAgricultureRequest(
+            villageName = binding.etVillage.getText(),
+            cityName = binding.etCity.getText(),
+            mandalName = binding.etMandal.getText(),
+            districtName = binding.etDistrict.getText(),
+            stateName = binding.etState.getText(),
+            extentInAcre = binding.etExtent.getText(),
+            extentInGunta = binding.etGuntas.getText(),
+            approachRoad = binding.etApproachRoad.getText(),
+            roadSizeFeet = binding.etApproachRoadWidth.getText(),
+            offerPricePerUnit = binding.etOfferPrice.getText(),
+            marketPricePerUnit = binding.etMarketPrice.getText(),
+            fieldPartnerCode = binding.etFieldPartner.getText(),
+            ownerName = binding.etOwnerName.getText(),
+            contactNumber1 = binding.etPrimaryContact.getText(),
+            contactNumber2 = binding.etAlternativeContact.getText(),
+            description = binding.etDescription.getText(),
+            offerPriceDetails = UnitDetails(
+                value = binding.etOfferPrice.getText(),
+                unitType = binding.etOfferPrice.getSwitchText()
+            ),
+            marketPriceDetails = UnitDetails(
+                value = binding.etMarketPrice.getText(),
+                unitType = binding.etMarketPrice.getSwitchText()
+            )
+        )
     }
 
 

@@ -1,6 +1,9 @@
 package com.gs.realestate.network
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 import java.io.Serializable
 
 class GetOtp {
@@ -52,31 +55,32 @@ class AuthenticationResponse {
 
 }
 
-
-class Details {
-    var value: String? = null
+@Parcelize
+data class Details (
+    var value: String? = null,
     var unit: String? = null
-}
+):Parcelable
 
-class Series {
-    var name: String? = null
+@Parcelize
+data class Series (
+    var name: String? = null,
     var data: List<Int>? = null
-}
+): Parcelable
 
-
-class Properties {
-    var propertyid = 0
-    var imageUrl: String? = null
-    var propertyType: String? = null
-    var details: List<Details>? = null
-    var location: String? = null
-    var viewCount = 0
-    var favCount = 0
-    var commentCount = 0
-    var expiryDate: String? = null
-    var categories: List<String>? = null
+@Parcelize
+data class Properties(
+    var propertyid: Int = 0,
+    var imageUrl: String? = null,
+    var propertyType: String? = null,
+    var details: List<Details>? = null,
+    var location: String? = null,
+    var viewCount: Int = 0,
+    var favCount: Int = 0,
+    var commentCount: Int = 0,
+    var expiryDate: String? = null,
+    var categories: List<String>? = null,
     var series: List<Series>? = null
-}
+): Parcelable
 
 class AllPropertiesResponse {
     var data: String? = null

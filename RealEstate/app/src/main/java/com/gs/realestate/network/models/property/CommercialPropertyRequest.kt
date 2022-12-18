@@ -38,7 +38,7 @@ data class CommercialPropertyRequest(
     @SerializedName("description")
     var description: String? = null,
     @SerializedName("pref")
-    var prefDetails: Pref?,
+    var prefDetails: Pref? = null,
     @SerializedName("latitute")
     var latitude: Double? = null,
     @SerializedName("longtitue")
