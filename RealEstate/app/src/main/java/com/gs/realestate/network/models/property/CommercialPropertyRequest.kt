@@ -1,7 +1,10 @@
 package com.gs.realestate.network.models.property
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class CommercialPropertyRequest(
     @SerializedName("villagename")
     var villageName: String? = null,
@@ -22,9 +25,9 @@ data class CommercialPropertyRequest(
     @SerializedName("empty")
     var empty: String? = null,
     @SerializedName("offerprice")
-    var offerPriceDetails: UnitDetails?,
+    var offerPriceDetails: UnitDetails? = null,
     @SerializedName("marketprice")
-    var marketPriceDetails: UnitDetails?,
+    var marketPriceDetails: UnitDetails? = null,
     @SerializedName("suitablefor")
     var suitableFor: String? = null,
     @SerializedName("fieldpartnercode")
@@ -74,4 +77,4 @@ data class CommercialPropertyRequest(
     var plotArea: String? = null,
     @SerializedName("plintharea")
     var plinthArea: String? = null,
-)
+) : Parcelable

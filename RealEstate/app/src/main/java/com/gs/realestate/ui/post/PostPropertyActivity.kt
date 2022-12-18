@@ -23,6 +23,9 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.gs.realestate.R
 import com.gs.realestate.databinding.ActivityPostpropertyBinding
+import com.gs.realestate.network.models.property.CommercialPropertyRequest
+import com.gs.realestate.network.models.property.PostAgricultureRequest
+import com.gs.realestate.network.models.property.PostResidentialPropertyRequest
 import com.gs.realestate.ui.post.properties.PostAgricultureActivity
 import com.gs.realestate.ui.post.properties.PostCommercialActivity
 import com.gs.realestate.ui.post.properties.PostResidentialActivity
@@ -92,24 +95,19 @@ class PostPropertyActivity : AppCompatActivity(), OnMapReadyCallback {
             } else {
                 when (selectedOption?.first) {
                     CustomPropertyCategoryView.TYPE_AGRICULTURE -> {
-                        val intent = Intent(this@PostPropertyActivity, PostAgricultureActivity::class.java)
-                        intent.putExtra(Constants.EXTRA_PROPERTY_TYPE, selectedOption.second)
-                        startActivity(intent)
+                        buildAgricultureRequest(selectedOption = selectedOption.second)
                     }
                     CustomPropertyCategoryView.TYPE_RESIDENTIAL -> {
-                        val intent = Intent(this@PostPropertyActivity, PostResidentialActivity::class.java)
-                        intent.putExtra(Constants.EXTRA_PROPERTY_TYPE, selectedOption.second)
-                        startActivity(intent)
+                        buildResidentialRequest(selectedOption = selectedOption.second)
                     }
                     CustomPropertyCategoryView.TYPE_COMMERCIAL -> {
-                        val intent = Intent(this@PostPropertyActivity, PostCommercialActivity::class.java)
-                        intent.putExtra(Constants.EXTRA_PROPERTY_TYPE, selectedOption.second)
-                        startActivity(intent)
+                        buildCommercialRequest(selectedOption = selectedOption.second)
                     }
                 }
             }
         }
     }
+
 
     private fun fetchLocation() {
         if (ActivityCompat.checkSelfPermission(
@@ -166,5 +164,71 @@ class PostPropertyActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+
+    private fun buildAgricultureRequest(selectedOption: String) {
+
+        val postAgricultureRequest = PostAgricultureRequest(
+            latitute = 17.387007579354037,
+            longtitue = 17.387007579354037,
+            locationName = "709/78, Navodaya Colony, Mehdipatnam, Hyderabad, Telangana 500028, India",
+            propertyTypeId = 1,
+            propertySubTypeId = if (selectedOption == getString(R.string.str_agricultural_land)) 1 else 2
+        )
+
+        val intent =
+            Intent(this@PostPropertyActivity, PostAgricultureActivity::class.java)
+        intent.putExtra(Constants.EXTRA_PROPERTY_TYPE, selectedOption)
+        intent.putExtra(
+            Constants.EXTRA_POST_PROPERTY_REQUEST,
+            postAgricultureRequest
+        )
+        startActivity(intent)
+
+    }
+
+
+    private fun buildResidentialRequest(selectedOption: String) {
+
+        val postResidentialPropertyRequest = PostResidentialPropertyRequest(
+            latitute = 17.387007579354037,
+            longtitue = 17.387007579354037,
+            locationName = "709/78, Navodaya Colony, Mehdipatnam, Hyderabad, Telangana 500028, India",
+            propertyTypeId = 2,
+            propertySubTypeId = when (selectedOption) {
+                getString(R.string.str_plots) -> 3
+                getString(
+                    R.string.str_flats
+                ) -> 4
+                else -> 5
+            }
+        )
+
+        val intent =
+            Intent(this@PostPropertyActivity, PostResidentialActivity::class.java)
+        intent.putExtra(Constants.EXTRA_PROPERTY_TYPE, selectedOption)
+        intent.putExtra(Constants.EXTRA_POST_PROPERTY_REQUEST, postResidentialPropertyRequest)
+        startActivity(intent)
+    }
+
+
+    private fun buildCommercialRequest(selectedOption: String) {
+
+        val postCommercialPropertyRequest = CommercialPropertyRequest(
+            latitude = 17.387007579354037,
+            longitude = 17.387007579354037,
+            locationName = "709/78, Navodaya Colony, Mehdipatnam, Hyderabad, Telangana 500028, India",
+            propertyTypeId = 3,
+            propertySubTypeId = when (selectedOption) {
+                getString(R.string.str_open_spaces) -> 6
+                else -> 7
+            }
+        )
+
+        val intent =
+            Intent(this@PostPropertyActivity, PostCommercialActivity::class.java)
+        intent.putExtra(Constants.EXTRA_PROPERTY_TYPE, selectedOption)
+        intent.putExtra(Constants.EXTRA_POST_PROPERTY_REQUEST, postCommercialPropertyRequest)
+        startActivity(intent)
+    }
 
 }

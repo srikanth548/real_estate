@@ -23,10 +23,14 @@ import com.gs.realestate.databinding.ActivityPosthighlightsBinding
 import com.gs.realestate.network.ApiInterface
 import com.gs.realestate.network.PlacesPOJO
 import com.gs.realestate.network.RetrofitClient
+import com.gs.realestate.network.models.property.CommercialPropertyRequest
+import com.gs.realestate.network.models.property.PostAgricultureRequest
+import com.gs.realestate.network.models.property.PostResidentialPropertyRequest
 import com.gs.realestate.ui.login.TermsAdapter
 import com.gs.realestate.ui.post.adapter.HighLightsAdapter
 import com.gs.realestate.ui.post.adapter.ImageAdapter
 import com.gs.realestate.ui.post.adapter.PicturesAdapter
+import com.gs.realestate.util.Constants
 import com.gs.realestate.util.SnackBarToast
 import com.razorpay.Checkout
 import com.razorpay.ExternalWalletListener
@@ -54,6 +58,12 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
 
     private lateinit var picturesAdapter: PicturesAdapter
 
+
+    private var postAgricultureRequest: PostAgricultureRequest? = null
+    private var postResidentialRequest: PostResidentialPropertyRequest? = null
+    private var postCommercialPropertyRequest: CommercialPropertyRequest? = null
+    private var selectedCategory: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPosthighlightsBinding.inflate(layoutInflater)
@@ -62,6 +72,9 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
         Checkout.preload(applicationContext)
+
+        readExtras()
+
         imagePicker = ImagePicker(this)
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(this@PostHighlightActivity)
@@ -112,6 +125,31 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         }
     }
 
+
+    private fun readExtras() {
+        intent?.extras?.let {
+            if (it.containsKey(Constants.EXTRA_PROPERTY_CATEGORY)) {
+                selectedCategory = it.getString(Constants.EXTRA_PROPERTY_CATEGORY, "")
+                when (selectedCategory) {
+                    Constants.EXTRA_AGRICULTURE -> {
+                        postAgricultureRequest =
+                            it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        println("Agriculture : $postAgricultureRequest")
+                    }
+                    Constants.EXTRA_RESIDENTIAL -> {
+                        postResidentialRequest = it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        print("Residential : $postResidentialRequest")
+                    }
+                    Constants.EXTRA_COMMERCIAL -> {
+                        postCommercialPropertyRequest = it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        print("Commercial : $postCommercialPropertyRequest")
+                    }
+                }
+            }
+        }
+    }
+
+
     private fun setLocationProximityData() {
         val itemsArray = listOf(
             "Near to Reserve Forest",
@@ -131,6 +169,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         createChips(itemsArray)
     }
 
+
     private fun createChips(itemsArray: List<String>) {
         itemsArray.forEach {
             val chip = Chip(this@PostHighlightActivity).apply {
@@ -145,6 +184,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         }
     }
 
+
     private fun setPicturesView() {
         binding.clCustomPictureUpload.gvUploadedPictures.apply {
             picturesAdapter = PicturesAdapter(imagesList, this@PostHighlightActivity)
@@ -152,6 +192,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
             adapter = picturesAdapter
         }
     }
+
 
     private fun showTerms() {
         val terms =
@@ -192,6 +233,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
 //        dialog.show()
     }
 
+
     private fun fetchLocation() {
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_FINE_LOCATION
@@ -215,6 +257,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
             }
         }
     }
+
 
     private fun getPlaces() {
         showLoader()

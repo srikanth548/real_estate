@@ -17,6 +17,8 @@ class PostAgricultureActivity : BaseActivity() {
     private lateinit var binding: ActivityPostAgricultureBinding
     private var isLandType: Boolean = true
 
+    private var postAgricultureRequest: PostAgricultureRequest? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPostAgricultureBinding.inflate(layoutInflater)
@@ -37,95 +39,94 @@ class PostAgricultureActivity : BaseActivity() {
                 isLandType = false
                 binding.clFarmHouseFields.visibility = View.VISIBLE
             }
+
+            postAgricultureRequest = it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
         }
 
         binding.btnPost.setOnClickListener {
-//            startActivity(Intent(this@PostAgricultureActivity, PostHighlightActivity::class.java))
             if (isLandType) {
                 if (validateAgricultureLandType()) {
                     val landObj = prepareAgricultureLandObject()
-                    startActivity(
-                        Intent(
-                            this@PostAgricultureActivity,
-                            PostHighlightActivity::class.java
-                        )
-                    )
+                    val intent =
+                        Intent(this@PostAgricultureActivity, PostHighlightActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_PROPERTY_CATEGORY, Constants.EXTRA_AGRICULTURE)
+                    intent.putExtra(Constants.EXTRA_POST_PROPERTY_REQUEST, landObj)
+                    startActivity(intent)
                 }
             } else {
                 if (validateFarmHouseType()) {
                     val farmHouseObj = prepareFarmHouseObject()
-                    startActivity(
-                        Intent(
-                            this@PostAgricultureActivity,
-                            PostHighlightActivity::class.java
-                        )
-                    )
+                    val intent =
+                        Intent(this@PostAgricultureActivity, PostHighlightActivity::class.java)
+                    intent.putExtra(Constants.EXTRA_PROPERTY_CATEGORY, Constants.EXTRA_AGRICULTURE)
+                    intent.putExtra(Constants.EXTRA_POST_PROPERTY_REQUEST, farmHouseObj)
+                    startActivity(intent)
                 }
             }
         }
     }
 
-    private fun prepareFarmHouseObject(): PostAgricultureRequest {
-        return PostAgricultureRequest(
-            villageName = binding.etVillage.getText(),
-            cityName = binding.etCity.getText(),
-            mandalName = binding.etMandal.getText(),
-            districtName = binding.etDistrict.getText(),
-            stateName = binding.etState.getText(),
-            extentInAcre = binding.etExtent.getText(),
-            extentInGunta = binding.etGuntas.getText(),
-            constructionType = binding.etConstructionType.getText(),
-            plotArea = binding.etConstructedPlotArea.getText(),
-            propertyFacing = binding.etFacing.getText(),
-            ageOfProperty = binding.etAgeOfFarmHouse.getText(),
-            plinthArea = binding.etFarmHousePlinthArea.getText(),
-            approachRoad = binding.etApproachRoad.getText(),
-            roadSizeFeet = binding.etApproachRoadWidth.getText(),
-            offerPricePerUnit = binding.etOfferPrice.getText(),
-            marketPricePerUnit = binding.etMarketPrice.getText(),
-            fieldPartnerCode = binding.etFieldPartner.getText(),
-            ownerName = binding.etOwnerName.getText(),
-            contactNumber1 = binding.etPrimaryContact.getText(),
-            contactNumber2 = binding.etAlternativeContact.getText(),
-            description = binding.etDescription.getText(),
+    private fun prepareFarmHouseObject(): PostAgricultureRequest? {
+        return postAgricultureRequest?.apply {
+            villageName = binding.etVillage.getText()
+            cityName = binding.etCity.getText()
+            mandalName = binding.etMandal.getText()
+            districtName = binding.etDistrict.getText()
+            stateName = binding.etState.getText()
+            extentInAcre = binding.etExtent.getText()
+            extentInGunta = binding.etGuntas.getText()
+            constructionType = binding.etConstructionType.getText()
+            plotArea = binding.etConstructedPlotArea.getText()
+            propertyFacing = binding.etFacing.getText()
+            ageOfProperty = binding.etAgeOfFarmHouse.getText()
+            plinthArea = binding.etFarmHousePlinthArea.getText()
+            approachRoad = binding.etApproachRoad.getText()
+            roadSizeFeet = binding.etApproachRoadWidth.getText()
+            offerPricePerUnit = binding.etOfferPrice.getText()
+            marketPricePerUnit = binding.etMarketPrice.getText()
+            fieldPartnerCode = binding.etFieldPartner.getText()
+            ownerName = binding.etOwnerName.getText()
+            contactNumber1 = binding.etPrimaryContact.getText()
+            contactNumber2 = binding.etAlternativeContact.getText()
+            description = binding.etDescription.getText()
             offerPriceDetails = UnitDetails(
                 value = binding.etOfferPrice.getText(),
                 unitType = binding.etOfferPrice.getSwitchText()
-            ),
+            )
             marketPriceDetails = UnitDetails(
                 value = binding.etMarketPrice.getText(),
                 unitType = binding.etMarketPrice.getSwitchText()
             )
-        )
+        }
     }
 
-    private fun prepareAgricultureLandObject(): PostAgricultureRequest {
-        return PostAgricultureRequest(
-            villageName = binding.etVillage.getText(),
-            cityName = binding.etCity.getText(),
-            mandalName = binding.etMandal.getText(),
-            districtName = binding.etDistrict.getText(),
-            stateName = binding.etState.getText(),
-            extentInAcre = binding.etExtent.getText(),
-            extentInGunta = binding.etGuntas.getText(),
-            approachRoad = binding.etApproachRoad.getText(),
-            roadSizeFeet = binding.etApproachRoadWidth.getText(),
-            offerPricePerUnit = binding.etOfferPrice.getText(),
-            marketPricePerUnit = binding.etMarketPrice.getText(),
-            fieldPartnerCode = binding.etFieldPartner.getText(),
-            ownerName = binding.etOwnerName.getText(),
-            contactNumber1 = binding.etPrimaryContact.getText(),
-            contactNumber2 = binding.etAlternativeContact.getText(),
-            description = binding.etDescription.getText(),
+    private fun prepareAgricultureLandObject(): PostAgricultureRequest? {
+        return postAgricultureRequest?.apply {
+            villageName = binding.etVillage.getText()
+            cityName = binding.etCity.getText()
+            mandalName = binding.etMandal.getText()
+            districtName = binding.etDistrict.getText()
+            stateName = binding.etState.getText()
+            extentInAcre = binding.etExtent.getText()
+            extentInGunta = binding.etGuntas.getText()
+            approachRoad = binding.etApproachRoad.getText()
+            roadSizeFeet = binding.etApproachRoadWidth.getText()
+            offerPricePerUnit = binding.etOfferPrice.getText()
+            marketPricePerUnit = binding.etMarketPrice.getText()
+            fieldPartnerCode = binding.etFieldPartner.getText()
+            ownerName = binding.etOwnerName.getText()
+            contactNumber1 = binding.etPrimaryContact.getText()
+            contactNumber2 = binding.etAlternativeContact.getText()
+            description = binding.etDescription.getText()
             offerPriceDetails = UnitDetails(
                 value = binding.etOfferPrice.getText(),
                 unitType = binding.etOfferPrice.getSwitchText()
-            ),
+            )
             marketPriceDetails = UnitDetails(
                 value = binding.etMarketPrice.getText(),
                 unitType = binding.etMarketPrice.getSwitchText()
             )
-        )
+        }
     }
 
 

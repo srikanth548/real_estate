@@ -1,7 +1,10 @@
 package com.gs.realestate.network.models.property
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class PostResidentialPropertyRequest(
     @SerializedName("villagename")
     var villageName: String? = null,
@@ -83,10 +86,10 @@ data class PostResidentialPropertyRequest(
     @SerializedName("plintharea")
     var plinthArea: String? = null,
     @SerializedName("rentalvalue")
-    val rentalAmount: String? = null,
+    var rentalAmount: String? = null,
 
 
     //Villa fields
     @SerializedName("plotarea")
-    val plotArea: String? = null
-)
+    var plotArea: String? = null
+) : Parcelable

@@ -1,14 +1,19 @@
 package com.gs.realestate.network.models.property
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class UnitDetails(
     @SerializedName("value")
     val value: String = "",
     @SerializedName("unit")
     val unitType: String = ""
-)
+) : Parcelable
 
+
+@Parcelize
 data class Pref(
     @SerializedName("ref")
     val ref: Int = 0,
@@ -16,8 +21,10 @@ data class Pref(
     val ord: String = "",
     @SerializedName("pref")
     val pref: String = ""
-)
+) : Parcelable
 
+
+@Parcelize
 data class PropertyLocationHighlights(
     @SerializedName("id")
     val id: Int = 0,
@@ -35,4 +42,4 @@ data class PropertyLocationHighlights(
     val name: String = "",
     @SerializedName("icon")
     val icon: String? = null
-)
+) : Parcelable
