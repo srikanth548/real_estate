@@ -1,11 +1,14 @@
 package com.gs.realestate.ui.post.properties
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.gs.realestate.R
 import com.gs.realestate.databinding.ActivityPostResidentialBinding
+import com.gs.realestate.network.models.property.PostResidentialPropertyRequest
+import com.gs.realestate.network.models.property.UnitDetails
+import com.gs.realestate.ui.post.PostHighlightActivity
 import com.gs.realestate.util.Constants
 import com.gs.realestate.util.SnackBarToast
 
@@ -52,21 +55,144 @@ class PostResidentialActivity : AppCompatActivity() {
             when (selectedType) {
                 getString(R.string.str_plots) -> {
                     if (validatePlotType()) {
-                        Toast.makeText(this, "Valid data", Toast.LENGTH_SHORT).show()
+                        val plotObj = prepareResidentialPlotObject()
+                        startActivity(
+                            Intent(
+                                this@PostResidentialActivity,
+                                PostHighlightActivity::class.java
+                            )
+                        )
                     }
                 }
                 getString(R.string.str_flats) -> {
                     if (validateFlatType()) {
-                        Toast.makeText(this, "Valid data", Toast.LENGTH_SHORT).show()
+                        val flatObj = prepareResidentialFlatObject()
+                        startActivity(
+                            Intent(
+                                this@PostResidentialActivity,
+                                PostHighlightActivity::class.java
+                            )
+                        )
                     }
                 }
                 getString(R.string.str_villas_houses) -> {
                     if (validateHouseType()) {
-                        Toast.makeText(this, "Valid data", Toast.LENGTH_SHORT).show()
+                        val villaObj = prepareResidentialVillaObject()
+                        startActivity(
+                            Intent(
+                                this@PostResidentialActivity,
+                                PostHighlightActivity::class.java
+                            )
+                        )
                     }
                 }
             }
         }
+    }
+
+    private fun prepareResidentialVillaObject(): PostResidentialPropertyRequest {
+        return PostResidentialPropertyRequest(
+            villageName = binding.llPostHouse.etVillage.getText(),
+            cityName = binding.llPostHouse.etCity.getText(),
+            mandalName = binding.llPostHouse.etMandal.getText(),
+            districtName = binding.llPostHouse.etDistrict.getText(),
+            stateName = binding.llPostHouse.etState.getText(),
+            projectName = binding.llPostHouse.etNameOfVenture.getText(),
+            propertyFacing = binding.llPostHouse.etFacing.getText(),
+            approachRoad = binding.llPostHouse.etApproachRoad.getText(),
+            roadWidth = binding.llPostHouse.etApproachRoadWidth.getText(),
+            isGatedCommunity = binding.llPostHouse.gatedCommunitySwitch.isChecked.toString(),
+            plinthArea = binding.llPostHouse.etPlinthArea.getText(),
+            plotArea = binding.llPostHouse.etPlotArea.getText(),
+            numberOfFloors = binding.llPostHouse.etNoOfFloors.getText(),
+            floorNumber = binding.llPostHouse.etFloorNumber.getText(),
+            numberOfBedRooms = binding.llPostHouse.etNoOfBedRooms.getText(),
+            numberOfBathrooms = binding.llPostHouse.etNoOfBathrooms.getText(),
+            ageOfProperty = binding.llPostHouse.etBuildingAge.getText(),
+            offerPriceDetails = UnitDetails(
+                value = binding.llPostHouse.etOfferPrice.getText(),
+                unitType = binding.llPostHouse.etOfferPrice.getSwitchText()
+            ),
+            marketPriceDetails = UnitDetails(
+                value = binding.llPostHouse.etMarketPrice.getText(),
+                unitType = binding.llPostHouse.etMarketPrice.getSwitchText()
+            ),
+            rentalAmount = binding.llPostHouse.etApproaxRent.getText(),
+            suitableFor = binding.llPostHouse.etSuitableFor.getText(),
+            fieldPartnerCode = binding.llPostHouse.etFieldPartner.getText(),
+            ownerName = binding.llPostHouse.etOwnerName.getText(),
+            contactNumber1 = binding.llPostHouse.etPrimaryContact.getText(),
+            contactNumber2 = binding.llPostHouse.etAlternativeContact.getText(),
+            description = binding.llPostHouse.etDescription.getText()
+        )
+    }
+
+    private fun prepareResidentialFlatObject(): PostResidentialPropertyRequest {
+        return PostResidentialPropertyRequest(
+            villageName = binding.llPostFlat.etVillage.getText(),
+            cityName = binding.llPostFlat.etCity.getText(),
+            mandalName = binding.llPostFlat.etMandal.getText(),
+            districtName = binding.llPostFlat.etDistrict.getText(),
+            stateName = binding.llPostFlat.etState.getText(),
+            projectName = binding.llPostFlat.etNameOfVenture.getText(),
+            propertyFacing = binding.llPostFlat.etFacing.getText(),
+            approachRoad = binding.llPostFlat.etApproachRoad.getText(),
+            roadWidth = binding.llPostFlat.etApproachRoadWidth.getText(),
+            isGatedCommunity = binding.llPostFlat.gatedCommunitySwitch.isChecked.toString(),
+            plinthArea = binding.llPostFlat.etPlinthArea.getText(),
+            numberOfFloors = binding.llPostFlat.etNoOfFloors.getText(),
+            floorNumber = binding.llPostFlat.etFloorNumber.getText(),
+            numberOfBedRooms = binding.llPostFlat.etNoOfBedRooms.getText(),
+            numberOfBathrooms = binding.llPostFlat.etNoOfBathrooms.getText(),
+            fourWheelerParking = binding.llPostFlat.etNoOfCarParkings.getText(),
+            ageOfProperty = binding.llPostFlat.etBuildingAge.getText(),
+            rentalAmount = binding.llPostFlat.etApproaxRent.getText(),
+            offerPriceDetails = UnitDetails(
+                value = binding.llPostFlat.etOfferPrice.getText(),
+                unitType = binding.llPostFlat.etOfferPrice.getSwitchText()
+            ),
+            marketPriceDetails = UnitDetails(
+                value = binding.llPostFlat.etMarketPrice.getText(),
+                unitType = binding.llPostFlat.etMarketPrice.getSwitchText()
+            ),
+            suitableFor = binding.llPostFlat.etSuitableFor.getText(),
+            fieldPartnerCode = binding.llPostFlat.etFieldPartner.getText(),
+            ownerName = binding.llPostFlat.etOwnerName.getText(),
+            contactNumber1 = binding.llPostFlat.etPrimaryContact.getText(),
+            contactNumber2 = binding.llPostFlat.etAlternativeContact.getText(),
+            description = binding.llPostFlat.etDescription.getText()
+        )
+    }
+
+    private fun prepareResidentialPlotObject(): PostResidentialPropertyRequest {
+        return PostResidentialPropertyRequest(
+            villageName = binding.llPostPlot.etVillage.getText(),
+            cityName = binding.llPostPlot.etCity.getText(),
+            mandalName = binding.llPostPlot.etMandal.getText(),
+            districtName = binding.llPostPlot.etDistrict.getText(),
+            stateName = binding.llPostPlot.etState.getText(),
+            projectName = binding.llPostPlot.etNameOfVenture.getText(),
+            extentInSqryrds = binding.llPostPlot.etExtent.getText(),
+            propertyFacing = binding.llPostPlot.etFacing.getText(),
+            approachRoad = binding.llPostPlot.etApproachRoad.getText(),
+            roadWidth = binding.llPostPlot.etApproachRoadWidth.getText(),
+            isGatedCommunity = binding.llPostPlot.gatedCommunitySwitch.isChecked.toString(),
+            offerPriceDetails = UnitDetails(
+                value = binding.llPostPlot.etOfferPrice.getText(),
+                unitType = binding.llPostPlot.etOfferPrice.getSwitchText()
+            ),
+            marketPriceDetails = UnitDetails(
+                value = binding.llPostPlot.etMarketPrice.getText(),
+                unitType = "Lakhs"
+            ),
+            suitableFor = binding.llPostPlot.etSuitableFor.getText(),
+            fieldPartnerCode = binding.llPostPlot.etFieldPartner.getText(),
+            ownerName = binding.llPostPlot.etOwnerName.getText(),
+            contactNumber1 = binding.llPostPlot.etPrimaryContact.getText(),
+            contactNumber2 = binding.llPostPlot.etAlternativeContact.getText(),
+            description = binding.llPostPlot.etDescription.getText()
+        )
+
     }
 
 

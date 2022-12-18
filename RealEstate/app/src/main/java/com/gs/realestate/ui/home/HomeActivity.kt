@@ -2,20 +2,20 @@ package com.gs.realestate.ui.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.gs.realestate.R
-import com.gs.realestate.databinding.ActivityCongratsBinding
 import com.gs.realestate.databinding.ActivityHomeBinding
 import com.gs.realestate.ui.post.PostPropertyActivity
+import com.gs.realestate.util.PreferenceHelper
+import com.gs.realestate.util.PreferenceHelper.mobilenumber
+import kotlinx.android.synthetic.main.nav_header_main.view.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -27,7 +27,7 @@ class HomeActivity : AppCompatActivity() {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-      //  binding.appBarMain.toolbar.setTitleTextColor(resources.getColor(R.color.black))
+        //  binding.appBarMain.toolbar.setTitleTextColor(resources.getColor(R.color.black))
         setSupportActionBar(binding.appBarMain.toolbar)
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -41,26 +41,42 @@ class HomeActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-        navView.setNavigationItemSelectedListener{
-            val id = it.itemId
-            if (id == R.id.nav_home||id== R.id.nav_allproperties) {
-                navController.navigate(R.id.allPropertiesFrag)
-            }
-            else if(id== R.id.nav_myaccount){
-                navController.navigate(R.id.accountFragment)
-            }else if(id == R.id.nav_postproperty){
-                startActivity(Intent(this@HomeActivity, PostPropertyActivity::class.java))
-            }else if(id== R.id.nav_settings){
-                navController.navigate(R.id.settingsFragement)
-            }else if(id == R.id.nav_help){
-                navController.navigate(R.id.helpFragment)
-            }
-            else if(id == R.id.nav_logout){
-                this.finish()
+        navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.nav_home, R.id.nav_allproperties -> {
+                    navController.navigate(R.id.allPropertiesFrag)
+                }
+                R.id.nav_myaccount -> {
+                    navController.navigate(R.id.accountFragment)
+                }
+                R.id.nav_postproperty -> {
+                    startActivity(Intent(this@HomeActivity, PostPropertyActivity::class.java))
+                }
+                R.id.nav_settings -> {
+                    navController.navigate(R.id.settingsFragement)
+                }
+                R.id.nav_help -> {
+                    navController.navigate(R.id.helpFragment)
+                }
+                R.id.nav_notifications -> {
+                    navController.navigate(R.id.notificationFragment)
+                }
+                R.id.nav_logout -> {
+                    this.finish()
+                }
             }
             return@setNavigationItemSelectedListener true
         }
 
+
+        setUpHeaderData()
+    }
+
+    private fun setUpHeaderData() {
+        val prefs = PreferenceHelper.customPreference(this)
+        prefs.mobilenumber?.let {
+            binding.navView.tvMobileNumber.text = it
+        }
     }
 
 
@@ -74,7 +90,6 @@ class HomeActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
 
 
 }

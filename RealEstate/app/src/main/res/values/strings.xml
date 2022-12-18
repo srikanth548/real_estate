@@ -160,6 +160,7 @@
     <string name="str_open_spaces">Open Spaces</string>
     <string name="str_buildings">Buildings</string>
     <string name="str_property_type">Property type</string>
+    <string name="str_property_details">Property Details</string>
     <string name="str_select_property_type">Please select property type to proceed further.</string>
     <string name="str_name_of_venture">Name of the Project / Venture (Optional)</string>
     <string name="str_is_gated_community">Is it a gated community?</string>
@@ -214,6 +215,14 @@
     <string name="str_camera">Camera</string>
     <string name="str_gallery">Gallery</string>
     <string name="str_highlights">Highlights</string>
+    <string name="str_email_optional">Email (Optional)</string>
+    <string name="str_name">Name</string>
+    <string name="str_update">Update</string>
+    <string name="str_registered_mobile_number">Registered Mobile Number</string>
+    <string name="str_help_text">For any queries, please email to\n <u>info@rightmyproperty.in</u></string>
+    <string name="str_notifications">Notifications</string>
+    <string name="str_please_enter_url_to_save">Please enter Base URL to save.</string>
+    <string name="str_updated_success">Updated successfully</string>
 
     <string-array name="terms">
         <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>

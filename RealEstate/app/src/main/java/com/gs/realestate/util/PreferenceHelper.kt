@@ -6,6 +6,8 @@ import android.preference.PreferenceManager
 
 object PreferenceHelper {
 
+    val BASE_URL = "BASE_URL"
+
     val MOBILE_NUMBER = "MOBILE_NUMBER"
     val USER_PASSWORD = "PASSWORD"
     val CSRFTOKEN = "csrftoken"
@@ -14,9 +16,11 @@ object PreferenceHelper {
 
     val CUSTOM_PREF_NAME = "real_estate"
 
-    fun defaultPreference(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    fun defaultPreference(context: Context): SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(context)
 
-    fun customPreference(context: Context): SharedPreferences = context.getSharedPreferences(CUSTOM_PREF_NAME, Context.MODE_PRIVATE)
+    fun customPreference(context: Context): SharedPreferences =
+        context.getSharedPreferences(CUSTOM_PREF_NAME, Context.MODE_PRIVATE)
 
     inline fun SharedPreferences.editMe(operation: (SharedPreferences.Editor) -> Unit) {
         val editMe = edit()
@@ -25,7 +29,7 @@ object PreferenceHelper {
     }
 
     var SharedPreferences.mobilenumber
-        get() = getString(MOBILE_NUMBER,"")
+        get() = getString(MOBILE_NUMBER, "")
         set(value) {
             editMe {
                 it.putString(MOBILE_NUMBER, value)
@@ -33,21 +37,21 @@ object PreferenceHelper {
         }
 
     var SharedPreferences.messages
-        get() = getString(MESSAGES,"")
+        get() = getString(MESSAGES, "")
         set(value) {
             editMe {
                 it.putString(MESSAGES, value)
             }
         }
     var SharedPreferences.csrftoken
-        get() = getString(CSRFTOKEN,"")
+        get() = getString(CSRFTOKEN, "")
         set(value) {
             editMe {
                 it.putString(CSRFTOKEN, value)
             }
         }
     var SharedPreferences.sessionid
-        get() = getString(SESSIONID,"")
+        get() = getString(SESSIONID, "")
         set(value) {
             editMe {
                 it.putString(SESSIONID, value)
@@ -67,6 +71,15 @@ object PreferenceHelper {
         set(value) {
             editMe {
                 it.clear()
+            }
+        }
+
+
+    var SharedPreferences.baseUrl
+        get() = getString(BASE_URL, "")
+        set(value) {
+            editMe {
+                it.putString(BASE_URL, value)
             }
         }
 }

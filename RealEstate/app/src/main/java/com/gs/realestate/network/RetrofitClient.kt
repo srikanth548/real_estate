@@ -2,6 +2,7 @@ package com.gs.realestate.network
 
 import android.content.Context
 import com.gs.realestate.util.PreferenceHelper
+import com.gs.realestate.util.PreferenceHelper.baseUrl
 import com.gs.realestate.util.PreferenceHelper.csrftoken
 import com.gs.realestate.util.PreferenceHelper.messages
 import com.gs.realestate.util.PreferenceHelper.sessionid
@@ -24,21 +25,32 @@ object RetrofitClient {
         val mHttpLoggingInterceptor = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)
         val prefs = PreferenceHelper.customPreference(context)
-        val cookie = "messages="+prefs.messages+";csrftoken="+prefs.csrftoken+";sessionid="+prefs.sessionid
+        val cookie =
+            "messages=" + prefs.messages + ";csrftoken=" + prefs.csrftoken + ";sessionid=" + prefs.sessionid
 
         val mOkHttpClient = OkHttpClient
             .Builder()
             .addInterceptor(mHttpLoggingInterceptor)
             .addInterceptor(ReceivedCookiesInterceptor(context))
             .addInterceptor(Interceptor { chain ->
-                val request: Request = chain.request().newBuilder().addHeader("Cookie", cookie).build()
+                val request: Request =
+                    chain.request().newBuilder().addHeader("Cookie", cookie).build()
                 chain.proceed(request)
             })
             .build()
 
 
+        var baseUrl = ""
+        baseUrl = if (prefs.baseUrl.isNullOrEmpty()) {
+            "https://stage.rightmyproperty.in"
+        } else {
+            prefs.baseUrl ?: ""
+        }
+
+        prefs.baseUrl = baseUrl
+
         return Retrofit.Builder()
-            .baseUrl("https://stage.rightmyproperty.in")
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(mOkHttpClient)
             .client(getUnsafeOkHttpClient())
@@ -52,11 +64,17 @@ object RetrofitClient {
             val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(
                 object : X509TrustManager {
                     @Throws(CertificateException::class)
-                    override fun checkClientTrusted(chain: Array<X509Certificate?>?, authType: String?) {
+                    override fun checkClientTrusted(
+                        chain: Array<X509Certificate?>?,
+                        authType: String?
+                    ) {
                     }
 
                     @Throws(CertificateException::class)
-                    override fun checkServerTrusted(chain: Array<X509Certificate?>?, authType: String?) {
+                    override fun checkServerTrusted(
+                        chain: Array<X509Certificate?>?,
+                        authType: String?
+                    ) {
                     }
 
                     override fun getAcceptedIssuers(): Array<X509Certificate> {
@@ -93,7 +111,8 @@ object RetrofitClient {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client: OkHttpClient =
-            OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS).writeTimeout(30, TimeUnit.SECONDS).addInterceptor(interceptor)
+            OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS).addInterceptor(interceptor)
                 .build()
 
 
@@ -103,7 +122,6 @@ object RetrofitClient {
             .client(client)
             .build()
     }
-
 
 
 }
