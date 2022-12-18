@@ -13,6 +13,9 @@ import com.google.android.material.navigation.NavigationView
 import com.gs.realestate.R
 import com.gs.realestate.databinding.ActivityHomeBinding
 import com.gs.realestate.ui.post.PostPropertyActivity
+import com.gs.realestate.util.PreferenceHelper
+import com.gs.realestate.util.PreferenceHelper.mobilenumber
+import kotlinx.android.synthetic.main.nav_header_main.view.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -65,6 +68,15 @@ class HomeActivity : AppCompatActivity() {
             return@setNavigationItemSelectedListener true
         }
 
+
+        setUpHeaderData()
+    }
+
+    private fun setUpHeaderData() {
+        val prefs = PreferenceHelper.customPreference(this)
+        prefs.mobilenumber?.let {
+            binding.navView.tvMobileNumber.text = it
+        }
     }
 
 

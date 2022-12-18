@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import com.gs.realestate.R
 import com.gs.realestate.databinding.FragmentAccountBinding
 import com.gs.realestate.ui.login.TermsAdapter
+import com.gs.realestate.util.PreferenceHelper
+import com.gs.realestate.util.PreferenceHelper.mobilenumber
 import com.gs.realestate.util.SnackBarToast
 
 class AccountFragment : Fragment() {
@@ -39,6 +41,12 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val prefs = activity?.let { PreferenceHelper.customPreference(it) }
+        prefs?.mobilenumber?.let {
+            binding.etMobile.setInputText(it)
+        }
+
         binding.btnPost.setOnClickListener {
             if(binding.cbTerms.isChecked){
                 //TODO
