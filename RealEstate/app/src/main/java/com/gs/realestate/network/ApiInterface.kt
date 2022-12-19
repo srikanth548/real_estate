@@ -1,5 +1,6 @@
 package com.gs.realestate.network
 
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -34,5 +35,15 @@ interface ApiInterface {
         @Query(value = "rankby", encoded = true) rankby: String?,
         @Query(value = "key", encoded = true) key: String?
     ): Call<PlacesPOJO.Root?>
+
+
+    @Multipart
+    @POST("/api/property/uploadFile")
+    suspend fun syncImageToServer(
+        @Header("X-CSRFToken") crsfToken: String,
+        @Part("image") file: RequestBody,
+        @Part("uploaded_slno") serialNo: Int,
+        @Query("id") uuid: String
+    ): Response<ImageUploadResponse>
 
 }

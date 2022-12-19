@@ -30,7 +30,10 @@ import com.gs.realestate.ui.login.TermsAdapter
 import com.gs.realestate.ui.post.adapter.HighLightsAdapter
 import com.gs.realestate.ui.post.adapter.ImageAdapter
 import com.gs.realestate.ui.post.adapter.PicturesAdapter
+import com.gs.realestate.util.CommonMethods
 import com.gs.realestate.util.Constants
+import com.gs.realestate.util.PreferenceHelper
+import com.gs.realestate.util.PreferenceHelper.csrftoken
 import com.gs.realestate.util.SnackBarToast
 import com.razorpay.Checkout
 import com.razorpay.ExternalWalletListener
@@ -38,9 +41,12 @@ import com.razorpay.PaymentData
 import com.razorpay.PaymentResultWithDataListener
 import dev.ronnie.github.imagepicker.ImagePicker
 import dev.ronnie.github.imagepicker.ImageResult
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
+import java.io.File
 
 
 class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, ExternalWalletListener,
@@ -63,6 +69,10 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     private var postResidentialRequest: PostResidentialPropertyRequest? = null
     private var postCommercialPropertyRequest: CommercialPropertyRequest? = null
     private var selectedCategory: String = ""
+
+
+    //Random UUID to use for uploading images
+    private val imageUploadUUID = CommonMethods.getRandomUUID()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,10 +110,9 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         }
         highLightsAdapter = HighLightsAdapter(highlistnearby, this)
         binding.gdHighlights.adapter = highLightsAdapter
-//        highlistnearby.add("h1")
-//        highlistnearby.add("h")
-//        highLightsAdapter.notifyDataSetChanged()
+
         fetchLocation()
+
         alertDialogBuilder = AlertDialog.Builder(this@PostHighlightActivity)
         alertDialogBuilder.setTitle("Payment Result")
         alertDialogBuilder.setCancelable(true)
@@ -137,11 +146,13 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                         println("Agriculture : $postAgricultureRequest")
                     }
                     Constants.EXTRA_RESIDENTIAL -> {
-                        postResidentialRequest = it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        postResidentialRequest =
+                            it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
                         print("Residential : $postResidentialRequest")
                     }
                     Constants.EXTRA_COMMERCIAL -> {
-                        postCommercialPropertyRequest = it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        postCommercialPropertyRequest =
+                            it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
                         print("Commercial : $postCommercialPropertyRequest")
                     }
                 }
@@ -365,11 +376,8 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         when (imageResult) {
             is ImageResult.Success -> {
                 val uri = imageResult.value
-                imagesList.add(uri)
-                if (imagesList.isNotEmpty()) {
-                    binding.clCustomPictureUpload.gvUploadedPictures.visibility = View.VISIBLE
-                }
-                picturesAdapter.notifyDataSetChanged()
+
+                syncImagesToServer(imageUri = uri, index = imagesList.size + 1)
             }
             is ImageResult.Failure -> {
                 val errorString = imageResult.errorString
@@ -406,5 +414,61 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     }
 
     override fun onClick(dialog: DialogInterface?, which: Int) {
+    }
+
+
+    /*
+    * Image sync to server
+    * multi part file upload
+    * */
+    private fun syncImagesToServer(imageUri: Uri, index: Int) {
+        val retrofit = RetrofitClient.getInstance(this)
+        val apiInterface = retrofit.create(ApiInterface::class.java)
+        val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
+
+        lifecycleScope.launchWhenCreated {
+            showLoader()
+
+            val filePath = CommonMethods.getRealPathFromURI(
+                mContext = this@PostHighlightActivity,
+                imageUri
+            ) ?: ""
+
+            val imageFile = File(filePath)
+
+            val fileBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
+
+            val response = fileBody.let {
+                apiInterface.syncImageToServer(
+                    crsfToken = crsfToken,
+                    file = it,
+                    serialNo = index,
+                    uuid = imageUploadUUID
+                )
+            }
+
+
+            if (response.isSuccessful) {
+                //your code for handling success response
+                println("Image upload response : ${response.body()}")
+                response.body()?.let {
+                    if (it.statusCode == 0) {
+                        //success
+                        imagesList.add(imageUri)
+                        if (imagesList.isNotEmpty()) {
+                            binding.clCustomPictureUpload.gvUploadedPictures.visibility = View.VISIBLE
+                        }
+                        picturesAdapter.notifyDataSetChanged()
+                    } else {
+                        SnackBarToast.showErrorSnackBar(binding.root, it.data)
+                    }
+                }
+                hideLoader()
+            } else {
+                SnackBarToast.failedCall(this@PostHighlightActivity)
+                Log.i("failed {}", response?.body().toString())
+                hideLoader()
+            }
+        }
     }
 }

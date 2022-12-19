@@ -122,3 +122,17 @@ class PlacesPOJO {
         var lng: String? = null
     }
 }
+
+
+data class ImageUploadResponse(
+    @SerializedName("data")
+    val data: String = "",
+    @SerializedName("tags")
+    val tags: String? = null,
+    @SerializedName("error")
+    val error: String? = null,
+    @SerializedName("imgUrl")
+    val imageUrl: String = "",
+    @SerializedName("statusCode")
+    val statusCode: Int= 0,
+)
