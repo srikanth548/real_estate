@@ -65,7 +65,7 @@ data class PostAgricultureRequest(
     @SerializedName("propertyLocationHighlights")
     var propertyLocationHighlights: ArrayList<PropertyLocationHighlights> = arrayListOf(),
     @SerializedName("PropertyWellKnownFor")
-    var PropertyWellKnownFor: ArrayList<String> = arrayListOf(),
+    var propertyWellKnownFor: ArrayList<String> = arrayListOf(),
 
 
     //Farmhouse fields

@@ -23,9 +23,7 @@ import com.gs.realestate.databinding.ActivityPosthighlightsBinding
 import com.gs.realestate.network.ApiInterface
 import com.gs.realestate.network.PlacesPOJO
 import com.gs.realestate.network.RetrofitClient
-import com.gs.realestate.network.models.property.CommercialPropertyRequest
-import com.gs.realestate.network.models.property.PostAgricultureRequest
-import com.gs.realestate.network.models.property.PostResidentialPropertyRequest
+import com.gs.realestate.network.models.property.*
 import com.gs.realestate.ui.login.TermsAdapter
 import com.gs.realestate.ui.post.adapter.HighLightsAdapter
 import com.gs.realestate.ui.post.adapter.ImageAdapter
@@ -468,6 +466,218 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                 SnackBarToast.failedCall(this@PostHighlightActivity)
                 Log.i("failed {}", response?.body().toString())
                 hideLoader()
+            }
+        }
+    }
+
+
+    /*
+    * Upload property details
+    * */
+    private fun postPropertyDetails(prefData: Pref){
+        when(selectedCategory){
+            Constants.EXTRA_AGRICULTURE -> {
+                postAgricultureRequest?.apply {
+                    prefDetails = Pref(
+                        ref = 410,
+                        ord = "order_KstYVgfU5c692S",
+                        pref = "pay_KstYqWEi4Yeigb"
+                    )
+                    statecd = "TG"
+                    distanceFromORR = "12.4"
+                    distanceFromHyderabad = "1.9"
+                    propertyLocationHighlights = arrayListOf(
+                        PropertyLocationHighlights(
+                            id = 131,
+                            description = "bus stand",
+                            mediaUrl = "",
+                            highlightDescription = "",
+                            type ="bus stand",
+                            distance = null,
+                            name = ""
+                        )
+                    )
+                    propertyWellKnownFor = arrayListOf("123")
+                }
+
+                syncAgriculturePropertyData()
+            }
+
+            Constants.EXTRA_RESIDENTIAL -> {
+                postResidentialRequest?.apply {
+                    prefDetails = Pref(
+                        ref = 410,
+                        ord = "order_KstYVgfU5c692S",
+                        pref = "pay_KstYqWEi4Yeigb"
+                    )
+                    statecd = "TG"
+                    distanceFromORR = "12.4"
+                    distanceFromHyderabad = "1.9"
+                    propertyLocationHighlights = arrayListOf(
+                        PropertyLocationHighlights(
+                            id = 131,
+                            description = "bus stand",
+                            mediaUrl = "",
+                            highlightDescription = "",
+                            type ="bus stand",
+                            distance = null,
+                            name = ""
+                        )
+                    )
+                    propertyWellKnownFor = arrayListOf("123")
+                }
+
+                syncResidentialPropertyData()
+            }
+
+            Constants.EXTRA_COMMERCIAL -> {
+                postCommercialPropertyRequest?.apply {
+                    prefDetails = Pref(
+                        ref = 410,
+                        ord = "order_KstYVgfU5c692S",
+                        pref = "pay_KstYqWEi4Yeigb"
+                    )
+                    statecd = "TG"
+                    distanceFromORR = "12.4"
+                    distanceFromHyderabad = "1.9"
+                    propertyLocationHighlights = arrayListOf(
+                        PropertyLocationHighlights(
+                            id = 131,
+                            description = "bus stand",
+                            mediaUrl = "",
+                            highlightDescription = "",
+                            type ="bus stand",
+                            distance = null,
+                            name = ""
+                        )
+                    )
+                    propertyWellKnownFor = arrayListOf("123")
+                }
+
+                syncCommercialPropertyData()
+            }
+        }
+    }
+
+
+    /*
+    * Method to sync the agriculture data
+    * */
+    private fun syncAgriculturePropertyData() {
+        val retrofit = RetrofitClient.getInstance(this)
+        val apiInterface = retrofit.create(ApiInterface::class.java)
+        val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
+
+        lifecycleScope.launchWhenCreated {
+            showLoader()
+
+            val response = postAgricultureRequest?.let {
+                apiInterface.syncAgricultureProperty(
+                    token = "",
+                    crsfToken = crsfToken,
+                    uuid = imageUploadUUID,
+                    postAgricultureRequest = it
+                )
+            }
+
+            response?.let {
+                if(it.isSuccessful){
+                    it.body()?.let { responseData ->
+                        if (responseData.status == 0) {
+                            //sync success
+                        } else {
+                            SnackBarToast.failedCall(this@PostHighlightActivity)
+                        }
+                    }
+                hideLoader()
+
+                }else{
+                     SnackBarToast.failedCall(this@PostHighlightActivity)
+                    Log.i("failed {}", response.body().toString())
+                    hideLoader()
+                }
+            }
+        }
+    }
+
+
+    /*
+    * Method to sync the residential data
+    * */
+    private fun syncResidentialPropertyData(){
+        val retrofit = RetrofitClient.getInstance(this)
+        val apiInterface = retrofit.create(ApiInterface::class.java)
+        val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
+
+        lifecycleScope.launchWhenCreated {
+            showLoader()
+
+            val response = postResidentialRequest?.let {
+                apiInterface.syncResidentialProperty(
+                    token = "",
+                    crsfToken = crsfToken,
+                    uuid = imageUploadUUID,
+                    postResidentialPropertyRequest = it
+                )
+            }
+
+            response?.let {
+                if(it.isSuccessful){
+                    it.body()?.let { responseData ->
+                        if (responseData.status == 0) {
+                            //sync success
+                        } else {
+                            SnackBarToast.failedCall(this@PostHighlightActivity)
+                        }
+                    }
+                    hideLoader()
+
+                }else{
+                    SnackBarToast.failedCall(this@PostHighlightActivity)
+                    Log.i("failed {}", response.body().toString())
+                    hideLoader()
+                }
+            }
+        }
+    }
+
+
+    /*
+   * Method to sync the commercial data
+   * */
+    private fun syncCommercialPropertyData(){
+        val retrofit = RetrofitClient.getInstance(this)
+        val apiInterface = retrofit.create(ApiInterface::class.java)
+        val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
+
+        lifecycleScope.launchWhenCreated {
+            showLoader()
+
+            val response = postCommercialPropertyRequest?.let {
+                apiInterface.syncCommercialProperty(
+                    token = "",
+                    crsfToken = crsfToken,
+                    uuid = imageUploadUUID,
+                    postCommercialPropertyRequest = it
+                )
+            }
+
+            response?.let {
+                if(it.isSuccessful){
+                    it.body()?.let { responseData ->
+                        if (responseData.status == 0) {
+                            //sync success
+                        } else {
+                            SnackBarToast.failedCall(this@PostHighlightActivity)
+                        }
+                    }
+                    hideLoader()
+
+                }else{
+                    SnackBarToast.failedCall(this@PostHighlightActivity)
+                    Log.i("failed {}", response.body().toString())
+                    hideLoader()
+                }
             }
         }
     }

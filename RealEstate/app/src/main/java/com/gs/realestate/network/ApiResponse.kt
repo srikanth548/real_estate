@@ -136,3 +136,11 @@ data class ImageUploadResponse(
     @SerializedName("statusCode")
     val statusCode: Int= 0,
 )
+
+
+data class PropertyUploadResponse(
+    @SerializedName("resp")
+    val propertyId: String = "",
+    @SerializedName("stat")
+    val status: Int = 0
+)

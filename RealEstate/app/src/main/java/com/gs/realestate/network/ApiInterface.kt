@@ -1,5 +1,8 @@
 package com.gs.realestate.network
 
+import com.gs.realestate.network.models.property.CommercialPropertyRequest
+import com.gs.realestate.network.models.property.PostAgricultureRequest
+import com.gs.realestate.network.models.property.PostResidentialPropertyRequest
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
@@ -45,5 +48,33 @@ interface ApiInterface {
         @Part("uploaded_slno") serialNo: Int,
         @Query("id") uuid: String
     ): Response<ImageUploadResponse>
+
+
+
+    @POST("api/property/list")
+    suspend fun syncAgricultureProperty(
+        @Header("Authorization") token: String,
+        @Header("X-CSRFToken") crsfToken: String,
+        @Query("id") uuid: String,
+        @Body postAgricultureRequest: PostAgricultureRequest
+    ): Response<PropertyUploadResponse>
+
+
+    @POST("api/property/list")
+    suspend fun syncResidentialProperty(
+        @Header("Authorization") token: String,
+        @Header("X-CSRFToken") crsfToken: String,
+        @Query("id") uuid: String,
+        @Body postResidentialPropertyRequest: PostResidentialPropertyRequest
+    ): Response<PropertyUploadResponse>
+
+
+    @POST("api/property/list")
+    suspend fun syncCommercialProperty(
+        @Header("Authorization") token: String,
+        @Header("X-CSRFToken") crsfToken: String,
+        @Query("id") uuid: String,
+        @Body postCommercialPropertyRequest: CommercialPropertyRequest
+    ): Response<PropertyUploadResponse>
 
 }
