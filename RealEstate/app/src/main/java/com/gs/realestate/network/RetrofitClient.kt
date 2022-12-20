@@ -22,22 +22,22 @@ import javax.net.ssl.*
 object RetrofitClient {
 
     fun getInstance(context: Context): Retrofit {
-        val mHttpLoggingInterceptor = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+//        val mHttpLoggingInterceptor = HttpLoggingInterceptor()
+//            .setLevel(HttpLoggingInterceptor.Level.BODY)
         val prefs = PreferenceHelper.customPreference(context)
-        val cookie =
-            "messages=" + prefs.messages + ";csrftoken=" + prefs.csrftoken + ";sessionid=" + prefs.sessionid
-
-        val mOkHttpClient = OkHttpClient
-            .Builder()
-            .addInterceptor(mHttpLoggingInterceptor)
-            .addInterceptor(ReceivedCookiesInterceptor(context))
-            .addInterceptor(Interceptor { chain ->
-                val request: Request =
-                    chain.request().newBuilder().addHeader("Cookie", cookie).build()
-                chain.proceed(request)
-            })
-            .build()
+//        val cookie =
+//            "messages=" + prefs.messages + ";csrftoken=" + prefs.csrftoken + ";sessionid=" + prefs.sessionid
+//
+//        val mOkHttpClient = OkHttpClient
+//            .Builder()
+//            .addInterceptor(mHttpLoggingInterceptor)
+//            .addInterceptor(ReceivedCookiesInterceptor(context))
+//            .addInterceptor(Interceptor { chain ->
+//                val request: Request =
+//                    chain.request().newBuilder().addHeader("Cookie", cookie).build()
+//                chain.proceed(request)
+//            })
+//            .build()
 
 
         var baseUrl = ""
@@ -52,13 +52,12 @@ object RetrofitClient {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(mOkHttpClient)
-            .client(getUnsafeOkHttpClient())
+            .client(getUnsafeOkHttpClient(context))
             .build()
     }
 
 
-    fun getUnsafeOkHttpClient(): OkHttpClient {
+    fun getUnsafeOkHttpClient(context: Context): OkHttpClient {
         return try {
             // Create a trust manager that does not validate certificate chains
             val trustAllCerts: Array<TrustManager> = arrayOf<TrustManager>(
@@ -96,6 +95,19 @@ object RetrofitClient {
                 override fun verify(hostname: String?, session: SSLSession?): Boolean {
                     return true
                 }
+            })
+            val mHttpLoggingInterceptor = HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.BODY)
+            val prefs = PreferenceHelper.customPreference(context)
+            val cookie =
+                "messages=" + prefs.messages + ";csrftoken=" + prefs.csrftoken + ";sessionid=" + prefs.sessionid
+
+            builder.addInterceptor(mHttpLoggingInterceptor)
+            builder.addInterceptor(ReceivedCookiesInterceptor(context))
+            builder.addInterceptor(Interceptor { chain ->
+                val request: Request =
+                    chain.request().newBuilder().addHeader("Cookie", cookie).build()
+                chain.proceed(request)
             })
             builder.build()
         } catch (e: Exception) {
