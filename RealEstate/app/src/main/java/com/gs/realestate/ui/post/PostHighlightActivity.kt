@@ -24,6 +24,7 @@ import com.gs.realestate.network.ApiInterface
 import com.gs.realestate.network.PlacesPOJO
 import com.gs.realestate.network.RetrofitClient
 import com.gs.realestate.network.models.property.*
+import com.gs.realestate.network.models.propertyType.PropertyKnownForDetails
 import com.gs.realestate.ui.login.TermsAdapter
 import com.gs.realestate.ui.post.adapter.HighLightsAdapter
 import com.gs.realestate.ui.post.adapter.ImageAdapter
@@ -67,6 +68,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     private var postResidentialRequest: PostResidentialPropertyRequest? = null
     private var postCommercialPropertyRequest: CommercialPropertyRequest? = null
     private var selectedCategory: String = ""
+    private var selectedSubTypeId: Int = 0
 
 
     //Random UUID to use for uploading images
@@ -88,7 +90,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
             LocationServices.getFusedLocationProviderClient(this@PostHighlightActivity)
 
         setPicturesView()
-        setLocationProximityData()
+//        setLocationProximityData()
 
         imagesUpload = ImageAdapter(imagesList, this)
 
@@ -130,6 +132,9 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                 SnackBarToast.showErrorSnackBar(it, getString(R.string.pleasecheckterms))
             }
         }
+
+
+        fetchPropertyTypesFromServer()
     }
 
 
@@ -141,16 +146,19 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                     Constants.EXTRA_AGRICULTURE -> {
                         postAgricultureRequest =
                             it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        selectedSubTypeId = postAgricultureRequest?.propertySubTypeId ?: 0
                         println("Agriculture : $postAgricultureRequest")
                     }
                     Constants.EXTRA_RESIDENTIAL -> {
                         postResidentialRequest =
                             it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        selectedSubTypeId = postResidentialRequest?.propertySubTypeId ?: 0
                         print("Residential : $postResidentialRequest")
                     }
                     Constants.EXTRA_COMMERCIAL -> {
                         postCommercialPropertyRequest =
                             it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        selectedSubTypeId = postCommercialPropertyRequest?.propertySubTypeId ?: 0
                         print("Commercial : $postCommercialPropertyRequest")
                     }
                 }
@@ -175,14 +183,14 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
             "Near to NH",
             "Near to River or pond"
         )
-        createChips(itemsArray)
+//        createChips(itemsArray)
     }
 
 
-    private fun createChips(itemsArray: List<String>) {
+    private fun createChips(itemsArray: List<PropertyKnownForDetails>) {
         itemsArray.forEach {
             val chip = Chip(this@PostHighlightActivity).apply {
-                text = it
+                text = it.description
                 isCheckable = true
 //                setChipBackgroundColorResource(R.color.purple_500)
 //                isCloseIconVisible = true
@@ -416,6 +424,37 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
 
 
     /*
+    * API call to fetch the property types
+    * */
+    private fun fetchPropertyTypesFromServer() {
+        val retrofit = RetrofitClient.getInstance(this)
+        val apiInterface = retrofit.create(ApiInterface::class.java)
+
+        lifecycleScope.launchWhenCreated {
+            showLoader()
+
+            val response = apiInterface.fetchPropertyTypes()
+            response.let {
+                if (it.isSuccessful) {
+                    it.body()?.let { responseData ->
+                        if (responseData.statusCode == 0) {
+                            //sync success
+                        } else {
+                            SnackBarToast.failedCall(this@PostHighlightActivity)
+                        }
+                        hideLoader()
+                    }
+                } else {
+                    SnackBarToast.failedCall(this@PostHighlightActivity)
+                    Log.i("failed {}", response.body().toString())
+                    hideLoader()
+                }
+            }
+        }
+    }
+
+
+    /*
     * Image sync to server
     * multi part file upload
     * */
@@ -454,7 +493,8 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                         //success
                         imagesList.add(imageUri)
                         if (imagesList.isNotEmpty()) {
-                            binding.clCustomPictureUpload.gvUploadedPictures.visibility = View.VISIBLE
+                            binding.clCustomPictureUpload.gvUploadedPictures.visibility =
+                                View.VISIBLE
                         }
                         picturesAdapter.notifyDataSetChanged()
                     } else {
@@ -474,8 +514,8 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     /*
     * Upload property details
     * */
-    private fun postPropertyDetails(prefData: Pref){
-        when(selectedCategory){
+    private fun postPropertyDetails(prefData: Pref) {
+        when (selectedCategory) {
             Constants.EXTRA_AGRICULTURE -> {
                 postAgricultureRequest?.apply {
                     prefDetails = Pref(
@@ -492,7 +532,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                             description = "bus stand",
                             mediaUrl = "",
                             highlightDescription = "",
-                            type ="bus stand",
+                            type = "bus stand",
                             distance = null,
                             name = ""
                         )
@@ -519,7 +559,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                             description = "bus stand",
                             mediaUrl = "",
                             highlightDescription = "",
-                            type ="bus stand",
+                            type = "bus stand",
                             distance = null,
                             name = ""
                         )
@@ -546,7 +586,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                             description = "bus stand",
                             mediaUrl = "",
                             highlightDescription = "",
-                            type ="bus stand",
+                            type = "bus stand",
                             distance = null,
                             name = ""
                         )
@@ -581,7 +621,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
             }
 
             response?.let {
-                if(it.isSuccessful){
+                if (it.isSuccessful) {
                     it.body()?.let { responseData ->
                         if (responseData.status == 0) {
                             //sync success
@@ -589,10 +629,10 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                             SnackBarToast.failedCall(this@PostHighlightActivity)
                         }
                     }
-                hideLoader()
+                    hideLoader()
 
-                }else{
-                     SnackBarToast.failedCall(this@PostHighlightActivity)
+                } else {
+                    SnackBarToast.failedCall(this@PostHighlightActivity)
                     Log.i("failed {}", response.body().toString())
                     hideLoader()
                 }
@@ -604,7 +644,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     /*
     * Method to sync the residential data
     * */
-    private fun syncResidentialPropertyData(){
+    private fun syncResidentialPropertyData() {
         val retrofit = RetrofitClient.getInstance(this)
         val apiInterface = retrofit.create(ApiInterface::class.java)
         val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
@@ -622,7 +662,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
             }
 
             response?.let {
-                if(it.isSuccessful){
+                if (it.isSuccessful) {
                     it.body()?.let { responseData ->
                         if (responseData.status == 0) {
                             //sync success
@@ -632,7 +672,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                     }
                     hideLoader()
 
-                }else{
+                } else {
                     SnackBarToast.failedCall(this@PostHighlightActivity)
                     Log.i("failed {}", response.body().toString())
                     hideLoader()
@@ -645,7 +685,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     /*
    * Method to sync the commercial data
    * */
-    private fun syncCommercialPropertyData(){
+    private fun syncCommercialPropertyData() {
         val retrofit = RetrofitClient.getInstance(this)
         val apiInterface = retrofit.create(ApiInterface::class.java)
         val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
@@ -663,7 +703,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
             }
 
             response?.let {
-                if(it.isSuccessful){
+                if (it.isSuccessful) {
                     it.body()?.let { responseData ->
                         if (responseData.status == 0) {
                             //sync success
@@ -673,7 +713,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                     }
                     hideLoader()
 
-                }else{
+                } else {
                     SnackBarToast.failedCall(this@PostHighlightActivity)
                     Log.i("failed {}", response.body().toString())
                     hideLoader()

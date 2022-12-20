@@ -26,12 +26,12 @@ class PropertyDetailsActivity : AppCompatActivity() {
         intent.extras?.let {
             if(it.containsKey("EXTRA_PROPERTY_DETAILS")){
                 it.getParcelable<Properties>("EXTRA_PROPERTY_DETAILS")?.let {propertyDetails ->
-//                    loadData(propertyDetails)
+                    loadData(propertyDetails)
                 }
             }
         }
 
-        loadData(getDummyData())
+//        loadData(getDummyData())
     }
 
     private fun loadData(propertyDetails: Properties) {

@@ -1,110 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<io.github.florent37.shapeofview.shapes.RoundRectView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/royal_blue"
-        android:layout_margin="10dp"
-        android:elevation="4dp"
-        app:shape_roundRect_topLeftRadius="20dp"
-        app:shape_roundRect_topRightRadius="20dp"
-        app:shape_roundRect_bottomRightRadius="20dp"
-        app:shape_roundRect_bottomLeftRadius="20dp"
-        android:layout_alignParentBottom="true"
-        app:shape_roundRect_borderColor="@color/grey"
-        app:shape_roundRect_borderWidth="2dp"
->
+<io.github.florent37.shapeofview.shapes.RoundRectView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_margin="10dp"
+    android:background="@color/royal_blue"
+    android:elevation="4dp"
+    app:shape_roundRect_borderColor="@color/grey"
+    app:shape_roundRect_borderWidth="2dp"
+    app:shape_roundRect_bottomLeftRadius="15dp"
+    app:shape_roundRect_bottomRightRadius="15dp"
+    app:shape_roundRect_topLeftRadius="15dp"
+    app:shape_roundRect_topRightRadius="15dp">
 
-    <LinearLayout android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:padding="20dp"
-                  android:orientation="vertical"
-    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="12dp">
+
         <io.github.florent37.shapeofview.shapes.RoundRectView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            app:shape_roundRect_borderColor="@color/grey"
+            app:shape_roundRect_borderWidth="2dp"
+            app:shape_roundRect_bottomLeftRadius="10dp"
+            app:shape_roundRect_bottomRightRadius="10dp"
+            app:shape_roundRect_topLeftRadius="10dp"
+            app:shape_roundRect_topRightRadius="10dp">
+
+            <ImageView
+                android:id="@+id/rl_background"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="4dp"
-                app:shape_roundRect_topLeftRadius="10dp"
-                app:shape_roundRect_topRightRadius="10dp"
-                app:shape_roundRect_bottomRightRadius="10dp"
-                app:shape_roundRect_bottomLeftRadius="10dp"
-                app:shape_roundRect_borderColor="@color/grey"
-                app:shape_roundRect_borderWidth="2dp"
-        >
-            <ImageView android:layout_width="match_parent"
-                       android:id="@+id/rl_background"
-                       android:scaleType="centerCrop"
-                       android:layout_height="120dp"/>
-            <RelativeLayout android:layout_width="match_parent"
-                            android:layout_height="120dp"
-            >
+                android:layout_height="160dp"
+                android:scaleType="centerCrop" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp">
+
                 <io.github.florent37.shapeofview.shapes.RoundRectView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_margin="@dimen/size_10dp"
+                    android:elevation="4dp"
+                    app:shape_roundRect_borderColor="@color/grey"
+                    app:shape_roundRect_borderWidth="2dp"
+                    app:shape_roundRect_bottomLeftRadius="15dp"
+                    app:shape_roundRect_bottomRightRadius="15dp"
+                    app:shape_roundRect_topLeftRadius="15dp"
+                    app:shape_roundRect_topRightRadius="15dp">
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:elevation="4dp"
-                        app:shape_roundRect_topLeftRadius="10dp"
-                        app:shape_roundRect_topRightRadius="10dp"
-                        app:shape_roundRect_bottomRightRadius="10dp"
-                        app:shape_roundRect_bottomLeftRadius="10dp"
-                        app:shape_roundRect_borderColor="@color/grey"
-                        app:shape_roundRect_borderWidth="2dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_margin="5dp" >
-                    <LinearLayout android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"
-                                  android:background="@color/white"
-                                  android:orientation="horizontal"
-                                  android:padding="5dp"
-                    >
-                        <TextView android:layout_width="wrap_content"
-                                  android:text="15"
-                                  android:id="@+id/tv_heartcount"
-                                  android:drawableStart="@drawable/ic_heart"
-                                  android:layout_height="wrap_content"
-                        />
+                        android:orientation="horizontal"
+                        android:background="@color/white"
+                        android:paddingStart="@dimen/size_10dp"
+                        android:paddingEnd="@dimen/size_10dp"
+                        android:paddingTop="@dimen/size_5dp"
+                        android:paddingBottom="@dimen/size_5dp">
 
-                        <TextView android:layout_width="wrap_content"
-                                  android:text="15"
-                                  android:id="@+id/tv_viewcount"
-                                  android:layout_marginLeft="5dp"
-                                  android:drawableStart="@drawable/ic_view"
-                                  android:layout_height="wrap_content"
-                        />
+                        <TextView
+                            android:id="@+id/tv_heartcount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/size_5dp"
+                            tools:text="15"
+                            app:drawableStartCompat="@drawable/ic_heart" />
+
+                        <TextView
+                            android:id="@+id/tv_viewcount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/size_5dp"
+                            android:layout_marginStart="@dimen/size_10dp"
+                            tools:text="15"
+                            app:drawableStartCompat="@drawable/ic_view" />
                     </LinearLayout>
 
                 </io.github.florent37.shapeofview.shapes.RoundRectView>
 
                 <io.github.florent37.shapeofview.shapes.RoundRectView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginVertical="15dp"
+                    android:elevation="4dp"
+                    app:shape_roundRect_borderColor="@color/grey"
+                    app:shape_roundRect_borderWidth="2dp"
+                    app:shape_roundRect_bottomLeftRadius="10dp"
+                    app:shape_roundRect_topLeftRadius="10dp">
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:elevation="4dp"
-                        app:shape_roundRect_topLeftRadius="10dp"
-                        app:shape_roundRect_bottomLeftRadius="10dp"
-                        app:shape_roundRect_borderColor="@color/grey"
-                        app:shape_roundRect_borderWidth="2dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginVertical="15dp"
-                        >
-                    <LinearLayout android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"
-                                  android:background="@color/white"
-                                  android:orientation="horizontal"
-                                  android:padding="5dp"
-                    >
-                        <TextView android:layout_width="wrap_content"
-                                  android:text="2.0 cr"
-                                  android:id="@+id/tv_amount"
-                                  android:textColor="@color/royal_blue"
-                                  android:textStyle="bold"
-                                  android:drawablePadding="2dp"
-                                  android:textSize="17dp"
-                                  android:drawableStart="@drawable/ic_rupee"
-                                  android:layout_height="wrap_content"
-                        />
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:id="@+id/tv_amount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="5dp"
+                            android:paddingTop="@dimen/size_3dp"
+                            android:paddingBottom="@dimen/size_3dp"
+                            android:paddingStart="@dimen/size_10dp"
+                            android:paddingEnd="@dimen/size_10dp"
+                            android:text="2.0 cr"
+                            android:textColor="@color/royal_blue"
+                            android:textSize="@dimen/size_16sp"
+                            android:textStyle="bold"
+                            app:drawableStartCompat="@drawable/ic_rupee" />
 
 
                     </LinearLayout>
@@ -115,36 +130,38 @@
 
         </io.github.florent37.shapeofview.shapes.RoundRectView>
 
-        <TextView android:layout_width="wrap_content"
-                  android:text="2 Acre Farm Land"
-                  android:textStyle="bold"
-                  android:textSize="18dp"
-                  android:id="@+id/land_description"
-                  android:layout_marginTop="5dp"
-                  android:textColor="@color/black"
-                  android:layout_height="wrap_content"
-        />
-        <TextView android:layout_width="wrap_content"
-                  android:text="Hyderabad"
-                  android:gravity="center"
-                  android:id="@+id/location"
-                  android:textStyle="bold"
-                  android:drawablePadding="2dp"
-                  android:textSize="17dp"
-                  android:layout_marginTop="5dp"
-                  android:drawableStart="@drawable/ic_map"
-                  android:layout_height="wrap_content"
-        />
-        <TextView android:layout_width="wrap_content"
-                  android:text="Expires"
-                  android:id="@+id/tv_expirydate"
-                  android:gravity="center"
-                  android:textStyle="bold"
-                  android:textColor="@android:color/holo_red_dark"
-                  android:textSize="14dp"
-                  android:layout_marginTop="15dp"
-                  android:layout_height="wrap_content"
-        />
+        <TextView
+            android:id="@+id/land_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            tools:text="2 Acre Farm Land"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            tools:text="Hyderabad"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_map" />
+
+        <TextView
+            android:id="@+id/tv_expirydate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            tools:text="Expires"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </io.github.florent37.shapeofview.shapes.RoundRectView>

@@ -3,6 +3,7 @@ package com.gs.realestate.network
 import com.gs.realestate.network.models.property.CommercialPropertyRequest
 import com.gs.realestate.network.models.property.PostAgricultureRequest
 import com.gs.realestate.network.models.property.PostResidentialPropertyRequest
+import com.gs.realestate.network.models.propertyType.PropertyTypesResponseModel
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
@@ -77,4 +78,7 @@ interface ApiInterface {
         @Body postCommercialPropertyRequest: CommercialPropertyRequest
     ): Response<PropertyUploadResponse>
 
+
+    @GET("api/property/property-types")
+    suspend fun fetchPropertyTypes(): Response<PropertyTypesResponseModel>
 }
