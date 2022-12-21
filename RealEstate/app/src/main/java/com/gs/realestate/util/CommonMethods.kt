@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import java.util.*
 
 
@@ -24,12 +25,17 @@ object CommonMethods {
         var res: String? = null
         val proj = arrayOf(MediaStore.Images.Media.DATA)
         val cursor: Cursor? =
-            contentUri?.let { mContext.getContentResolver().query(it, proj, null, null, null) }
+            contentUri?.let { mContext.contentResolver.query(it, proj, null, null, null) }
         if (cursor?.moveToFirst() == true) {
             val columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
             res = cursor.getString(columnIndex)
         }
         cursor?.close()
         return res
+    }
+
+    fun filePathFromCaches(contentUri: Uri): String? {
+        val filePath = contentUri.path
+        return filePath
     }
 }

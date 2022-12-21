@@ -69,6 +69,8 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     private var postCommercialPropertyRequest: CommercialPropertyRequest? = null
     private var selectedCategory: String = ""
     private var selectedSubTypeId: Int = 0
+    private var selectedTypeId: Int = 0
+    private var locationProximityList: List<PropertyKnownForDetails>? = null
 
 
     //Random UUID to use for uploading images
@@ -97,14 +99,16 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         binding.clCustomPictureUpload.tvCamera.setOnClickListener {
             imagePicker.takeFromCamera { imageResult ->
                 imageCallBack(
-                    imageResult
+                    imageResult,
+                    isFromCamera =true
                 )
             }
         }
         binding.clCustomPictureUpload.tvGallery.setOnClickListener {
             imagePicker.pickFromStorage { imageResult ->
                 imageCallBack(
-                    imageResult
+                    imageResult,
+                    isFromCamera = false
                 )
             }
         }
@@ -125,7 +129,6 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         }
 
         binding.btnPost.setOnClickListener {
-//            println("Selected chips : "+binding.cgProximity.checkedChipIds.forEach { binding.root.findViewById<Chip>(it).text.toString() })
             if (binding.terms.isChecked) {
                 startPayment()
             } else {
@@ -146,18 +149,21 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                     Constants.EXTRA_AGRICULTURE -> {
                         postAgricultureRequest =
                             it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        selectedTypeId = postAgricultureRequest?.propertyTypeId ?: 0
                         selectedSubTypeId = postAgricultureRequest?.propertySubTypeId ?: 0
                         println("Agriculture : $postAgricultureRequest")
                     }
                     Constants.EXTRA_RESIDENTIAL -> {
                         postResidentialRequest =
                             it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        selectedTypeId = postResidentialRequest?.propertyTypeId ?: 0
                         selectedSubTypeId = postResidentialRequest?.propertySubTypeId ?: 0
                         print("Residential : $postResidentialRequest")
                     }
                     Constants.EXTRA_COMMERCIAL -> {
                         postCommercialPropertyRequest =
                             it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        selectedTypeId = postCommercialPropertyRequest?.propertyTypeId ?: 0
                         selectedSubTypeId = postCommercialPropertyRequest?.propertySubTypeId ?: 0
                         print("Commercial : $postCommercialPropertyRequest")
                     }
@@ -188,14 +194,17 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
 
 
     private fun createChips(itemsArray: List<PropertyKnownForDetails>) {
-        itemsArray.forEach {
+        itemsArray.forEachIndexed { index, propertyKnownForDetails ->
             val chip = Chip(this@PostHighlightActivity).apply {
-                text = it.description
+                text = propertyKnownForDetails.description
                 isCheckable = true
 //                setChipBackgroundColorResource(R.color.purple_500)
 //                isCloseIconVisible = true
 //                setTextColor(ContextCompat.getColor(context, R.color.white))
 //                setTextAppearance(R.style.ChipTextAppearance)
+                setOnCheckedChangeListener { compoundButton, b ->
+                    itemsArray[index].isSelected = b
+                }
             }
             binding.cgProximity.addView(chip)
         }
@@ -378,12 +387,12 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     }
 
     //CallBack for result
-    private fun imageCallBack(imageResult: ImageResult<Uri>) {
+    private fun imageCallBack(imageResult: ImageResult<Uri>, isFromCamera: Boolean) {
         when (imageResult) {
             is ImageResult.Success -> {
                 val uri = imageResult.value
 
-                syncImagesToServer(imageUri = uri, index = imagesList.size + 1)
+                syncImagesToServer(isFromCamera,imageUri = uri, index = imagesList.size + 1)
             }
             is ImageResult.Failure -> {
                 val errorString = imageResult.errorString
@@ -438,7 +447,15 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                 if (it.isSuccessful) {
                     it.body()?.let { responseData ->
                         if (responseData.statusCode == 0) {
-                            //sync success
+                            //fetch success
+                            locationProximityList =
+                                responseData.propertyCategoryList
+                                    .firstOrNull { it.propertyTypeId == selectedTypeId }
+                                    ?.propertySubTypesList
+                                    ?.firstOrNull { it.propertySubTypeId == selectedSubTypeId }
+                                    ?.knownForList
+
+                            locationProximityList?.let { it1 -> createChips(it1) }
                         } else {
                             SnackBarToast.failedCall(this@PostHighlightActivity)
                         }
@@ -458,7 +475,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     * Image sync to server
     * multi part file upload
     * */
-    private fun syncImagesToServer(imageUri: Uri, index: Int) {
+    private fun syncImagesToServer(isFromCamera: Boolean, imageUri: Uri, index: Int) {
         val retrofit = RetrofitClient.getInstance(this)
         val apiInterface = retrofit.create(ApiInterface::class.java)
         val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
@@ -466,19 +483,24 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         lifecycleScope.launchWhenCreated {
             showLoader()
 
-            val filePath = CommonMethods.getRealPathFromURI(
-                mContext = this@PostHighlightActivity,
-                imageUri
-            ) ?: ""
+            val imageFile = if(isFromCamera){
+                imageUri.lastPathSegment?.let { File(cacheDir, it) }
+            }else{
+                val filePath = CommonMethods.getRealPathFromURI(
+                    mContext = this@PostHighlightActivity,
+                    imageUri
+                ) ?: ""
 
-            val imageFile = File(filePath)
+                File(filePath)
+            }
 
-            val fileBody = imageFile.asRequestBody("image/*".toMediaTypeOrNull())
+
+            val fileBody = imageFile?.asRequestBody("image/*".toMediaTypeOrNull())
 
             val response = fileBody.let {
                 apiInterface.syncImageToServer(
                     crsfToken = crsfToken,
-                    file = it,
+                    file = it!!,
                     serialNo = index,
                     uuid = imageUploadUUID
                 )

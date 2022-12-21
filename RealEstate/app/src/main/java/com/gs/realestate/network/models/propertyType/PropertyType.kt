@@ -60,4 +60,6 @@ data class PropertyKnownForDetails(
     val iconUrl: String = "",
     @SerializedName("icon")
     val icon: String = ""
-)
+){
+    var isSelected: Boolean = false
+}
