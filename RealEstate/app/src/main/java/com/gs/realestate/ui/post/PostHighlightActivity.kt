@@ -559,7 +559,8 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                             name = ""
                         )
                     )
-                    propertyWellKnownFor = arrayListOf("123")
+                    propertyWellKnownFor = getSelectedLocationProximity()
+
                 }
 
                 syncAgriculturePropertyData()
@@ -586,7 +587,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                             name = ""
                         )
                     )
-                    propertyWellKnownFor = arrayListOf("123")
+                    propertyWellKnownFor = getSelectedLocationProximity()
                 }
 
                 syncResidentialPropertyData()
@@ -613,7 +614,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                             name = ""
                         )
                     )
-                    propertyWellKnownFor = arrayListOf("123")
+                    propertyWellKnownFor = getSelectedLocationProximity()
                 }
 
                 syncCommercialPropertyData()
@@ -742,5 +743,16 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                 }
             }
         }
+    }
+
+
+    /*
+    * Method to get the selected location proximity
+    * */
+    fun getSelectedLocationProximity(): List<String> {
+        return locationProximityList
+            ?.filter { it.isSelected }
+            ?.map { it.id.toString() }
+            ?: listOf()
     }
 }

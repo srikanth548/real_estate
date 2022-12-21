@@ -61,7 +61,7 @@ data class CommercialPropertyRequest(
     @SerializedName("propertyLocationHighlights")
     var propertyLocationHighlights: ArrayList<PropertyLocationHighlights> = arrayListOf(),
     @SerializedName("PropertyWellKnownFor")
-    var propertyWellKnownFor: ArrayList<String> = arrayListOf(),
+    var propertyWellKnownFor: List<String> = listOf(),
     @SerializedName("extentinsqryrds")
     var extentInSqrYrds: String? = null,
 
