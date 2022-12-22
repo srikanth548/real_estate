@@ -4,6 +4,7 @@ import com.gs.realestate.network.models.property.CommercialPropertyRequest
 import com.gs.realestate.network.models.property.PostAgricultureRequest
 import com.gs.realestate.network.models.property.PostResidentialPropertyRequest
 import com.gs.realestate.network.models.propertyType.PropertyTypesResponseModel
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
@@ -45,7 +46,7 @@ interface ApiInterface {
     @POST("/api/property/uploadFile")
     suspend fun syncImageToServer(
         @Header("X-CSRFToken") crsfToken: String,
-        @Part("image") file: RequestBody,
+        @Part file: MultipartBody.Part,
         @Part("uploaded_slno") serialNo: Int,
         @Query("id") uuid: String
     ): Response<ImageUploadResponse>

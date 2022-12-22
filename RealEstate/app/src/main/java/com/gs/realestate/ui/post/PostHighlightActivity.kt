@@ -41,6 +41,7 @@ import com.razorpay.PaymentResultWithDataListener
 import dev.ronnie.github.imagepicker.ImagePicker
 import dev.ronnie.github.imagepicker.ImageResult
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONObject
 import retrofit2.Call
@@ -495,19 +496,21 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
             }
 
 
-            val fileBody = imageFile?.asRequestBody("image/*".toMediaTypeOrNull())
+            val fileBody = imageFile?.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val multiPartBody =
+                fileBody?.let { MultipartBody.Part.createFormData("image", imageFile.name, it) }
 
-            val response = fileBody.let {
+            val response = multiPartBody?.let {
                 apiInterface.syncImageToServer(
                     crsfToken = crsfToken,
-                    file = it!!,
+                    file = it,
                     serialNo = index,
                     uuid = imageUploadUUID
                 )
             }
 
 
-            if (response.isSuccessful) {
+            if (response?.isSuccessful == true) {
                 //your code for handling success response
                 println("Image upload response : ${response.body()}")
                 response.body()?.let {
