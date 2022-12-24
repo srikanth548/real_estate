@@ -16,6 +16,7 @@ import com.gs.realestate.databinding.FragmentConfirmotpBinding
 import com.gs.realestate.network.*
 import com.gs.realestate.ui.home.HomeActivity
 import com.gs.realestate.util.PreferenceHelper
+import com.gs.realestate.util.PreferenceHelper.authToken
 import com.gs.realestate.util.PreferenceHelper.mobilenumber
 import com.gs.realestate.util.SnackBarToast
 
@@ -120,6 +121,7 @@ class ConfirmOtpFragment : BaseFragment() {
                                     val authResponse =
                                         apiInterface.authentication(authenticationRequest)
                                     if (authResponse.isSuccessful) {
+                                        PreferenceHelper.customPreference(context).authToken = authResponse.body()?.token
                                         startActivity(Intent(activity, HomeActivity::class.java))
                                     } else {
                                         Log.i("Auth failed {}", response.body().toString())

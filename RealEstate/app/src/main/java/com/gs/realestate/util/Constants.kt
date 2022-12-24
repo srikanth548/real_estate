@@ -2,6 +2,8 @@ package com.gs.realestate.util
 
 object Constants {
 
+    const val REFERRER_URL = "https://stage.rightmyproperty.in/web/sell"
+
     const val EXTRA_PROPERTY_CATEGORY = "EXTRA_PROPERTY_CATEGORY"
     const val EXTRA_PROPERTY_TYPE = "EXTRA_PROPERTY_TYPE"
     const val EXTRA_POST_PROPERTY_REQUEST = "EXTRA_POST_PROPERTY_REQUEST"

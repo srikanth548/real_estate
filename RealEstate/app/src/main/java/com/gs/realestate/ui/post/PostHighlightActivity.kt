@@ -3,6 +3,7 @@ package com.gs.realestate.ui.post
 import android.Manifest
 import android.app.Activity
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
@@ -25,6 +26,7 @@ import com.gs.realestate.network.PlacesPOJO
 import com.gs.realestate.network.RetrofitClient
 import com.gs.realestate.network.models.property.*
 import com.gs.realestate.network.models.propertyType.PropertyKnownForDetails
+import com.gs.realestate.ui.home.HomeActivity
 import com.gs.realestate.ui.login.TermsAdapter
 import com.gs.realestate.ui.post.adapter.HighLightsAdapter
 import com.gs.realestate.ui.post.adapter.ImageAdapter
@@ -32,6 +34,7 @@ import com.gs.realestate.ui.post.adapter.PicturesAdapter
 import com.gs.realestate.util.CommonMethods
 import com.gs.realestate.util.Constants
 import com.gs.realestate.util.PreferenceHelper
+import com.gs.realestate.util.PreferenceHelper.authToken
 import com.gs.realestate.util.PreferenceHelper.csrftoken
 import com.gs.realestate.util.SnackBarToast
 import com.razorpay.Checkout
@@ -131,7 +134,8 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
 
         binding.btnPost.setOnClickListener {
             if (binding.terms.isChecked) {
-                startPayment()
+//                startPayment()
+                postPropertyDetails(null)
             } else {
                 SnackBarToast.showErrorSnackBar(it, getString(R.string.pleasecheckterms))
             }
@@ -539,7 +543,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     /*
     * Upload property details
     * */
-    private fun postPropertyDetails(prefData: Pref) {
+    private fun postPropertyDetails(prefData: Pref?) {
         when (selectedCategory) {
             Constants.EXTRA_AGRICULTURE -> {
                 postAgricultureRequest?.apply {
@@ -633,16 +637,18 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         val retrofit = RetrofitClient.getInstance(this)
         val apiInterface = retrofit.create(ApiInterface::class.java)
         val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
+        val authToken = ("Bearer " + PreferenceHelper.customPreference(this).authToken) ?: ""
 
         lifecycleScope.launchWhenCreated {
             showLoader()
 
             val response = postAgricultureRequest?.let {
                 apiInterface.syncAgricultureProperty(
-                    token = "",
+                    token = authToken,
                     crsfToken = crsfToken,
                     uuid = imageUploadUUID,
-                    postAgricultureRequest = it
+                    postAgricultureRequest = it,
+                    referer = Constants.REFERRER_URL
                 )
             }
 
@@ -651,6 +657,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                     it.body()?.let { responseData ->
                         if (responseData.status == 0) {
                             //sync success
+                            moveToHomeScreen()
                         } else {
                             SnackBarToast.failedCall(this@PostHighlightActivity)
                         }
@@ -674,16 +681,18 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         val retrofit = RetrofitClient.getInstance(this)
         val apiInterface = retrofit.create(ApiInterface::class.java)
         val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
+        val authToken = ("Bearer " + PreferenceHelper.customPreference(this).authToken) ?: ""
 
         lifecycleScope.launchWhenCreated {
             showLoader()
 
             val response = postResidentialRequest?.let {
                 apiInterface.syncResidentialProperty(
-                    token = "",
+                    token = authToken,
                     crsfToken = crsfToken,
                     uuid = imageUploadUUID,
-                    postResidentialPropertyRequest = it
+                    postResidentialPropertyRequest = it,
+                    referer = Constants.REFERRER_URL
                 )
             }
 
@@ -692,6 +701,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                     it.body()?.let { responseData ->
                         if (responseData.status == 0) {
                             //sync success
+                            moveToHomeScreen()
                         } else {
                             SnackBarToast.failedCall(this@PostHighlightActivity)
                         }
@@ -715,16 +725,19 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         val retrofit = RetrofitClient.getInstance(this)
         val apiInterface = retrofit.create(ApiInterface::class.java)
         val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
+        val authToken = ("Bearer " + PreferenceHelper.customPreference(this).authToken) ?: ""
+
 
         lifecycleScope.launchWhenCreated {
             showLoader()
 
             val response = postCommercialPropertyRequest?.let {
                 apiInterface.syncCommercialProperty(
-                    token = "",
+                    token = authToken,
                     crsfToken = crsfToken,
                     uuid = imageUploadUUID,
-                    postCommercialPropertyRequest = it
+                    postCommercialPropertyRequest = it,
+                    referer = Constants.REFERRER_URL
                 )
             }
 
@@ -733,6 +746,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                     it.body()?.let { responseData ->
                         if (responseData.status == 0) {
                             //sync success
+                            moveToHomeScreen()
                         } else {
                             SnackBarToast.failedCall(this@PostHighlightActivity)
                         }
@@ -752,10 +766,20 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     /*
     * Method to get the selected location proximity
     * */
-    fun getSelectedLocationProximity(): List<String> {
+    private fun getSelectedLocationProximity(): List<String> {
         return locationProximityList
             ?.filter { it.isSelected }
             ?.map { it.id.toString() }
             ?: listOf()
+    }
+
+
+    /*
+    * Move to home screen
+    * */
+    private fun moveToHomeScreen() {
+        val i = Intent(this, HomeActivity::class.java)
+        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(i)
     }
 }

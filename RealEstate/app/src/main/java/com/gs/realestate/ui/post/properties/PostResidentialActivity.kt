@@ -268,6 +268,12 @@ class PostResidentialActivity : AppCompatActivity() {
         } else if (!binding.llPostPlot.etPrimaryContact.isValidText()) {
             showErrorMessage(getString(R.string.str_err_contact_number))
             return false
+        }else if(!binding.llPostPlot.etAlternativeContact.isValidText()){
+            showErrorMessage(getString(R.string.str_err_alt_contact_number))
+            return false
+        }else if(!binding.llPostPlot.etDescription.isValidText()){
+            showErrorMessage(getString(R.string.str_err_description))
+            return false
         }
         return true
     }
@@ -334,6 +340,12 @@ class PostResidentialActivity : AppCompatActivity() {
         } else if (!binding.llPostFlat.etPrimaryContact.isValidText()) {
             showErrorMessage(getString(R.string.str_err_contact_number))
             return false
+        }else if(!binding.llPostFlat.etAlternativeContact.isValidText()){
+            showErrorMessage(getString(R.string.str_err_alt_contact_number))
+            return false
+        }else if(!binding.llPostFlat.etDescription.isValidText()){
+            showErrorMessage(getString(R.string.str_err_description))
+            return false
         }
         return true
     }
@@ -382,20 +394,26 @@ class PostResidentialActivity : AppCompatActivity() {
         } else if (!binding.llPostHouse.etBuildingAge.isValidText()) {
             showErrorMessage(getString(R.string.str_err_age_of_building))
             return false
-        } else if (!binding.llPostFlat.etOfferPrice.isValidText()) {
+        } else if (!binding.llPostHouse.etOfferPrice.isValidText()) {
             showErrorMessage(getString(R.string.str_err_enter_offer_price))
             return false
-        } else if (!binding.llPostFlat.etMarketPrice.isValidText()) {
+        } else if (!binding.llPostHouse.etMarketPrice.isValidText()) {
             showErrorMessage(getString(R.string.str_err_market_price))
             return false
-        } else if (!binding.llPostFlat.etSuitableFor.isValidText()) {
+        } else if (!binding.llPostHouse.etSuitableFor.isValidText()) {
             showErrorMessage(getString(R.string.str_err_suitable_for))
             return false
-        } else if (!binding.llPostFlat.etOwnerName.isValidText()) {
+        } else if (!binding.llPostHouse.etOwnerName.isValidText()) {
             showErrorMessage(getString(R.string.str_err_owner_name))
             return false
-        } else if (!binding.llPostFlat.etPrimaryContact.isValidText()) {
+        } else if (!binding.llPostHouse.etPrimaryContact.isValidText()) {
             showErrorMessage(getString(R.string.str_err_contact_number))
+            return false
+        }else if(!binding.llPostHouse.etAlternativeContact.isValidText()){
+            showErrorMessage(getString(R.string.str_err_alt_contact_number))
+            return false
+        }else if(!binding.llPostHouse.etDescription.isValidText()){
+            showErrorMessage(getString(R.string.str_err_description))
             return false
         }
         return true
