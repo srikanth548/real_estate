@@ -136,8 +136,7 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
 
         binding.btnPost.setOnClickListener {
             if (binding.terms.isChecked) {
-//                startPayment()
-                postPropertyDetails(null)
+                startPayment()
             } else {
                 SnackBarToast.showErrorSnackBar(it, getString(R.string.pleasecheckterms))
             }
@@ -410,8 +409,9 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
 
     override fun onPaymentSuccess(p0: String?, p1: PaymentData?) {
         try {
-            alertDialogBuilder.setMessage("Payment Successful : Payment ID: $p0\nPayment Data: ${p1?.data}")
-            alertDialogBuilder.show()
+//            alertDialogBuilder.setMessage("Payment Successful : Payment ID: $p0\nPayment Data: ${p1?.data}")
+//            alertDialogBuilder.show()
+            postPropertyDetails(null)
         } catch (e: Exception) {
             e.printStackTrace()
         }
