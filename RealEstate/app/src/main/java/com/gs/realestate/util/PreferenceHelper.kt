@@ -13,6 +13,7 @@ object PreferenceHelper {
     val CSRFTOKEN = "csrftoken"
     val SESSIONID = "sessionid"
     val MESSAGES = "messages"
+    val AUTH_TOKEN = "authToken"
 
     val CUSTOM_PREF_NAME = "real_estate"
 
@@ -80,6 +81,14 @@ object PreferenceHelper {
         set(value) {
             editMe {
                 it.putString(BASE_URL, value)
+            }
+        }
+
+    var SharedPreferences.authToken
+        get() = getString(AUTH_TOKEN, "")
+        set(value) {
+            editMe {
+                it.putString(AUTH_TOKEN, value)
             }
         }
 }

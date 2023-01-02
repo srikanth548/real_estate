@@ -223,6 +223,8 @@
     <string name="str_notifications">Notifications</string>
     <string name="str_please_enter_url_to_save">Please enter Base URL to save.</string>
     <string name="str_updated_success">Updated successfully</string>
+    <string name="str_err_alt_contact_number">Please enter Alternative Contact number</string>
+    <string name="str_err_description">Please enter description.</string>
 
     <string-array name="terms">
         <item>i.To access the service provided by Right My Property, you must create an Account by completing the registration process.</item>

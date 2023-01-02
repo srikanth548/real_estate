@@ -3,6 +3,7 @@ package com.gs.realestate.ui.post
 import android.Manifest
 import android.app.Activity
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
@@ -23,14 +24,19 @@ import com.gs.realestate.databinding.ActivityPosthighlightsBinding
 import com.gs.realestate.network.ApiInterface
 import com.gs.realestate.network.PlacesPOJO
 import com.gs.realestate.network.RetrofitClient
-import com.gs.realestate.network.models.property.CommercialPropertyRequest
-import com.gs.realestate.network.models.property.PostAgricultureRequest
-import com.gs.realestate.network.models.property.PostResidentialPropertyRequest
+import com.gs.realestate.network.models.property.*
+import com.gs.realestate.network.models.propertyType.PropertyKnownForDetails
+import com.gs.realestate.ui.home.HomeActivity
 import com.gs.realestate.ui.login.TermsAdapter
 import com.gs.realestate.ui.post.adapter.HighLightsAdapter
 import com.gs.realestate.ui.post.adapter.ImageAdapter
 import com.gs.realestate.ui.post.adapter.PicturesAdapter
+import com.gs.realestate.util.CommonMethods
 import com.gs.realestate.util.Constants
+import com.gs.realestate.util.PathUtil
+import com.gs.realestate.util.PreferenceHelper
+import com.gs.realestate.util.PreferenceHelper.authToken
+import com.gs.realestate.util.PreferenceHelper.csrftoken
 import com.gs.realestate.util.SnackBarToast
 import com.razorpay.Checkout
 import com.razorpay.ExternalWalletListener
@@ -38,9 +44,14 @@ import com.razorpay.PaymentData
 import com.razorpay.PaymentResultWithDataListener
 import dev.ronnie.github.imagepicker.ImagePicker
 import dev.ronnie.github.imagepicker.ImageResult
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
+import java.io.File
 
 
 class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, ExternalWalletListener,
@@ -63,6 +74,13 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     private var postResidentialRequest: PostResidentialPropertyRequest? = null
     private var postCommercialPropertyRequest: CommercialPropertyRequest? = null
     private var selectedCategory: String = ""
+    private var selectedSubTypeId: Int = 0
+    private var selectedTypeId: Int = 0
+    private var locationProximityList: List<PropertyKnownForDetails>? = null
+
+
+    //Random UUID to use for uploading images
+    private val imageUploadUUID = CommonMethods.getRandomUUID()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,30 +98,31 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
             LocationServices.getFusedLocationProviderClient(this@PostHighlightActivity)
 
         setPicturesView()
-        setLocationProximityData()
+//        setLocationProximityData()
 
         imagesUpload = ImageAdapter(imagesList, this)
 
         binding.clCustomPictureUpload.tvCamera.setOnClickListener {
             imagePicker.takeFromCamera { imageResult ->
                 imageCallBack(
-                    imageResult
+                    imageResult,
+                    isFromCamera =true
                 )
             }
         }
         binding.clCustomPictureUpload.tvGallery.setOnClickListener {
             imagePicker.pickFromStorage { imageResult ->
                 imageCallBack(
-                    imageResult
+                    imageResult,
+                    isFromCamera = false
                 )
             }
         }
         highLightsAdapter = HighLightsAdapter(highlistnearby, this)
         binding.gdHighlights.adapter = highLightsAdapter
-//        highlistnearby.add("h1")
-//        highlistnearby.add("h")
-//        highLightsAdapter.notifyDataSetChanged()
+
         fetchLocation()
+
         alertDialogBuilder = AlertDialog.Builder(this@PostHighlightActivity)
         alertDialogBuilder.setTitle("Payment Result")
         alertDialogBuilder.setCancelable(true)
@@ -116,13 +135,15 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         }
 
         binding.btnPost.setOnClickListener {
-//            println("Selected chips : "+binding.cgProximity.checkedChipIds.forEach { binding.root.findViewById<Chip>(it).text.toString() })
             if (binding.terms.isChecked) {
                 startPayment()
             } else {
                 SnackBarToast.showErrorSnackBar(it, getString(R.string.pleasecheckterms))
             }
         }
+
+
+        fetchPropertyTypesFromServer()
     }
 
 
@@ -134,14 +155,22 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
                     Constants.EXTRA_AGRICULTURE -> {
                         postAgricultureRequest =
                             it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        selectedTypeId = postAgricultureRequest?.propertyTypeId ?: 0
+                        selectedSubTypeId = postAgricultureRequest?.propertySubTypeId ?: 0
                         println("Agriculture : $postAgricultureRequest")
                     }
                     Constants.EXTRA_RESIDENTIAL -> {
-                        postResidentialRequest = it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        postResidentialRequest =
+                            it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        selectedTypeId = postResidentialRequest?.propertyTypeId ?: 0
+                        selectedSubTypeId = postResidentialRequest?.propertySubTypeId ?: 0
                         print("Residential : $postResidentialRequest")
                     }
                     Constants.EXTRA_COMMERCIAL -> {
-                        postCommercialPropertyRequest = it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        postCommercialPropertyRequest =
+                            it.getParcelable(Constants.EXTRA_POST_PROPERTY_REQUEST)
+                        selectedTypeId = postCommercialPropertyRequest?.propertyTypeId ?: 0
+                        selectedSubTypeId = postCommercialPropertyRequest?.propertySubTypeId ?: 0
                         print("Commercial : $postCommercialPropertyRequest")
                     }
                 }
@@ -166,19 +195,22 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
             "Near to NH",
             "Near to River or pond"
         )
-        createChips(itemsArray)
+//        createChips(itemsArray)
     }
 
 
-    private fun createChips(itemsArray: List<String>) {
-        itemsArray.forEach {
+    private fun createChips(itemsArray: List<PropertyKnownForDetails>) {
+        itemsArray.forEachIndexed { index, propertyKnownForDetails ->
             val chip = Chip(this@PostHighlightActivity).apply {
-                text = it
+                text = propertyKnownForDetails.description
                 isCheckable = true
 //                setChipBackgroundColorResource(R.color.purple_500)
 //                isCloseIconVisible = true
 //                setTextColor(ContextCompat.getColor(context, R.color.white))
 //                setTextAppearance(R.style.ChipTextAppearance)
+                setOnCheckedChangeListener { compoundButton, b ->
+                    itemsArray[index].isSelected = b
+                }
             }
             binding.cgProximity.addView(chip)
         }
@@ -361,15 +393,12 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     }
 
     //CallBack for result
-    private fun imageCallBack(imageResult: ImageResult<Uri>) {
+    private fun imageCallBack(imageResult: ImageResult<Uri>, isFromCamera: Boolean) {
         when (imageResult) {
             is ImageResult.Success -> {
                 val uri = imageResult.value
-                imagesList.add(uri)
-                if (imagesList.isNotEmpty()) {
-                    binding.clCustomPictureUpload.gvUploadedPictures.visibility = View.VISIBLE
-                }
-                picturesAdapter.notifyDataSetChanged()
+
+                syncImagesToServer(isFromCamera,imageUri = uri, index = imagesList.size + 1)
             }
             is ImageResult.Failure -> {
                 val errorString = imageResult.errorString
@@ -380,8 +409,9 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
 
     override fun onPaymentSuccess(p0: String?, p1: PaymentData?) {
         try {
-            alertDialogBuilder.setMessage("Payment Successful : Payment ID: $p0\nPayment Data: ${p1?.data}")
-            alertDialogBuilder.show()
+//            alertDialogBuilder.setMessage("Payment Successful : Payment ID: $p0\nPayment Data: ${p1?.data}")
+//            alertDialogBuilder.show()
+            postPropertyDetails(null)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -406,5 +436,362 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
     }
 
     override fun onClick(dialog: DialogInterface?, which: Int) {
+    }
+
+
+    /*
+    * API call to fetch the property types
+    * */
+    private fun fetchPropertyTypesFromServer() {
+        val retrofit = RetrofitClient.getInstance(this)
+        val apiInterface = retrofit.create(ApiInterface::class.java)
+
+        lifecycleScope.launchWhenCreated {
+            showLoader()
+
+            val response = apiInterface.fetchPropertyTypes()
+            response.let {
+                if (it.isSuccessful) {
+                    it.body()?.let { responseData ->
+                        if (responseData.statusCode == 0) {
+                            //fetch success
+                            locationProximityList =
+                                responseData.propertyCategoryList
+                                    .firstOrNull { it.propertyTypeId == selectedTypeId }
+                                    ?.propertySubTypesList
+                                    ?.firstOrNull { it.propertySubTypeId == selectedSubTypeId }
+                                    ?.knownForList
+
+                            locationProximityList?.let { it1 -> createChips(it1) }
+                        } else {
+                            SnackBarToast.failedCall(this@PostHighlightActivity)
+                        }
+                        hideLoader()
+                    }
+                } else {
+                    SnackBarToast.failedCall(this@PostHighlightActivity)
+                    Log.i("failed {}", response.body().toString())
+                    hideLoader()
+                }
+            }
+        }
+    }
+
+
+    /*
+    * Image sync to server
+    * multi part file upload
+    * */
+    private fun syncImagesToServer(isFromCamera: Boolean, imageUri: Uri, index: Int) {
+        val retrofit = RetrofitClient.getInstance(this)
+        val apiInterface = retrofit.create(ApiInterface::class.java)
+        val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
+
+        lifecycleScope.launchWhenCreated {
+            showLoader()
+
+
+           // val imageFile = File(imageUri.toString())
+           // val imagePath = contentResolver.openInputStream(imageUri)
+
+            val imageFile = if(isFromCamera){
+                imageUri.lastPathSegment?.let { File(cacheDir, it) }
+            }else{
+//                val filePath = CommonMethods.getRealPathFromURI(
+//                    mContext = this@PostHighlightActivity,
+//                    imageUri
+//                ) ?: ""
+                val filePath = PathUtil.getPath(this@PostHighlightActivity,imageUri);
+
+                File(filePath)
+
+            }
+
+
+            val fileBody = if(isFromCamera){
+                contentResolver.openInputStream(imageUri)?.readBytes()?.toRequestBody()
+            }else{
+                imageFile?.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+            }
+            val multiPartBody =
+                fileBody?.let { MultipartBody.Part.createFormData("image", imageFile?.name, it) }
+
+            val response = multiPartBody?.let {
+                apiInterface.syncImageToServer(
+                    crsfToken = crsfToken,
+                    file = it,
+                    serialNo = index,
+                    uuid = imageUploadUUID
+                )
+            }
+
+
+            if (response?.isSuccessful == true) {
+                //your code for handling success response
+                println("Image upload response : ${response.body()}")
+                response.body()?.let {
+                    if (it.statusCode == 0) {
+                        //success
+                        imagesList.add(imageUri)
+                        if (imagesList.isNotEmpty()) {
+                            binding.clCustomPictureUpload.gvUploadedPictures.visibility =
+                                View.VISIBLE
+                        }
+                        picturesAdapter.notifyDataSetChanged()
+                    } else {
+                        SnackBarToast.showErrorSnackBar(binding.root, it.data)
+                    }
+                }
+                hideLoader()
+            } else {
+                SnackBarToast.failedCall(this@PostHighlightActivity)
+                Log.i("failed {}", response?.body().toString())
+                hideLoader()
+            }
+        }
+    }
+
+
+    /*
+    * Upload property details
+    * */
+    private fun postPropertyDetails(prefData: Pref?) {
+        when (selectedCategory) {
+            Constants.EXTRA_AGRICULTURE -> {
+                postAgricultureRequest?.apply {
+                    prefDetails = Pref(
+                        ref = 410,
+                        ord = "order_KstYVgfU5c692S",
+                        pref = "pay_KstYqWEi4Yeigb"
+                    )
+                    statecd = "TG"
+                    distanceFromORR = "12.4"
+                    distanceFromHyderabad = "1.9"
+                    propertyLocationHighlights = arrayListOf(
+                        PropertyLocationHighlights(
+                            id = 131,
+                            description = "bus stand",
+                            mediaUrl = "",
+                            highlightDescription = "",
+                            type = "bus stand",
+                            distance = null,
+                            name = ""
+                        )
+                    )
+                    propertyWellKnownFor = getSelectedLocationProximity()
+
+                }
+
+                syncAgriculturePropertyData()
+            }
+
+            Constants.EXTRA_RESIDENTIAL -> {
+                postResidentialRequest?.apply {
+                    prefDetails = Pref(
+                        ref = 410,
+                        ord = "order_KstYVgfU5c692S",
+                        pref = "pay_KstYqWEi4Yeigb"
+                    )
+                    statecd = "TG"
+                    distanceFromORR = "12.4"
+                    distanceFromHyderabad = "1.9"
+                    propertyLocationHighlights = arrayListOf(
+                        PropertyLocationHighlights(
+                            id = 131,
+                            description = "bus stand",
+                            mediaUrl = "",
+                            highlightDescription = "",
+                            type = "bus stand",
+                            distance = null,
+                            name = ""
+                        )
+                    )
+                    propertyWellKnownFor = getSelectedLocationProximity()
+                }
+
+                syncResidentialPropertyData()
+            }
+
+            Constants.EXTRA_COMMERCIAL -> {
+                postCommercialPropertyRequest?.apply {
+                    prefDetails = Pref(
+                        ref = 410,
+                        ord = "order_KstYVgfU5c692S",
+                        pref = "pay_KstYqWEi4Yeigb"
+                    )
+                    statecd = "TG"
+                    distanceFromORR = "12.4"
+                    distanceFromHyderabad = "1.9"
+                    propertyLocationHighlights = arrayListOf(
+                        PropertyLocationHighlights(
+                            id = 131,
+                            description = "bus stand",
+                            mediaUrl = "",
+                            highlightDescription = "",
+                            type = "bus stand",
+                            distance = null,
+                            name = ""
+                        )
+                    )
+                    propertyWellKnownFor = getSelectedLocationProximity()
+                }
+
+                syncCommercialPropertyData()
+            }
+        }
+    }
+
+
+    /*
+    * Method to sync the agriculture data
+    * */
+    private fun syncAgriculturePropertyData() {
+        val retrofit = RetrofitClient.getInstance(this)
+        val apiInterface = retrofit.create(ApiInterface::class.java)
+        val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
+        val authToken = ("Bearer " + PreferenceHelper.customPreference(this).authToken) ?: ""
+
+        lifecycleScope.launchWhenCreated {
+            showLoader()
+
+            val response = postAgricultureRequest?.let {
+                apiInterface.syncAgricultureProperty(
+                    token = authToken,
+                    crsfToken = crsfToken,
+                    uuid = imageUploadUUID,
+                    postAgricultureRequest = it,
+                    referer = Constants.REFERRER_URL
+                )
+            }
+
+            response?.let {
+                if (it.isSuccessful) {
+                    it.body()?.let { responseData ->
+                        if (responseData.status == 0) {
+                            //sync success
+                            moveToHomeScreen()
+                        } else {
+                            SnackBarToast.failedCall(this@PostHighlightActivity)
+                        }
+                    }
+                    hideLoader()
+
+                } else {
+                    SnackBarToast.failedCall(this@PostHighlightActivity)
+                    Log.i("failed {}", response.body().toString())
+                    hideLoader()
+                }
+            }
+        }
+    }
+
+
+    /*
+    * Method to sync the residential data
+    * */
+    private fun syncResidentialPropertyData() {
+        val retrofit = RetrofitClient.getInstance(this)
+        val apiInterface = retrofit.create(ApiInterface::class.java)
+        val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
+        val authToken = ("Bearer " + PreferenceHelper.customPreference(this).authToken) ?: ""
+
+        lifecycleScope.launchWhenCreated {
+            showLoader()
+
+            val response = postResidentialRequest?.let {
+                apiInterface.syncResidentialProperty(
+                    token = authToken,
+                    crsfToken = crsfToken,
+                    uuid = imageUploadUUID,
+                    postResidentialPropertyRequest = it,
+                    referer = Constants.REFERRER_URL
+                )
+            }
+
+            response?.let {
+                if (it.isSuccessful) {
+                    it.body()?.let { responseData ->
+                        if (responseData.status == 0) {
+                            //sync success
+                            moveToHomeScreen()
+                        } else {
+                            SnackBarToast.failedCall(this@PostHighlightActivity)
+                        }
+                    }
+                    hideLoader()
+
+                } else {
+                    SnackBarToast.failedCall(this@PostHighlightActivity)
+                    Log.i("failed {}", response.body().toString())
+                    hideLoader()
+                }
+            }
+        }
+    }
+
+
+    /*
+   * Method to sync the commercial data
+   * */
+    private fun syncCommercialPropertyData() {
+        val retrofit = RetrofitClient.getInstance(this)
+        val apiInterface = retrofit.create(ApiInterface::class.java)
+        val crsfToken = PreferenceHelper.customPreference(this).csrftoken ?: ""
+        val authToken = ("Bearer " + PreferenceHelper.customPreference(this).authToken) ?: ""
+
+
+        lifecycleScope.launchWhenCreated {
+            showLoader()
+
+            val response = postCommercialPropertyRequest?.let {
+                apiInterface.syncCommercialProperty(
+                    token = authToken,
+                    crsfToken = crsfToken,
+                    uuid = imageUploadUUID,
+                    postCommercialPropertyRequest = it,
+                    referer = Constants.REFERRER_URL
+                )
+            }
+
+            response?.let {
+                if (it.isSuccessful) {
+                    it.body()?.let { responseData ->
+                        if (responseData.status == 0) {
+                            //sync success
+                            moveToHomeScreen()
+                        } else {
+                            SnackBarToast.failedCall(this@PostHighlightActivity)
+                        }
+                    }
+                    hideLoader()
+
+                } else {
+                    SnackBarToast.failedCall(this@PostHighlightActivity)
+                    Log.i("failed {}", response.body().toString())
+                    hideLoader()
+                }
+            }
+        }
+    }
+
+
+    /*
+    * Method to get the selected location proximity
+    * */
+    private fun getSelectedLocationProximity(): List<String> {
+        return locationProximityList
+            ?.filter { it.isSelected }
+            ?.map { it.id.toString() }
+            ?: listOf()
+    }
+
+
+    /*
+    * Move to home screen
+    * */
+    private fun moveToHomeScreen() {
+        val i = Intent(this, HomeActivity::class.java)
+        i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(i)
     }
 }

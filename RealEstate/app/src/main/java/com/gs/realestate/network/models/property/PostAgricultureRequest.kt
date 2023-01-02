@@ -65,7 +65,7 @@ data class PostAgricultureRequest(
     @SerializedName("propertyLocationHighlights")
     var propertyLocationHighlights: ArrayList<PropertyLocationHighlights> = arrayListOf(),
     @SerializedName("PropertyWellKnownFor")
-    var PropertyWellKnownFor: ArrayList<String> = arrayListOf(),
+    var propertyWellKnownFor: List<String> = listOf(),
 
 
     //Farmhouse fields
@@ -82,4 +82,4 @@ data class PostAgricultureRequest(
     @SerializedName("propertyfacing")
     var propertyFacing: String? = null,
 
-): Parcelable
+    ): Parcelable

@@ -8,6 +8,7 @@ import com.gs.realestate.base.BaseActivity
 import com.gs.realestate.databinding.ActivityPostAgricultureBinding
 import com.gs.realestate.network.models.property.PostAgricultureRequest
 import com.gs.realestate.network.models.property.UnitDetails
+import com.gs.realestate.ui.home.HomeActivity
 import com.gs.realestate.ui.post.PostHighlightActivity
 import com.gs.realestate.util.Constants
 import com.gs.realestate.util.SnackBarToast
@@ -184,6 +185,12 @@ class PostAgricultureActivity : BaseActivity() {
         } else if (!binding.etPrimaryContact.isValidText()) {
             showErrorMessage(getString(R.string.str_err_contact_number))
             return false
+        }else if(!binding.etAlternativeContact.isValidText()){
+            showErrorMessage(getString(R.string.str_err_alt_contact_number))
+                return false
+        }else if(!binding.etDescription.isValidText()){
+            showErrorMessage(getString(R.string.str_err_description))
+            return false
         }
         return true
     }
@@ -239,6 +246,12 @@ class PostAgricultureActivity : BaseActivity() {
             return false
         } else if (!binding.etPrimaryContact.isValidText()) {
             showErrorMessage(getString(R.string.str_err_contact_number))
+            return false
+        }else if(!binding.etAlternativeContact.isValidText()){
+            showErrorMessage(getString(R.string.str_err_alt_contact_number))
+            return false
+        }else if(!binding.etDescription.isValidText()){
+            showErrorMessage(getString(R.string.str_err_description))
             return false
         }
         return true

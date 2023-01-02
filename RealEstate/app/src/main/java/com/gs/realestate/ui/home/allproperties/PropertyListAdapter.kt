@@ -41,7 +41,7 @@ class PropertyListAdapter(private val items: ArrayList<Properties>, val context:
         holder.landDescription.text = acres
         holder.heartCount.text = propertiesObj.favCount.toString()
         holder.viewCount.text = propertiesObj.viewCount.toString()
-        holder.expiryDate.text = "Expires : $propertiesObj.expiryDate"
+        holder.expiryDate.text = "Expires : ${propertiesObj.expiryDate}"
         holder.location.text = propertiesObj.location
         val image = propertiesObj.imageUrl.orEmpty()
         println("image $image")

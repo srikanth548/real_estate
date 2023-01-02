@@ -182,6 +182,12 @@ class PostCommercialActivity : AppCompatActivity() {
         } else if (!binding.llCommercialOpen.etPrimaryContact.isValidText()) {
             showErrorMessage(getString(R.string.str_err_contact_number))
             return false
+        }else if(!binding.llCommercialOpen.etAlternativeContact.isValidText()){
+            showErrorMessage(getString(R.string.str_err_alt_contact_number))
+            return false
+        }else if(!binding.llCommercialOpen.etDescription.isValidText()){
+            showErrorMessage(getString(R.string.str_err_description))
+            return false
         }
         return true
     }
@@ -228,6 +234,12 @@ class PostCommercialActivity : AppCompatActivity() {
             return false
         } else if (!binding.llCOmmercialBuilding.etPrimaryContact.isValidText()) {
             showErrorMessage(getString(R.string.str_err_contact_number))
+            return false
+        }else if(!binding.llCOmmercialBuilding.etAlternativeContact.isValidText()){
+            showErrorMessage(getString(R.string.str_err_alt_contact_number))
+            return false
+        }else if(!binding.llCOmmercialBuilding.etDescription.isValidText()){
+            showErrorMessage(getString(R.string.str_err_description))
             return false
         }
         return true
