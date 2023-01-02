@@ -33,6 +33,7 @@ import com.gs.realestate.ui.post.adapter.ImageAdapter
 import com.gs.realestate.ui.post.adapter.PicturesAdapter
 import com.gs.realestate.util.CommonMethods
 import com.gs.realestate.util.Constants
+import com.gs.realestate.util.PathUtil
 import com.gs.realestate.util.PreferenceHelper
 import com.gs.realestate.util.PreferenceHelper.authToken
 import com.gs.realestate.util.PreferenceHelper.csrftoken
@@ -46,6 +47,7 @@ import dev.ronnie.github.imagepicker.ImageResult
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
@@ -488,21 +490,31 @@ class PostHighlightActivity : BaseActivity(), PaymentResultWithDataListener, Ext
         lifecycleScope.launchWhenCreated {
             showLoader()
 
+
+           // val imageFile = File(imageUri.toString())
+           // val imagePath = contentResolver.openInputStream(imageUri)
+
             val imageFile = if(isFromCamera){
                 imageUri.lastPathSegment?.let { File(cacheDir, it) }
             }else{
-                val filePath = CommonMethods.getRealPathFromURI(
-                    mContext = this@PostHighlightActivity,
-                    imageUri
-                ) ?: ""
+//                val filePath = CommonMethods.getRealPathFromURI(
+//                    mContext = this@PostHighlightActivity,
+//                    imageUri
+//                ) ?: ""
+                val filePath = PathUtil.getPath(this@PostHighlightActivity,imageUri);
 
                 File(filePath)
+
             }
 
 
-            val fileBody = imageFile?.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val fileBody = if(isFromCamera){
+                contentResolver.openInputStream(imageUri)?.readBytes()?.toRequestBody()
+            }else{
+                imageFile?.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+            }
             val multiPartBody =
-                fileBody?.let { MultipartBody.Part.createFormData("image", imageFile.name, it) }
+                fileBody?.let { MultipartBody.Part.createFormData("image", imageFile?.name, it) }
 
             val response = multiPartBody?.let {
                 apiInterface.syncImageToServer(
